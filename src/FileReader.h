@@ -15,8 +15,8 @@ private:
     string filePath;
 
 public:
-    FileReader(const string &filePath);
-    vector<Stop> read();
+    FileReader(string filePath);
+    vector<Stop> readStops();
 };
 
 

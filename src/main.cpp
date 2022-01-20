@@ -1,6 +1,8 @@
 #include <iostream>
+#include "FileReader.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    FileReader fileReader("../dataset/stops.csv");
+    vector<Stop> stops = fileReader.readStops();
+
 }
