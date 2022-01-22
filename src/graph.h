@@ -38,7 +38,7 @@ public:
     Graph();
 
     // Add edge from source to destination with a certain weight
-    void addEdge(int src, int dest, string line, int weight = 1);
+    void addEdge(int src, int dest, string line, double d, int weight = 1);
 
     // Depth-First Search: example implementation
     void dfs(int v);

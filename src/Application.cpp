@@ -21,6 +21,18 @@ Stop getStop(string line){
     return stop;
 }
 
+double getDistance(double lat1, double lon1, double lat2, double lon2) {
+    double dLat = (lat2 - lat1) * M_PI / 180.0;
+    double dLon = (lon2 - lon1) * M_PI / 180.0;
+    lat1 = (lat1) * M_PI / 180.0;
+    lat2 = (lat2) * M_PI / 180.0;
+    double a = pow(sin(dLat / 2), 2) + pow(sin(dLon / 2), 2) * cos(lat1) * cos(lat2);
+    double rad = 6371;
+    double c = 2 * asin(sqrt(a));
+
+    return rad * c;
+}
+
 void Application::readStops() {
     ifstream fileStream;
     fileStream.open(stopsPath);
@@ -40,7 +52,7 @@ const unordered_map<string, int> &Application::getStopToInt() const {
     return stopToInt;
 }
 
-void Application::addEdges(Graph &g, const string& path) {
+void Application::addEdges(const string &path) {
     ifstream trajectory;
     trajectory.open(path);
     if (!trajectory.is_open()) {
@@ -52,32 +64,22 @@ void Application::addEdges(Graph &g, const string& path) {
     getline(trajectory, firstStop);
     for (int i=0;i<stoi(amountStops);i++) {
         getline(trajectory, secondStop);
-        g.addEdge(stopToInt[firstStop], stopToInt[secondStop], path.substr(path.find('_') + 1), path.find('.'));
+        g.addEdge(stopToInt[firstStop], stopToInt[secondStop], path.substr(path.find('_') + 1), path.find('.'),
+                  getDistance(stops[stopToInt[firstStop]].getLatitude(), stops[stopToInt[firstStop]].getLongitude(),
+                  stops[stopToInt[secondStop]].getLatitude(), stops[stopToInt[secondStop]].getLongitude()));
         firstStop = secondStop;
     }
 }
 
-void Application::readEdges(Graph &g) {
+void Application::readEdges() {
     ifstream linesDataset;
     linesDataset.open(linesPath);
     string line;
     getline(linesDataset, line);
     while(getline(linesDataset, line)) {
-        addEdges(g, "../dataset/line_" + line.substr(0, line.find(',')) + "_0.csv");
-        addEdges(g, "../dataset/line_" + line.substr(0, line.find(',')) + "_1.csv");
+        addEdges("../dataset/line_" + line.substr(0, line.find(',')) + "_0.csv");
+        addEdges("../dataset/line_" + line.substr(0, line.find(',')) + "_1.csv");
     }
-}
-
-double getDistance(double lat1, double lon1, double lat2, double lon2) {
-    double dLat = (lat2 - lat1) * M_PI / 180.0;
-    double dLon = (lon2 - lon1) * M_PI / 180.0;
-    lat1 = (lat1) * M_PI / 180.0;
-    lat2 = (lat2) * M_PI / 180.0;
-    double a = pow(sin(dLat / 2), 2) + pow(sin(dLon / 2), 2) * cos(lat1) * cos(lat2);
-    double rad = 6371;
-    double c = 2 * asin(sqrt(a));
-
-    return rad * c;
 }
 
 string getNearestStop(double lat, double lon, const vector<Stop> &stops) {
@@ -97,7 +99,7 @@ Application::Application(string stopsPath, string linesPath) : stopsPath(std::mo
                                                                              linesPath(std::move(linesPath)) {
     readStops();
     g = Graph (stops.size(), true);
-    readEdges(g);
+    readEdges();
 }
 
 list<int> Application::courseWithMinimumStops(string stop1, string stop2) {
