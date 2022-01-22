@@ -11,3 +11,7 @@ Stop::Stop(const string &code, const string &name, const string &zone, double la
                                                                                                                     latitude),
                                                                                                             longitude(
                                                                                                                     longitude) {}
+
+const string &Stop::getCode() const {
+    return code;
+}
