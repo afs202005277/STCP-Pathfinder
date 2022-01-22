@@ -15,11 +15,14 @@ class Graph {
     struct Edge {
         int dest;   // Destination node
         int weight; // An integer weight
+        string line;
     };
 
     struct Node {
         list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
         bool visited;   // As the node been visited on a search?
+        int dist;
+        int pred;
     };
 
     int n;              // Graph size (vertices are numbered from 1 to n)
@@ -31,13 +34,17 @@ public:
     Graph(int nodes, bool dir = false);
 
     // Add edge from source to destination with a certain weight
-    void addEdge(int src, int dest, int weight = 1);
+    void addEdge(int src, int dest, string line, int weight = 1);
 
     // Depth-First Search: example implementation
     void dfs(int v);
 
     // Breadth-First Search: example implementation
     void bfs(int v);
+
+    int dijkstra_distance(int a, int b);
+
+    list<int> dijkstra_path(int a, int b);
 };
 
 #endif

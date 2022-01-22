@@ -3,4 +3,4 @@ project(Projeto2)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Projeto2 src/main.cpp src/FileReader.cpp src/FileReader.h src/Stop.cpp src/Stop.h src/graph.h src/graph.cpp)
+add_executable(Projeto2 src/main.cpp src/FileReader.cpp src/FileReader.h src/Stop.cpp src/Stop.h src/graph.h src/graph.cpp src/minHeap.h)

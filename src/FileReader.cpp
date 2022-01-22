@@ -52,7 +52,7 @@ void FileReader::addEdges(Graph &g, const string& path) {
     getline(trajectory, firstStop);
     for (int i=0;i<stoi(amountStops);i++) {
         getline(trajectory, secondStop);
-        g.addEdge(map[firstStop], map[secondStop]);
+        g.addEdge(map[firstStop], map[secondStop], path.substr(path.find('_') + 1), path.find('.'));
         firstStop = secondStop;
     }
 }
@@ -67,5 +67,3 @@ void FileReader::readEdges(Graph &g) {
         addEdges(g, "../dataset/line_" + line.substr(0, line.find(',')) + "_1.csv");
     }
 }
-
-

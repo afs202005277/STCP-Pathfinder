@@ -3,14 +3,17 @@
 
 #include "graph.h"
 
+#include <utility>
+#include "minHeap.h"
+
 // Constructor: nr nodes and direction (default: undirected)
 Graph::Graph(int num, bool dir) : n(num), hasDir(dir), nodes(num+1) {
 }
 
 // Add edge from source to destination with a certain weight
-void Graph::addEdge(int src, int dest, int weight) {
+void Graph::addEdge(int src, int dest, string line, int weight) {
     if (src<1 || src>n || dest<1 || dest>n) return;
-    nodes[src].adj.push_back({dest, weight});
+    nodes[src].adj.push_back({dest, weight, std::move(line)});
     if (!hasDir) nodes[dest].adj.push_back({src, weight});
 }
 
@@ -42,5 +45,50 @@ void Graph::bfs(int v) {
             }
         }
     }
+}
+
+int Graph::dijkstra_distance(int a, int b) {
+    MinHeap<int, int> q(n, -1);
+    for (int i=1;i<=n;i++){
+        if (i==a) {
+            nodes[a].dist = 0;
+            nodes[a].pred = a;
+        }
+        else {
+            nodes[i].dist = INT_MAX;
+            nodes[i].visited = false;
+            nodes[i].pred = 0;
+        }
+        q.insert(i, nodes[i].dist);
+    }
+    while (q.getSize() > 0){
+        int u = q.removeMin();
+        nodes[u].visited = true;
+        for (auto v:nodes[u].adj){
+            if (!nodes[v.dest].visited && nodes[u].dist + v.weight < nodes[v.dest].dist){
+                nodes[v.dest].dist = nodes[u].dist + v.weight;
+                nodes[v.dest].pred = u;
+                q.decreaseKey(v.dest, nodes[v.dest].dist);
+            }
+        }
+    }
+    if (nodes[b].dist == INT_MAX)
+        return -1;
+    else
+        return nodes[b].dist;
+}
+
+list<int> Graph::dijkstra_path(int a, int b) {
+    list<int> path;
+    dijkstra_distance(a, b);
+    if (nodes[b].dist == INT_MAX)
+        return path;
+    int current = b;
+    while(current != a){
+        path.push_front(current);
+        current = nodes[current].pred;
+    }
+    path.push_front(a);
+    return path;
 }
 
