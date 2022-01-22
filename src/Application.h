@@ -18,7 +18,7 @@ private:
     string stopsPath, linesPath;
     unordered_map<string, int> stopToInt;
     Graph g;
-    int walkingDistance;
+    double walkingDistance;
 
 public:
     Application(string stopsPath, string linesPath, double distance);
@@ -27,8 +27,11 @@ public:
     void readEdges();
     void addEdges(const string &path);
     list<int> courseWithMinimumStops(string stop1, string stop2);
-    list<pair<string, int>> getAllStopsCloserToXMetres(double lat, double lon, unsigned int x); //par de code da paragem e respetivo indice no vetor
+    list<list<int>> courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2);
+    list<pair<string, int>> getAllStopsCloserToXMetres(double lat, double lon, double x); //par de code da paragem e respetivo indice no vetor
     void addOnFootEdges();
+    int getConnectedComponents();
+    pair<string, int> getNearestStop(double lat, double lon);
 };
 
 

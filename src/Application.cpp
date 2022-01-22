@@ -82,24 +82,26 @@ void Application::readEdges() {
     }
 }
 
-string getNearestStop(double lat, double lon, const vector<Stop> &stops) {
+pair<string, int> Application::getNearestStop(double lat, double lon) {
     Stop tmp;
     double min = DBL_MAX;
+    int idx=-1;
     for (int i=1;i<stops.size();i++){
         double dist = getDistance(lat, lon, stops[i].getLatitude(), stops[i].getLongitude());
         if ( dist < min){
             min = dist;
             tmp = stops[i];
+            idx = i;
         }
     }
-    return tmp.getCode();
+    return {tmp.getCode(), idx};
 }
 
 Application::Application(string stopsPath, string linesPath, double distance) : stopsPath(std::move(stopsPath)),
                                                                              linesPath(std::move(linesPath)) {
     walkingDistance = distance;
     readStops();
-    g = Graph (stops.size(), true);
+    g = Graph (stops.size()-1, true);
     readEdges();
     if (walkingDistance > 0)
         addOnFootEdges();
@@ -109,10 +111,10 @@ list<int> Application::courseWithMinimumStops(string stop1, string stop2) {
     return g.minimumStops(stopToInt[stop1], stopToInt[stop2]);
 }
 
-list<pair<string, int>> Application::getAllStopsCloserToXMetres(double lat, double lon, unsigned int x) {
+list<pair<string, int>> Application::getAllStopsCloserToXMetres(double lat, double lon, double x) {
     list<pair<string, int>> res;
     for (int i=1;i<stops.size();i++){
-        if (static_cast<bool>(getDistance(lat, lon, stops[i].getLatitude(), stops[i].getLongitude() < (double) x))) {
+        if (getDistance(lat, lon, stops[i].getLatitude(), stops[i].getLongitude()) * 1000 < x) {
             res.emplace_back(stops[i].getCode(), i);
         }
     }
@@ -123,10 +125,30 @@ void Application::addOnFootEdges() {
     for (int i=1;i+1<stops.size();i++){
         for (int j=i+1;j<stops.size();j++){
             double d = getDistance(stops[i].getLatitude(), stops[i].getLongitude(), stops[j].getLatitude(), stops[j].getLongitude());
-            if (d <= walkingDistance) {
+            if (d * 1000 <= walkingDistance) {
                 g.addEdge(i, j, "", d, true);
                 g.addEdge(j, i, "", d, true);
             }
         }
     }
+}
+
+list<list<int>> Application::courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2) {
+    list<list<int>> res;
+    list<pair<string, int>> src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
+    list<pair<string, int>> dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
+    if (src.empty())
+        src.push_back(getNearestStop(lat1, lon1));
+    if (dest.empty())
+        dest.push_back(getNearestStop(lat2, lon2));
+    for (const auto& s:src){
+        for (const auto& d:dest){
+            res.push_back(courseWithMinimumStops(s.first, d.first));
+        }
+    }
+    return res;
+}
+
+int Application::getConnectedComponents() {
+    return g.connectedComponents();
 }
