@@ -17,7 +17,13 @@ private:
 public:
     Stop(const string &code, const string &name, const string &zone, double latitude, double longitude);
 
+    Stop();
+
     const string &getCode() const;
+
+    double getLatitude() const;
+
+    double getLongitude() const;
 };
 
 
