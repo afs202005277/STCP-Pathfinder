@@ -12,22 +12,23 @@
 
 using namespace std;
 
+struct Edge {
+    int dest;   // Destination node
+    int weight; // An integer weight
+    string line;
+    double distanceRealWorld;
+    bool onFoot;
+};
+
+struct Node {
+    list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
+    bool visited;   // As the node been visited on a search?
+    int dist;
+    int pred;
+};
+
 class Graph {
-    struct Edge {
-        int dest;   // Destination node
-        int weight; // An integer weight
-        string line;
-        double distanceRealWorld;
-        bool onFoot;
-    };
-
-    struct Node {
-        list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
-        bool visited;   // As the node been visited on a search?
-        int dist;
-        int pred;
-    };
-
+private:
     int n;              // Graph size (vertices are numbered from 1 to n)
     bool hasDir;        // false: undirect; true: directed
     vector<Node> nodes; // The list of nodes being represented
@@ -54,6 +55,8 @@ public:
     list<int> minimumStops(int a, int b);
 
     int connectedComponents();
+
+    const vector<Node> &getNodes() const;
 };
 
 #endif

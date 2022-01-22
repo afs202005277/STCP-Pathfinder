@@ -152,3 +152,7 @@ list<list<int>> Application::courseWithMinimumStops(double lat1, double lon1, do
 int Application::getConnectedComponents() {
     return g.connectedComponents();
 }
+
+const vector<Stop> &Application::getStops() const {
+    return stops;
+}

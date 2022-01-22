@@ -32,6 +32,7 @@ public:
     void addOnFootEdges();
     int getConnectedComponents();
     pair<string, int> getNearestStop(double lat, double lon);
+    const vector<Stop> &getStops() const;
 };
 
 

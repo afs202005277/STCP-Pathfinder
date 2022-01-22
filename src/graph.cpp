@@ -125,3 +125,7 @@ int Graph::connectedComponents() {
 }
 
 Graph::Graph() {}
+
+const vector<Node> &Graph::getNodes() const {
+    return nodes;
+}
