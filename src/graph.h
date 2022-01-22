@@ -17,6 +17,7 @@ class Graph {
         int dest;   // Destination node
         int weight; // An integer weight
         string line;
+        double distanceRealWorld;
     };
 
     struct Node {
