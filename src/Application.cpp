@@ -95,11 +95,14 @@ string getNearestStop(double lat, double lon, const vector<Stop> &stops) {
     return tmp.getCode();
 }
 
-Application::Application(string stopsPath, string linesPath) : stopsPath(std::move(stopsPath)),
+Application::Application(string stopsPath, string linesPath, double distance) : stopsPath(std::move(stopsPath)),
                                                                              linesPath(std::move(linesPath)) {
+    walkingDistance = distance;
     readStops();
     g = Graph (stops.size(), true);
     readEdges();
+    if (walkingDistance > 0)
+        addOnFootEdges();
 }
 
 list<int> Application::courseWithMinimumStops(string stop1, string stop2) {
@@ -114,4 +117,16 @@ list<pair<string, int>> Application::getAllStopsCloserToXMetres(double lat, doub
         }
     }
     return res;
+}
+
+void Application::addOnFootEdges() {
+    for (int i=1;i+1<stops.size();i++){
+        for (int j=i+1;j<stops.size();j++){
+            double d = getDistance(stops[i].getLatitude(), stops[i].getLongitude(), stops[j].getLatitude(), stops[j].getLongitude());
+            if (d <= walkingDistance) {
+                g.addEdge(i, j, "", d, true);
+                g.addEdge(j, i, "", d, true);
+            }
+        }
+    }
 }

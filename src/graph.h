@@ -18,6 +18,7 @@ class Graph {
         int weight; // An integer weight
         string line;
         double distanceRealWorld;
+        bool onFoot;
     };
 
     struct Node {
@@ -38,7 +39,7 @@ public:
     Graph();
 
     // Add edge from source to destination with a certain weight
-    void addEdge(int src, int dest, string line, double d, int weight = 1);
+    void addEdge(int src, int dest, string line, double d, bool foot, int weight = 1);
 
     // Depth-First Search: example implementation
     void dfs(int v);

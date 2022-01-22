@@ -8,10 +8,10 @@
 Graph::Graph(int num, bool dir) : n(num), hasDir(dir), nodes(num+1) {}
 
 // Add edge from source to destination with a certain weight
-void Graph::addEdge(int src, int dest, string line, double d, int weight) {
+void Graph::addEdge(int src, int dest, string line, double d, bool foot, int weight) {
     if (src<1 || src>n || dest<1 || dest>n)
         return;
-    nodes[src].adj.push_back({dest, weight, std::move(line), d});
+    nodes[src].adj.push_back({dest, weight, std::move(line), d, false});
     if (!hasDir)
         nodes[dest].adj.push_back({src, weight});
 }
