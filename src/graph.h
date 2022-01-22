@@ -35,6 +35,8 @@ public:
     // Constructor: nr nodes and direction (default: undirected)
     Graph(int nodes, bool dir = false);
 
+    Graph();
+
     // Add edge from source to destination with a certain weight
     void addEdge(int src, int dest, string line, int weight = 1);
 

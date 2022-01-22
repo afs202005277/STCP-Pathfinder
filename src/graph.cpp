@@ -123,3 +123,5 @@ int Graph::connectedComponents() {
         }
     return counter;
 }
+
+Graph::Graph() {}
