@@ -30,14 +30,15 @@ vector<Stop> FileReader::readStops() {
     while(getline(fileStream, line)){
         Stop tmp = getStop(line);
         stops.push_back(tmp);
-        map.insert({tmp.getCode(), counter});
+        stopToInt.insert({tmp.getCode(), counter});
+        intToStop.insert({counter, tmp.getCode()});
         counter++;
     }
     return stops;
 }
 
-const unordered_map<string, int> &FileReader::getMap() const {
-    return map;
+const unordered_map<string, int> &FileReader::getStopToInt() const {
+    return stopToInt;
 }
 
 void FileReader::addEdges(Graph &g, const string& path) {
@@ -52,7 +53,7 @@ void FileReader::addEdges(Graph &g, const string& path) {
     getline(trajectory, firstStop);
     for (int i=0;i<stoi(amountStops);i++) {
         getline(trajectory, secondStop);
-        g.addEdge(map[firstStop], map[secondStop], path.substr(path.find('_') + 1), path.find('.'));
+        g.addEdge(stopToInt[firstStop], stopToInt[secondStop], path.substr(path.find('_') + 1), path.find('.'));
         firstStop = secondStop;
     }
 }
@@ -66,4 +67,8 @@ void FileReader::readEdges(Graph &g) {
         addEdges(g, "../dataset/line_" + line.substr(0, line.find(',')) + "_0.csv");
         addEdges(g, "../dataset/line_" + line.substr(0, line.find(',')) + "_1.csv");
     }
+}
+
+const unordered_map<int, string> &FileReader::getIntToStop() const {
+    return intToStop;
 }

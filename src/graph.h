@@ -8,6 +8,7 @@
 #include <list>
 #include <queue>
 #include <iostream>
+#include <bits/stl_list.h>
 
 using namespace std;
 
@@ -45,6 +46,10 @@ public:
     int dijkstra_distance(int a, int b);
 
     list<int> dijkstra_path(int a, int b);
+
+    list<int> minimumStops(int a, int b);
+
+    int connectedComponents();
 };
 
 #endif
