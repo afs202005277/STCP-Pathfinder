@@ -23,7 +23,6 @@ private:
 public:
     Application(string stopsPath, string linesPath, double distance);
     void readStops();
-    const unordered_map<string, int> &getStopToInt() const;
     void readEdges();
     void addEdges(const string &path);
     list<int> courseWithMinimumStops(string stop1, string stop2);

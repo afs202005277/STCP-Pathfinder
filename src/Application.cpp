@@ -48,10 +48,6 @@ void Application::readStops() {
     }
 }
 
-const unordered_map<string, int> &Application::getStopToInt() const {
-    return stopToInt;
-}
-
 void Application::addEdges(const string &path) {
     ifstream trajectory;
     trajectory.open(path);
