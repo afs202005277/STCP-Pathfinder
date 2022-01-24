@@ -8,7 +8,6 @@
 #include <list>
 #include <queue>
 #include <iostream>
-#include <bits/stl_list.h>
 
 using namespace std;
 
