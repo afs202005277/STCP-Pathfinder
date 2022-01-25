@@ -13,11 +13,6 @@ using namespace std;
 #include "graph.h"
 #include "Stop.h"
 
-struct Route {
-    list<int> route; // The list of outgoing edges (to adjacent nodes)
-    double dist;
-};
-
 class Application {
 private:
     vector<Stop> stops;
