@@ -167,7 +167,6 @@ double Application::getTotalDistance(list<int> l) {
 
 list<int> Application::courseWithMinimumDistance(const string& stop1, const string& stop2) {
     auto l = g.minimumDistance(stopToInt[stop1], stopToInt[stop2]);
-    l.push_front(getTotalDistance(l));
     return l;
 }
 
@@ -183,7 +182,7 @@ list<int> Application::courseWithMinimumDistance(double lat1, double lon1, doubl
     for (const auto& s:src){
         for (const auto& d:dest){
             auto tmp = courseWithMinimumDistance(s.first, d.first);
-            auto distance = getTotalDistance(tmp);
+            auto distance = getTotalDistance(tmp) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
             if (distance < min) {
                 min = distance;
                 res = tmp;
