@@ -3,6 +3,7 @@
 
 #include "graph.h"
 #include "minHeap.h"
+#define INF (INT_MAX/2)
 
 // Constructor: nr nodes and direction (default: undirected)
 Graph::Graph(int num, bool dir) : n(num), hasDir(dir), nodes(num+1) {}
@@ -128,4 +129,53 @@ Graph::Graph() {}
 
 const vector<Node> &Graph::getNodes() const {
     return nodes;
+}
+
+int Graph::dijkstra_distanceMinDistance(int a, int b) {
+    MinHeap<int, int> q(n, -1);
+    for (int i=1;i<=n;i++){
+        if (i==a) {
+            nodes[a].dist = 0;
+            nodes[a].pred = a;
+        }
+        else {
+            nodes[i].dist = INT_MAX;
+            nodes[i].visited = false;
+            nodes[i].pred = 0;
+        }
+        q.insert(i, nodes[i].dist);
+    }
+    while (q.getSize() > 0){
+        int u = q.removeMin();
+        nodes[u].visited = true;
+        for (const auto& v:nodes[u].adj){
+            if (!nodes[v.dest].visited && nodes[u].dist + v.distanceRealWorld < nodes[v.dest].dist){
+                nodes[v.dest].dist = nodes[u].dist + v.distanceRealWorld;
+                nodes[v.dest].pred = u;
+                q.decreaseKey(v.dest, nodes[v.dest].dist);
+            }
+        }
+    }
+    if (nodes[b].dist == INT_MAX)
+        return -1;
+    else
+        return nodes[b].dist;
+}
+
+list<int> Graph::dijkstra_pathMinDistance(int a, int b) {
+    list<int> path;
+    dijkstra_distanceMinDistance(a, b);
+    if (nodes[b].dist == INT_MAX)
+        return path;
+    int current = b;
+    while(current != a) {
+        path.push_front(current);
+        current = nodes[current].pred;
+    }
+    path.push_front(a);
+    return path;
+}
+
+list<int> Graph::minimumDistance(int a, int b) {
+    return dijkstra_pathMinDistance(a, b);
 }

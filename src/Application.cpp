@@ -152,3 +152,43 @@ int Application::getConnectedComponents() {
 const vector<Stop> &Application::getStops() const {
     return stops;
 }
+
+double Application::getTotalDistance(list<int> l) {
+    if (l.empty() || l.size() == 1)
+        return 0;
+    double total = 0.0;
+    int first = l.front();
+    for (auto it = next(l.begin());it != l.end();it++) {
+        total += getDistance(stops[first].getLatitude(), stops[first].getLongitude(), stops[*it].getLatitude(), stops[*it].getLongitude());
+        first = *it;
+    }
+    return total;
+}
+
+list<int> Application::courseWithMinimumDistance(const string& stop1, const string& stop2) {
+    auto l = g.minimumDistance(stopToInt[stop1], stopToInt[stop2]);
+    l.push_front(getTotalDistance(l));
+    return l;
+}
+
+list<int> Application::courseWithMinimumDistance(double lat1, double lon1, double lat2, double lon2) {
+    list<int> res;
+    double min = DBL_MAX;
+    list<pair<string, int>> src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
+    list<pair<string, int>> dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
+    if (src.empty())
+        src.push_back(getNearestStop(lat1, lon1));
+    if (dest.empty())
+        dest.push_back(getNearestStop(lat2, lon2));
+    for (const auto& s:src){
+        for (const auto& d:dest){
+            auto tmp = courseWithMinimumDistance(s.first, d.first);
+            auto distance = getTotalDistance(tmp);
+            if (distance < min) {
+                min = distance;
+                res = tmp;
+            }
+        }
+    }
+    return res;
+}

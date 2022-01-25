@@ -56,6 +56,12 @@ public:
     int connectedComponents();
 
     const vector<Node> &getNodes() const;
+
+    list<int> minimumDistance(int a, int b);
+
+    list<int> dijkstra_pathMinDistance(int a, int b);
+
+    int dijkstra_distanceMinDistance(int a, int b);
 };
 
 #endif

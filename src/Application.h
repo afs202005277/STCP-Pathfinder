@@ -9,8 +9,14 @@ using namespace std;
 
 #include <vector>
 #include <unordered_map>
+#include <bits/stl_list.h>
 #include "graph.h"
 #include "Stop.h"
+
+struct Route {
+    list<int> route; // The list of outgoing edges (to adjacent nodes)
+    double dist;
+};
 
 class Application {
 private:
@@ -32,6 +38,11 @@ public:
     int getConnectedComponents();
     pair<string, int> getNearestStop(double lat, double lon);
     const vector<Stop> &getStops() const;
+    list<int> courseWithMinimumDistance(const string& stop1, const string& stop2);
+
+    double getTotalDistance(list<int> l);
+
+    list<int> courseWithMinimumDistance(double lat1, double lon1, double lat2, double lon2);
 };
 
 
