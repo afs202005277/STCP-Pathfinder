@@ -246,3 +246,30 @@ Edge Graph::edgeBetween(int &a, int &b)
     }
     return Edge();
 }
+
+void Graph::minimunZones(int a){
+    MinHeap<int, int> q(n, -1);
+    for (int v=1; v<=n; v++) {
+        nodes[v].zoneChanges = INF;
+        q.insert(v, INF);
+        nodes[v].visited = false;
+    }
+    int s;
+    nodes[s].zoneChanges = 1;
+    q.decreaseKey(s, 1);
+    nodes[s].pred = s;
+    while (q.getSize()>0) {
+        int u = q.removeMin();
+        // cout << "Node " << u << " with dist = " << nodes[u].dist << endl;
+        nodes[u].visited = true;
+        for (auto e : nodes[u].adj) {
+            int v = e.dest;
+            int w = nodes[u].zoneChanges != nodes[v].zoneChanges;
+            if (!nodes[v].visited && nodes[u].zoneChanges + w < nodes[v].zoneChanges) {
+                nodes[v].zoneChanges = nodes[u].zoneChanges+ w;
+                q.decreaseKey(v, nodes[v].zoneChanges);
+                nodes[v].pred = u;
+            }
+        }
+    }
+}

@@ -19,6 +19,8 @@ public:
 
     Stop();
 
+    const string &getZone() const;
+
     const string &getCode() const;
 
     double getLatitude() const;

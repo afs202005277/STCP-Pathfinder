@@ -17,6 +17,7 @@ struct Edge {
     string line;
     double distanceRealWorld;
     bool onFoot;
+    bool changeZone; //True if zone has changed; False otherwise
 };
 
 struct Node {
@@ -24,6 +25,7 @@ struct Node {
     bool visited;   // As the node been visited on a search?
     int dist;
     int pred;
+    int zoneChanges;
 };
 
 class Graph {
@@ -31,6 +33,7 @@ private:
     int n;              // Graph size (vertices are numbered from 1 to n)
     bool hasDir;        // false: undirect; true: directed
     vector<Node> nodes; // The list of nodes being represented
+
 
 public:
     // Constructor: nr nodes and direction (default: undirected)
@@ -68,6 +71,8 @@ public:
     int dijkstra_distanceMinDistance(int a, int b);
 
     Edge edgeBetween(int &a, int &b);
+
+    void minimunZones(int a);
 };
 
 #endif
