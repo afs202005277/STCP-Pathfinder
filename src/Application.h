@@ -38,6 +38,7 @@ public:
     double getTotalDistance(list<int> l);
 
     list<int> courseWithMinimumDistance(double lat1, double lon1, double lat2, double lon2);
+
 };
 
 

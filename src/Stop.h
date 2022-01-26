@@ -21,6 +21,8 @@ public:
 
     const string &getCode() const;
 
+    const string &getZone() const;
+
     double getLatitude() const;
 
     double getLongitude() const;

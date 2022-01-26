@@ -16,6 +16,10 @@ const string &Stop::getCode() const {
     return code;
 }
 
+const string &Stop::getZone() const {
+    return zone;
+}
+
 Stop::Stop() {}
 
 double Stop::getLatitude() const {

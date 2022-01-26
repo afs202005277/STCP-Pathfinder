@@ -93,8 +93,7 @@ pair<string, int> Application::getNearestStop(double lat, double lon) {
     return {tmp.getCode(), idx};
 }
 
-Application::Application(string stopsPath, string linesPath, double distance) : stopsPath(std::move(stopsPath)),
-                                                                             linesPath(std::move(linesPath)) {
+Application::Application(string stopsPath, string linesPath, double distance) : stopsPath(std::move(stopsPath)),linesPath(std::move(linesPath)) {
     walkingDistance = distance;
     readStops();
     g = Graph (stops.size()-1, true);
