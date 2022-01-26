@@ -51,7 +51,11 @@ public:
 
     list<int> dijkstra_path(int a, int b);
 
+    int dijkstra_lineChange(int a, int b);
+
     list<int> minimumStops(int a, int b);
+
+    list<int> minimumLines(int a, int b);
 
     int connectedComponents();
 
@@ -62,6 +66,8 @@ public:
     list<int> dijkstra_pathMinDistance(int a, int b);
 
     int dijkstra_distanceMinDistance(int a, int b);
+
+    Edge edgeBetween(int &a, int &b);
 };
 
 #endif

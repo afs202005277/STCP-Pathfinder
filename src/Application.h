@@ -9,7 +9,6 @@ using namespace std;
 
 #include <vector>
 #include <unordered_map>
-#include <bits/stl_list.h>
 #include "graph.h"
 #include "Stop.h"
 
@@ -36,8 +35,11 @@ public:
     list<int> courseWithMinimumDistance(const string& stop1, const string& stop2);
 
     double getTotalDistance(list<int> l);
+    int getLineChange(list<int> l);
 
     list<int> courseWithMinimumDistance(double lat1, double lon1, double lat2, double lon2);
+    list<int> courseWithMinimumLines(string stop1, string stop2);
+    list<int> courseWithMinimumLines(double lat1, double lon1, double lat2, double lon2);
 };
 
 

@@ -107,11 +107,67 @@ list<int> Application::courseWithMinimumStops(string stop1, string stop2) {
     return g.minimumStops(stopToInt[stop1], stopToInt[stop2]);
 }
 
+list<list<int>> Application::courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2) {
+    list<list<int>> res;
+    list<pair<string, int>> src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
+    list<pair<string, int>> dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
+    if (src.empty())
+        src.push_back(getNearestStop(lat1, lon1));
+    if (dest.empty())
+        dest.push_back(getNearestStop(lat2, lon2));
+    for (const auto& s:src){
+        for (const auto& d:dest){
+            res.push_back(courseWithMinimumStops(s.first, d.first));
+        }
+    }
+    return res;
+}
+
 list<pair<string, int>> Application::getAllStopsCloserToXMetres(double lat, double lon, double x) {
     list<pair<string, int>> res;
     for (int i=1;i<stops.size();i++){
         if (getDistance(lat, lon, stops[i].getLatitude(), stops[i].getLongitude()) * 1000 < x) {
             res.emplace_back(stops[i].getCode(), i);
+        }
+    }
+    return res;
+}
+
+list<int> Application::courseWithMinimumLines(string stop1, string stop2) {
+    return g.minimumLines(stopToInt[stop1], stopToInt[stop2]);
+}
+
+list<int> Application::courseWithMinimumLines(double lat1, double lon1, double lat2, double lon2)
+{
+    list<int> res;
+    list<pair<string, int>> src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
+    list<pair<string, int>> dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
+    if (src.empty())
+        src.push_back(getNearestStop(lat1, lon1));
+    if (dest.empty())
+        dest.push_back(getNearestStop(lat2, lon2));
+
+    int min_lines = -1;
+    double min_dist = -1;
+    for (const auto& s:src) {
+        for (const auto& d:dest) {
+            auto tmp = courseWithMinimumLines(s.first, d.first);
+            auto linesCross = getLineChange(tmp);
+            if (min_lines > linesCross || min_lines == -1)
+            {
+                res = tmp;
+                min_lines = linesCross;
+                min_dist = getTotalDistance(tmp) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
+            }
+            else if (min_lines == linesCross)
+            {
+                double temp = getTotalDistance(tmp) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
+                if (min_dist > temp || min_dist == -1)
+                {
+                    res = tmp;
+                    min_dist = getTotalDistance(tmp) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
+                }
+            }
         }
     }
     return res;
@@ -127,22 +183,6 @@ void Application::addOnFootEdges() {
             }
         }
     }
-}
-
-list<list<int>> Application::courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2) {
-    list<list<int>> res;
-    list<pair<string, int>> src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
-    list<pair<string, int>> dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
-    if (src.empty())
-        src.push_back(getNearestStop(lat1, lon1));
-    if (dest.empty())
-        dest.push_back(getNearestStop(lat2, lon2));
-    for (const auto& s:src){
-        for (const auto& d:dest){
-            res.push_back(courseWithMinimumStops(s.first, d.first));
-        }
-    }
-    return res;
 }
 
 int Application::getConnectedComponents() {
@@ -163,6 +203,27 @@ double Application::getTotalDistance(list<int> l) {
         first = *it;
     }
     return total;
+}
+
+int Application::getLineChange(list<int> l)
+{
+    if (l.empty() || l.size() == 1)
+        return 0;
+    int lines = 0;
+    string line = "";
+    auto prev_it = l.begin();
+    auto it = l.begin();
+    it++;
+    for (; it != l.end(); ++it)
+    {
+        if (g.edgeBetween(*prev_it, *it).line != line)
+        {
+            line = g.edgeBetween(*prev_it, *it).line;
+            lines++;
+        }
+        prev_it++;
+    }
+    return lines;
 }
 
 list<int> Application::courseWithMinimumDistance(const string& stop1, const string& stop2) {

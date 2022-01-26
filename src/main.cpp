@@ -15,10 +15,10 @@ int main() {
         cout << stops[elem].getCode() << endl;
     }*/
     //cout << teste.front().size() << endl;
-     auto teste = application.courseWithMinimumDistance(41.184369951579704, -8.641757713581917, 41.174167013902576, -8.689407024963856);
-    // auto teste = application.courseWithMinimumDistance("AV2", "PCID4");
+    //auto teste = application.courseWithMinimumDistance(41.184369951579704, -8.641757713581917, 41.174167013902576, -8.689407024963856);
 
-    for (auto i:teste) {
-        cout << stops[i].getCode() << endl;
+    auto teste = application.courseWithMinimumLines(41.184369951579704, -8.641757713581917, 41.174167013902576, -8.689407024963856);
+    for (auto elem:teste) {
+        cout << stops[elem].getCode() << endl;
     }
 }
