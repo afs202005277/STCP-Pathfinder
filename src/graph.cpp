@@ -10,6 +10,10 @@ Graph::Graph(int num, bool dir) : n(num), hasDir(dir), nodes(num+1) {}
 
 Graph::Graph() {}
 
+/**
+ * Function that calculates the number of connected components in the graph
+ * @return number of connected components in the graph
+ */
 int Graph::connectedComponents() {
     int counter=0;
     for (int i=1;i<=n;i++)
@@ -23,7 +27,15 @@ int Graph::connectedComponents() {
     return counter;
 }
 
-// Add edge from source to destination with a certain zoneChanges
+/**
+ * Function that adds an edge between two nodes
+ * @param src first node
+ * @param dest second node
+ * @param line the code of the bus' line that connects the two nodes
+ * @param d distance between the nodes (bus stops)
+ * @param foot a boolean to flag the links that aren't possible using buses
+ * @param weight an integer to represent the amount of zone transitions made by the edge
+ */
 void Graph::addEdge(int src, int dest, string line, double d, bool foot, int weight) {
     if (src<1 || src>n || dest<1 || dest>n)
         return;
@@ -32,7 +44,10 @@ void Graph::addEdge(int src, int dest, string line, double d, bool foot, int wei
         nodes[dest].adj.push_back({src, weight});
 }
 
-
+/**
+ * Standard depth first search
+ * @param v starting node
+ */
 void Graph::dfs(int v) {
     // cout << v << " "; // show node order
     nodes[v].visited = true;
@@ -43,7 +58,10 @@ void Graph::dfs(int v) {
     }
 }
 
-
+/**
+ * Standard breath first search
+ * @param v starting node
+ */
 void Graph::bfs(int v) {
     for (int v=1; v<=n; v++) {
         nodes[v].visited = false;
@@ -69,6 +87,12 @@ void Graph::bfs(int v) {
     }
 }
 
+ /**
+  * Dijkstra algorithm that calculates the distance between two nodes, while making it possible to reconstruct the path
+  * @param a starting node
+  * @param b target node
+  * @return the distance (integer) between the nodes
+  */
 int Graph::dijkstra_distance(int a, int b) {
     MinHeap<int, int> q(n, -1);
     for (int i=1;i<=n;i++){
@@ -99,7 +123,12 @@ int Graph::dijkstra_distance(int a, int b) {
     else
         return nodes[b].dist;
 }
-
+/**
+ * Dijkstra algorithm that reconstructs the path used by the dijkstra algorithm implementation that calculates the distance between two nodes
+ * @param a starting node
+ * @param b target node
+ * @return a list with the integers that are associated with each node of the path
+ */
 list<int> Graph::dijkstra_path(int a, int b) {
     list<int> path;
     dijkstra_distance(a, b);
@@ -114,6 +143,12 @@ list<int> Graph::dijkstra_path(int a, int b) {
     return path;
 }
 
+/**
+ * Algorithm to calculate the path that contains the minimum number of stops between two nodes
+ * @param a starting node
+ * @param b target node
+ * @return a list with the integers that are associated with each node of the path
+ */
 list<int> Graph::minimumStops(int a, int b) {
     list<int> res;
     int distance = dijkstra_distance(a, b);
@@ -129,6 +164,12 @@ list<int> Graph::minimumStops(int a, int b) {
     return res;
 }
 
+/**
+ * Dijkstra implementation to calculate the distance between two nodes, using a path that minimizes the amount of times that the user needs to change line
+ * @param a starting node
+ * @param b target node
+ * @return the distance (integer) between the two nodes
+ */
 int Graph::dijkstra_lineChange(int a, int b) {
     MinHeap<int, int> q(n, -1);
     for (int i=1;i<=n;i++){
@@ -162,6 +203,12 @@ int Graph::dijkstra_lineChange(int a, int b) {
         return nodes[b].dist;
 }
 
+/**
+ * Algorithm that reconstructs the path created by the Dijkstra implementation that minimizes line changes
+ * @param a starting node
+ * @param b target node
+ * @return a list with the integers that are associated with each node of the path
+ */
 list<int> Graph::minimumLines(int a, int b) {
     list<int> res;
     int distance = dijkstra_lineChange(a, b);
@@ -176,6 +223,12 @@ list<int> Graph::minimumLines(int a, int b) {
     return res;
 }
 
+/**
+ * Dijkstra implementation to calculate the distance between two nodes, using a path that minimizes the distance travelled
+ * @param a starting node
+ * @param b target node
+ * @return the distance (integer) between the two nodes
+ */
 int Graph::dijkstra_distanceMinDistance(int a, int b) {
     MinHeap<int, int> q(n, -1);
     for (int i=1;i<=n;i++){
@@ -207,6 +260,12 @@ int Graph::dijkstra_distanceMinDistance(int a, int b) {
         return nodes[b].dist;
 }
 
+/**
+ * Algorithm that reconstructs the path created by the Dijkstra implementation that minimizes the distance travelled
+ * @param a starting node
+ * @param b target node
+ * @return a list with the integers that are associated with each node of the path
+ */
 list<int> Graph::dijkstra_pathMinDistance(int a, int b) {
     list<int> path;
     dijkstra_distanceMinDistance(a, b);
@@ -221,10 +280,6 @@ list<int> Graph::dijkstra_pathMinDistance(int a, int b) {
     return path;
 }
 
-list<int> Graph::minimumDistance(int a, int b) {
-    return dijkstra_pathMinDistance(a, b);
-}
-
 Edge Graph::edgeBetween(int &a, int &b)
 {
     for (auto &v : nodes[a].adj)
@@ -237,6 +292,12 @@ Edge Graph::edgeBetween(int &a, int &b)
     return {};
 }
 
+/**
+ * Dijkstra implementation to calculate the distance between two nodes, using a path that minimizes the zones used
+ * @param a starting node
+ * @param b target node
+ * @return the distance (integer) between the two nodes
+ */
 int Graph::dijkstra_distanceMinZones(int a, int b) {
     MinHeap<int, int> q(n, -1);
     for (int i=1;i<=n;i++){
@@ -268,6 +329,12 @@ int Graph::dijkstra_distanceMinZones(int a, int b) {
         return nodes[b].dist;
 }
 
+/**
+ * Algorithm that reconstructs the path created by the Dijkstra implementation that minimizes the zones used
+ * @param a starting node
+ * @param b target node
+ * @return a list with the integers that are associated with each node of the path
+ */
 list<int> Graph::dijkstra_pathMinZones(int a, int b) {
     list<int> path;
     dijkstra_distanceMinZones(a, b);
@@ -282,6 +349,3 @@ list<int> Graph::dijkstra_pathMinZones(int a, int b) {
     return path;
 }
 
-list<int> Graph::minimumZones(int a, int b) {
-    return dijkstra_pathMinZones(a, b);
-}
