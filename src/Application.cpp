@@ -60,9 +60,12 @@ void Application::addEdges(const string &path) {
     getline(trajectory, firstStop);
     for (int i=0;i<stoi(amountStops);i++) {
         getline(trajectory, secondStop);
+        int weight = 0;
+        if (stops[stopToInt[firstStop]].getZone() != stops[stopToInt[secondStop]].getZone())
+            weight = 1;
         g.addEdge(stopToInt[firstStop], stopToInt[secondStop], path.substr(path.find('_') + 1), path.find('.'),
                   getDistance(stops[stopToInt[firstStop]].getLatitude(), stops[stopToInt[firstStop]].getLongitude(),
-                  stops[stopToInt[secondStop]].getLatitude(), stops[stopToInt[secondStop]].getLongitude()));
+                  stops[stopToInt[secondStop]].getLatitude(), stops[stopToInt[secondStop]].getLongitude()), weight);
         firstStop = secondStop;
     }
 }
@@ -178,8 +181,11 @@ void Application::addOnFootEdges() {
         for (int j=i+1;j<stops.size();j++){
             double d = getDistance(stops[i].getLatitude(), stops[i].getLongitude(), stops[j].getLatitude(), stops[j].getLongitude());
             if (d * 1000 <= walkingDistance) {
-                g.addEdge(i, j, "", d, true);
-                g.addEdge(j, i, "", d, true);
+                int weight = 0;
+                if (stops[i].getZone() != stops[j].getZone())
+                    weight = 1;
+                g.addEdge(i, j, "", d, true, weight);
+                g.addEdge(j, i, "", d, true, weight);
             }
         }
     }

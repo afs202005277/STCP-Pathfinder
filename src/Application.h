@@ -22,20 +22,24 @@ private:
 
 public:
     Application(string stopsPath, string linesPath, double distance);
+
     void readStops();
     void readEdges();
     void addEdges(const string &path);
-    list<int> courseWithMinimumStops(string stop1, string stop2);
-    list<list<int>> courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2);
     list<pair<string, int>> getAllStopsCloserToXMetres(double lat, double lon, double x); //par de code da paragem e respetivo indice no vetor
     void addOnFootEdges();
     int getConnectedComponents();
     pair<string, int> getNearestStop(double lat, double lon);
     const vector<Stop> &getStops() const;
-    list<int> courseWithMinimumDistance(const string& stop1, const string& stop2);
     double getTotalDistance(list<int> l);
     int getLineChange(list<int> l);
+
     list<int> courseWithMinimumDistance(double lat1, double lon1, double lat2, double lon2);
+    list<int> courseWithMinimumDistance(const string& stop1, const string& stop2);
+
+    list<int> courseWithMinimumStops(string stop1, string stop2);
+    list<list<int>> courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2);
+
     list<int> courseWithMinimumLines(string stop1, string stop2);
     list<int> courseWithMinimumLines(double lat1, double lon1, double lat2, double lon2);
 };

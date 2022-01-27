@@ -8,16 +8,16 @@
 #include <list>
 #include <queue>
 #include <iostream>
+#include <bits/stl_list.h>
 
 using namespace std;
 
 struct Edge {
     int dest;   // Destination node
-    int weight; // An integer weight
+    int zoneChanges;
     string line;
     double distanceRealWorld;
     bool onFoot;
-    bool changeZone; //True if zone has changed; False otherwise
 };
 
 struct Node {
@@ -25,7 +25,6 @@ struct Node {
     bool visited;   // As the node been visited on a search?
     int dist;
     int pred;
-    int zoneChanges;
 };
 
 class Graph {
@@ -41,8 +40,8 @@ public:
 
     Graph();
 
-    // Add edge from source to destination with a certain weight
-    void addEdge(int src, int dest, string line, double d, bool foot, int weight = 1);
+    // Add edge from source to destination with a certain zoneChanges
+    void addEdge(int src, int dest, string line, double d, bool foot, int weight);
 
     // Depth-First Search: example implementation
     void dfs(int v);
@@ -73,6 +72,10 @@ public:
     Edge edgeBetween(int &a, int &b);
 
     void minimunZones(int a);
+
+    int dijkstra_distanceMinZones(int a, int b);
+
+    list<int> dijkstra_pathMinZones(int a, int b);
 };
 
 #endif
