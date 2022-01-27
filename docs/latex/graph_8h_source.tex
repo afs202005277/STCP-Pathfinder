@@ -1,0 +1,87 @@
+\doxysection{graph.\+h}
+\label{graph_8h_source}\index{src/graph.h@{src/graph.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// AED 2021/2022 -\/ Aula Pratica 09}}
+\DoxyCodeLine{2 \textcolor{comment}{// Pedro Ribeiro (DCC/FCUP) [03/01/2022]}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#ifndef \_GRAPH\_H\_}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#define \_GRAPH\_H\_}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <list>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <queue>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <bits/stl\_list.h>}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{struct }Edge \{}
+\DoxyCodeLine{16     \textcolor{keywordtype}{int} dest;   \textcolor{comment}{// Destination node}}
+\DoxyCodeLine{17     \textcolor{keywordtype}{int} zoneChanges;}
+\DoxyCodeLine{18     \textcolor{keywordtype}{string} line;}
+\DoxyCodeLine{19     \textcolor{keywordtype}{double} distanceRealWorld;}
+\DoxyCodeLine{20     \textcolor{keywordtype}{bool} onFoot;}
+\DoxyCodeLine{21 \};}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{struct }Node \{}
+\DoxyCodeLine{24     list<Edge> adj; \textcolor{comment}{// The list of outgoing edges (to adjacent nodes)}}
+\DoxyCodeLine{25     \textcolor{keywordtype}{bool} visited;   \textcolor{comment}{// As the node been visited on a search?}}
+\DoxyCodeLine{26     \textcolor{keywordtype}{int} dist;}
+\DoxyCodeLine{27     \textcolor{keywordtype}{int} pred;}
+\DoxyCodeLine{28 \};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{keyword}{class }Graph \{}
+\DoxyCodeLine{31 \textcolor{keyword}{private}:}
+\DoxyCodeLine{32     \textcolor{keywordtype}{int} n;              \textcolor{comment}{// Graph size (vertices are numbered from 1 to n)}}
+\DoxyCodeLine{33     \textcolor{keywordtype}{bool} hasDir;        \textcolor{comment}{// false: undirect; true: directed}}
+\DoxyCodeLine{34     vector<Node> nodes; \textcolor{comment}{// The list of nodes being represented}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{keyword}{public}:}
+\DoxyCodeLine{38     \textcolor{comment}{// Constructor: nr nodes and direction (default: undirected)}}
+\DoxyCodeLine{39     Graph(\textcolor{keywordtype}{int} nodes, \textcolor{keywordtype}{bool} dir = \textcolor{keyword}{false});}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     Graph();}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{comment}{// Add edge from source to destination with a certain zoneChanges}}
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} addEdge(\textcolor{keywordtype}{int} src, \textcolor{keywordtype}{int} dest, \textcolor{keywordtype}{string} line, \textcolor{keywordtype}{double} d, \textcolor{keywordtype}{bool} foot, \textcolor{keywordtype}{int} weight);}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{comment}{// Depth-\/First Search: example implementation}}
+\DoxyCodeLine{47     \textcolor{keywordtype}{void} dfs(\textcolor{keywordtype}{int} v);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{comment}{// Breadth-\/First Search: example implementation}}
+\DoxyCodeLine{50     \textcolor{keywordtype}{void} bfs(\textcolor{keywordtype}{int} v);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     \textcolor{keywordtype}{int} dijkstra\_distance(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     list<int> dijkstra\_path(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56     \textcolor{keywordtype}{int} dijkstra\_lineChange(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     list<int> minimumStops(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     list<int> minimumLines(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62     \textcolor{keywordtype}{int} connectedComponents();}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \textcolor{keyword}{const} vector<Node> \&getNodes() \textcolor{keyword}{const};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     list<int> minimumDistance(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     list<int> dijkstra\_pathMinDistance(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{keywordtype}{int} dijkstra\_distanceMinDistance(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     Edge edgeBetween(\textcolor{keywordtype}{int} \&a, \textcolor{keywordtype}{int} \&b);}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     list<int> minimunZones(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76     \textcolor{keywordtype}{int} dijkstra\_distanceMinZones(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78     list<int> dijkstra\_pathMinZones(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{79 \};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

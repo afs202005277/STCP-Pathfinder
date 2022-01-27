@@ -1,0 +1,58 @@
+\doxysection{Application.\+h}
+\label{_application_8h_source}\index{src/Application.h@{src/Application.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by andre on 22/01/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef PROJETO2\_APPLICATION\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define PROJETO2\_APPLICATION\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <unordered\_map>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}graph.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}Stop.h"{}}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{class }Application \{}
+\DoxyCodeLine{16 \textcolor{keyword}{private}:}
+\DoxyCodeLine{17     vector<Stop> stops;}
+\DoxyCodeLine{18     \textcolor{keywordtype}{string} stopsPath, linesPath;}
+\DoxyCodeLine{19     unordered\_map<string, int> stopToInt;}
+\DoxyCodeLine{20     Graph g;}
+\DoxyCodeLine{21     \textcolor{keywordtype}{double} walkingDistance;}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{public}:}
+\DoxyCodeLine{24     Application(\textcolor{keywordtype}{string} stopsPath, \textcolor{keywordtype}{string} linesPath, \textcolor{keywordtype}{double} distance);}
+\DoxyCodeLine{25     \textcolor{keywordtype}{void} readStops();}
+\DoxyCodeLine{26     \textcolor{keywordtype}{void} readEdges();}
+\DoxyCodeLine{27     \textcolor{keywordtype}{void} addEdges(\textcolor{keyword}{const} \textcolor{keywordtype}{string} \&path);}
+\DoxyCodeLine{28     list<pair<string, int>> getAllStopsCloserToXMetres(\textcolor{keywordtype}{double} lat, \textcolor{keywordtype}{double} lon, \textcolor{keywordtype}{double} x); \textcolor{comment}{//par de code da paragem e respetivo indice no vetor}}
+\DoxyCodeLine{29     \textcolor{keywordtype}{void} addOnFootEdges();}
+\DoxyCodeLine{30     \textcolor{keywordtype}{int} getConnectedComponents();}
+\DoxyCodeLine{31     pair<string, int> getNearestStop(\textcolor{keywordtype}{double} lat, \textcolor{keywordtype}{double} lon);}
+\DoxyCodeLine{32     \textcolor{keyword}{const} vector<Stop> \&getStops() \textcolor{keyword}{const};}
+\DoxyCodeLine{33     \textcolor{keywordtype}{double} getTotalDistance(list<int> l);}
+\DoxyCodeLine{34     \textcolor{keywordtype}{int} getLineChange(list<int> l);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     list<int> courseWithMinimumDistance(\textcolor{keywordtype}{double} lat1, \textcolor{keywordtype}{double} lon1, \textcolor{keywordtype}{double} lat2, \textcolor{keywordtype}{double} lon2);}
+\DoxyCodeLine{37     list<int> courseWithMinimumDistance(\textcolor{keyword}{const} \textcolor{keywordtype}{string}\& stop1, \textcolor{keyword}{const} \textcolor{keywordtype}{string}\& stop2);}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     list<int> courseWithMinimumStops(\textcolor{keywordtype}{string} stop1, \textcolor{keywordtype}{string} stop2);}
+\DoxyCodeLine{40     list<int> courseWithMinimumStops(\textcolor{keywordtype}{double} lat1, \textcolor{keywordtype}{double} lon1, \textcolor{keywordtype}{double} lat2, \textcolor{keywordtype}{double} lon2);}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     list<int> courseWithMinimumLines(\textcolor{keywordtype}{string} stop1, \textcolor{keywordtype}{string} stop2);}
+\DoxyCodeLine{43     list<int> courseWithMinimumLines(\textcolor{keywordtype}{double} lat1, \textcolor{keywordtype}{double} lon1, \textcolor{keywordtype}{double} lat2, \textcolor{keywordtype}{double} lon2);}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     list<int> courseWithMinimumZones(\textcolor{keyword}{const} \textcolor{keywordtype}{string}\& stop1, \textcolor{keyword}{const} \textcolor{keywordtype}{string}\& stop2);}
+\DoxyCodeLine{46     list<int> courseWithMinimumZones(\textcolor{keywordtype}{double} lat1, \textcolor{keywordtype}{double} lon1, \textcolor{keywordtype}{double} lat2, \textcolor{keywordtype}{double} lon2);}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     \textcolor{keywordtype}{int} getTotalChanges(list<int> l);}
+\DoxyCodeLine{49 \};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//PROJETO2\_APPLICATION\_H}}
+
+\end{DoxyCode}
