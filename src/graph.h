@@ -8,7 +8,6 @@
 #include <list>
 #include <queue>
 #include <iostream>
-#include <bits/stl_list.h>
 
 using namespace std;
 
@@ -25,6 +24,7 @@ struct Node {
     bool visited;   // As the node been visited on a search?
     int dist;
     int pred;
+    Edge edgePrev;
 };
 
 class Graph {

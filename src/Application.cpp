@@ -63,7 +63,7 @@ void Application::addEdges(const string &path) {
         int weight = 0;
         if (stops[stopToInt[firstStop]].getZone() != stops[stopToInt[secondStop]].getZone())
             weight = 1;
-        g.addEdge(stopToInt[firstStop], stopToInt[secondStop], path.substr(path.find('_') + 1, path.find('.')),
+        g.addEdge(stopToInt[firstStop], stopToInt[secondStop], path.substr(path.find('_') + 1, path.find('.')-path.find('_')),
                   getDistance(stops[stopToInt[firstStop]].getLatitude(), stops[stopToInt[firstStop]].getLongitude(),
                   stops[stopToInt[secondStop]].getLatitude(), stops[stopToInt[secondStop]].getLongitude()), false, weight);
         firstStop = secondStop;

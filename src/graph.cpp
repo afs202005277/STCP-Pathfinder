@@ -107,7 +107,7 @@ list<int> Graph::minimumStops(int a, int b) {
         return res;
     bfs(a);
     int current = b;
-    while(current != a){
+    while(current != a) {
         res.push_front(current);
         current = nodes[current].pred;
     }
@@ -134,17 +134,10 @@ int Graph::dijkstra_lineChange(int a, int b) {
         nodes[u].visited = true;
         string prevLine;
         for (const auto& v:nodes[u].adj){
-            for (Edge tmp : nodes[nodes[u].pred].adj)
-            {
-                if (tmp.dest == u)
-                {
-                    prevLine = tmp.line;
-                    break;
-                }
-            }
-            if (!nodes[v.dest].visited && nodes[u].dist + (v.line == prevLine || v.line.empty() ? 0 : 999999) < nodes[v.dest].dist){
-                nodes[v.dest].dist = nodes[u].dist + (v.line == prevLine || v.line.empty() ? 0 : 999999);
+            if (!nodes[v.dest].visited && nodes[u].dist + (nodes[u].edgePrev.line == v.line ? 0 : 1) < nodes[v.dest].dist){
+                nodes[v.dest].dist = nodes[u].dist + (nodes[u].edgePrev.line == v.line ? 0 : 1);
                 nodes[v.dest].pred = u;
+                nodes[v.dest].edgePrev = v;
                 q.decreaseKey(v.dest, nodes[v.dest].dist);
             }
         }
