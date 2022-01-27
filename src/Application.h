@@ -22,7 +22,6 @@ private:
 
 public:
     Application(string stopsPath, string linesPath, double distance);
-
     void readStops();
     void readEdges();
     void addEdges(const string &path);
@@ -38,7 +37,7 @@ public:
     list<int> courseWithMinimumDistance(const string& stop1, const string& stop2);
 
     list<int> courseWithMinimumStops(string stop1, string stop2);
-    list<list<int>> courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2);
+    list<int> courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2);
 
     list<int> courseWithMinimumLines(string stop1, string stop2);
     list<int> courseWithMinimumLines(double lat1, double lon1, double lat2, double lon2);

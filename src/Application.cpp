@@ -110,8 +110,9 @@ list<int> Application::courseWithMinimumStops(string stop1, string stop2) {
     return g.minimumStops(stopToInt[stop1], stopToInt[stop2]);
 }
 
-list<list<int>> Application::courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2) {
-    list<list<int>> res;
+list<int> Application::courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2) {
+    list<list<int>> tmp;
+    list<int> res;
     list<pair<string, int>> src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
     list<pair<string, int>> dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
     if (src.empty())
@@ -120,7 +121,14 @@ list<list<int>> Application::courseWithMinimumStops(double lat1, double lon1, do
         dest.push_back(getNearestStop(lat2, lon2));
     for (const auto& s:src){
         for (const auto& d:dest){
-            res.push_back(courseWithMinimumStops(s.first, d.first));
+            tmp.push_back(courseWithMinimumStops(s.first, d.first));
+        }
+    }
+    int min = INT_MAX;
+    for (const auto& l:tmp) {
+        if (l.size() < min) {
+            res = l;
+            min = l.size();
         }
     }
     return res;
