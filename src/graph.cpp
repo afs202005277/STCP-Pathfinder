@@ -112,6 +112,61 @@ list<int> Graph::minimumStops(int a, int b) {
     return res;
 }
 
+int Graph::dijkstra_lineChange(int a, int b) {
+    MinHeap<int, int> q(n, -1);
+    for (int i=1;i<=n;i++){
+        if (i==a) {
+            nodes[a].dist = 0;
+            nodes[a].pred = a;
+        }
+        else {
+            nodes[i].dist = INT_MAX;
+            nodes[i].visited = false;
+            nodes[i].pred = 0;
+        }
+        q.insert(i, nodes[i].dist);
+    }
+    while (q.getSize() > 0){
+        int u = q.removeMin();
+        nodes[u].visited = true;
+        string prevLine = "";
+        for (const auto& v:nodes[u].adj){
+            if (!nodes[v.dest].visited && nodes[u].dist + v.weight < nodes[v.dest].dist){
+                for (Edge tmp : nodes[nodes[u].pred].adj)
+                {
+                    if (tmp.dest == u)
+                    {
+                        prevLine = tmp.line;
+                        break;
+                    }
+                }
+                nodes[v.dest].dist = nodes[u].dist + v.distanceRealWorld*(v.line == prevLine || prevLine.empty() ? 1 : 999999);
+                nodes[v.dest].pred = u;
+                q.decreaseKey(v.dest, nodes[v.dest].dist);
+            }
+        }
+    }
+    if (nodes[b].dist == INT_MAX)
+        return -1;
+    else
+        return nodes[b].dist;
+}
+
+list<int> Graph::minimumLines(int a, int b) {
+    list<int> res;
+    int distance = dijkstra_lineChange(a, b);
+    if (distance == -1)
+        return res;
+    bfs(a);
+    int current = b;
+    while(current != a){
+        res.push_front(current);
+        current = nodes[current].pred;
+    }
+    res.push_front(a);
+    return res;
+}
+
 int Graph::connectedComponents() {
     int counter=0;
     for (int i=1;i<=n;i++)
@@ -178,4 +233,43 @@ list<int> Graph::dijkstra_pathMinDistance(int a, int b) {
 
 list<int> Graph::minimumDistance(int a, int b) {
     return dijkstra_pathMinDistance(a, b);
+}
+
+Edge Graph::edgeBetween(int &a, int &b)
+{
+    for (auto &v : nodes[a].adj)
+    {
+        if (v.dest == b)
+        {
+            return v;
+        }
+    }
+    return Edge();
+}
+
+void Graph::minimunZones(int a){
+    MinHeap<int, int> q(n, -1);
+    for (int v=1; v<=n; v++) {
+        nodes[v].zoneChanges = INF;
+        q.insert(v, INF);
+        nodes[v].visited = false;
+    }
+    int s;
+    nodes[s].zoneChanges = 1;
+    q.decreaseKey(s, 1);
+    nodes[s].pred = s;
+    while (q.getSize()>0) {
+        int u = q.removeMin();
+        // cout << "Node " << u << " with dist = " << nodes[u].dist << endl;
+        nodes[u].visited = true;
+        for (auto e : nodes[u].adj) {
+            int v = e.dest;
+            int w = nodes[u].zoneChanges != nodes[v].zoneChanges;
+            if (!nodes[v].visited && nodes[u].zoneChanges + w < nodes[v].zoneChanges) {
+                nodes[v].zoneChanges = nodes[u].zoneChanges+ w;
+                q.decreaseKey(v, nodes[v].zoneChanges);
+                nodes[v].pred = u;
+            }
+        }
+    }
 }
