@@ -8,6 +8,21 @@
 // Constructor: nr nodes and direction (default: undirected)
 Graph::Graph(int num, bool dir) : n(num), hasDir(dir), nodes(num+1) {}
 
+Graph::Graph() {}
+
+int Graph::connectedComponents() {
+    int counter=0;
+    for (int i=1;i<=n;i++)
+        nodes[i].visited = false;
+    for (int i=1;i<=n;i++)
+        if (!nodes[i].visited)
+        {
+            counter++;
+            dfs(i);
+        }
+    return counter;
+}
+
 // Add edge from source to destination with a certain zoneChanges
 void Graph::addEdge(int src, int dest, string line, double d, bool foot, int weight) {
     if (src<1 || src>n || dest<1 || dest>n)
@@ -17,7 +32,7 @@ void Graph::addEdge(int src, int dest, string line, double d, bool foot, int wei
         nodes[dest].adj.push_back({src, weight});
 }
 
-// Depth-First Search: example implementation
+
 void Graph::dfs(int v) {
     // cout << v << " "; // show node order
     nodes[v].visited = true;
@@ -28,7 +43,7 @@ void Graph::dfs(int v) {
     }
 }
 
-// Depth-First Search: example implementation
+
 void Graph::bfs(int v) {
     for (int v=1; v<=n; v++) {
         nodes[v].visited = false;
@@ -97,7 +112,6 @@ list<int> Graph::dijkstra_path(int a, int b) {
     }
     path.push_front(a);
     return path;
-    return path;
 }
 
 list<int> Graph::minimumStops(int a, int b) {
@@ -160,25 +174,6 @@ list<int> Graph::minimumLines(int a, int b) {
     }
     res.push_front(a);
     return res;
-}
-
-int Graph::connectedComponents() {
-    int counter=0;
-    for (int i=1;i<=n;i++)
-        nodes[i].visited = false;
-    for (int i=1;i<=n;i++)
-        if (!nodes[i].visited)
-        {
-            counter++;
-            dfs(i);
-        }
-    return counter;
-}
-
-Graph::Graph() {}
-
-const vector<Node> &Graph::getNodes() const {
-    return nodes;
 }
 
 int Graph::dijkstra_distanceMinDistance(int a, int b) {
