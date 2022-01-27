@@ -42,6 +42,11 @@ public:
 
     list<int> courseWithMinimumLines(string stop1, string stop2);
     list<int> courseWithMinimumLines(double lat1, double lon1, double lat2, double lon2);
+
+    list<int> courseWithMinimumZones(const string& stop1, const string& stop2);
+    list<int> courseWithMinimumZones(double lat1, double lon1, double lat2, double lon2);
+
+    int getTotalChanges(list<int> l);
 };
 
 

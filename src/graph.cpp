@@ -291,3 +291,7 @@ list<int> Graph::dijkstra_pathMinZones(int a, int b) {
     path.push_front(a);
     return path;
 }
+
+list<int> Graph::minimunZones(int a, int b) {
+    return dijkstra_pathMinZones(a, b);
+}
