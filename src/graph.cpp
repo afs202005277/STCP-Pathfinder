@@ -33,6 +33,7 @@ void Graph::bfs(int v) {
     for (int v=1; v<=n; v++) {
         nodes[v].visited = false;
         nodes[v].pred = 0;
+        nodes[v].dist = 0;
     }
     queue<int> q; // queue of unvisited nodes
     q.push(v);
@@ -47,6 +48,7 @@ void Graph::bfs(int v) {
                 q.push(w);
                 nodes[w].visited = true;
                 nodes[w].pred = u;
+                nodes[w].dist = nodes[u].dist+1;
             }
         }
     }
@@ -95,6 +97,7 @@ list<int> Graph::dijkstra_path(int a, int b) {
     }
     path.push_front(a);
     return path;
+    return path;
 }
 
 list<int> Graph::minimumStops(int a, int b) {
@@ -131,16 +134,16 @@ int Graph::dijkstra_lineChange(int a, int b) {
         nodes[u].visited = true;
         string prevLine;
         for (const auto& v:nodes[u].adj){
-            if (!nodes[v.dest].visited && nodes[u].dist + v.zoneChanges < nodes[v.dest].dist){
-                for (Edge tmp : nodes[nodes[u].pred].adj)
+            for (Edge tmp : nodes[nodes[u].pred].adj)
+            {
+                if (tmp.dest == u)
                 {
-                    if (tmp.dest == u)
-                    {
-                        prevLine = tmp.line;
-                        break;
-                    }
+                    prevLine = tmp.line;
+                    break;
                 }
-                nodes[v.dest].dist = nodes[u].dist + v.distanceRealWorld*(v.line == prevLine || prevLine.empty() ? 1 : 999999);
+            }
+            if (!nodes[v.dest].visited && nodes[u].dist + (v.line == prevLine || v.line.empty() ? 0 : 999999) < nodes[v.dest].dist){
+                nodes[v.dest].dist = nodes[u].dist + (v.line == prevLine || v.line.empty() ? 0 : 999999);
                 nodes[v.dest].pred = u;
                 q.decreaseKey(v.dest, nodes[v.dest].dist);
             }
@@ -157,7 +160,6 @@ list<int> Graph::minimumLines(int a, int b) {
     int distance = dijkstra_lineChange(a, b);
     if (distance == -1)
         return res;
-    bfs(a);
     int current = b;
     while(current != a){
         res.push_front(current);
@@ -292,6 +294,6 @@ list<int> Graph::dijkstra_pathMinZones(int a, int b) {
     return path;
 }
 
-list<int> Graph::minimunZones(int a, int b) {
+list<int> Graph::minimumZones(int a, int b) {
     return dijkstra_pathMinZones(a, b);
 }

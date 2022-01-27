@@ -2,23 +2,101 @@
 #include "Application.h"
 
 int main() {
-    Application application("../dataset/stops.csv", "../dataset/lines.csv", 50);
+    Application application("../dataset/stops.csv", "../dataset/lines.csv", 0);
     auto stops = application.getStops();
-    /*auto teste = application.courseWithMinimumStops(41.188138102636366, -8.63988573136558, 41.17639492070776, -8.692438308431848);
-    for (auto inner:teste){
-        for (auto elem:inner){
-            cout << stops[elem].getCode() << endl;
-        }
-    }*/
-    /*auto teste = application.courseWithMinimumStops("STA1", "FGTR1");
-    for (auto elem:teste) {
-        cout << stops[elem].getCode() << endl;
-    }*/
-    //cout << teste.front().size() << endl;
-    //auto teste = application.courseWithMinimumDistance(41.184369951579704, -8.641757713581917, 41.174167013902576, -8.689407024963856);
 
-    auto teste = application.courseWithMinimumLines(41.184369951579704, -8.641757713581917, 41.174167013902576, -8.689407024963856);
-    for (auto elem:teste) {
-        cout << stops[elem].getCode() << endl;
+    cout << "Welcome to the STCP routing system." << endl;
+    while (true) {
+        cout << "Please input the coordinates (or the stop code) of the departure location." << endl;
+        string tmp1, tmp2, src, dest;
+        bool srcUsingCode = false, destUsingCode = false;
+        double lat1, lon1, lat2, lon2;
+        try {
+            getline(cin, tmp1);
+            lat1 = stod(tmp1);
+            for (auto letter:tmp1)
+                if (letter != '.' && !isdigit(letter))
+                    throw exception();
+            getline(cin, tmp1);
+            lon1 = stod(tmp1);
+        } catch (...) {
+            src = tmp1;
+            srcUsingCode = true;
+        }
+        cout << "Please input the coordinates (or the stop code) of the arrival." << endl;
+        try {
+            getline(cin, tmp1);
+            lat2 = stod(tmp1);
+            for (auto letter:tmp1)
+                if (letter != '.' && !isdigit(letter))
+                    throw exception();
+            getline(cin, tmp1);
+            lon2 = stod(tmp1);
+        } catch (...) {
+            dest = tmp1;
+            destUsingCode = true;
+        }
+        int option;
+        cout << "There are several routing methods." << endl;
+        cout << "1- The route with the minimum number of stops." << endl;
+        cout << "2- The shortest route." << endl;
+        cout << "3- The cheapest route." << endl;
+        cout << "4- The route with the minimum number of lines used." << endl;
+        cout << "Please input the number of the method you want to use:  ";
+        cin >> option;
+        cin.ignore();
+
+        list<int> res;
+        if (option == 1) {
+            if (srcUsingCode && destUsingCode)
+                res = application.courseWithMinimumStops(src, dest);
+            else if ((!srcUsingCode) && destUsingCode)
+                res = application.courseWithMinimumStops(lat1, lon1, dest);
+            else if (srcUsingCode && (!destUsingCode))
+                res = application.courseWithMinimumStops(src, lat2, lon2);
+            else if (!srcUsingCode && !destUsingCode)
+                res = application.courseWithMinimumStops(lat1, lon1, lat2, lon2);
+        } else if (option == 2) {
+            if (srcUsingCode && destUsingCode)
+                res = application.courseWithMinimumDistance(src, dest);
+            else if ((!srcUsingCode) && destUsingCode)
+                res = application.courseWithMinimumDistance(lat1, lon1, dest);
+            else if (srcUsingCode && (!destUsingCode))
+                res = application.courseWithMinimumDistance(src, lat2, lon2);
+            else if (!srcUsingCode && !destUsingCode)
+                res = application.courseWithMinimumDistance(lat1, lon1, lat2, lon2);
+        } else if (option == 3) {
+            if (srcUsingCode && destUsingCode)
+                res = application.courseWithMinimumZones(src, dest);
+            else if ((!srcUsingCode) && destUsingCode)
+                res = application.courseWithMinimumZones(lat1, lon1, dest);
+            else if (srcUsingCode && (!destUsingCode))
+                res = application.courseWithMinimumZones(src, lat2, lon2);
+            else if (!srcUsingCode && !destUsingCode)
+                res = application.courseWithMinimumZones(lat1, lon1, lat2, lon2);
+        } else if (option == 4) {
+            if (srcUsingCode && destUsingCode)
+                res = application.courseWithMinimumLines(src, dest);
+            else if ((!srcUsingCode) && destUsingCode)
+                //res = application.courseWithMinimumLines(lat1, lon1, dest);
+                cout << "Not Implemented" << endl;
+            else if (srcUsingCode && (!destUsingCode))
+                //res = application.courseWithMinimumLines(src, lat2, lon2);
+                cout << "Not Implemented" << endl;
+            else if (!srcUsingCode && !destUsingCode)
+                res = application.courseWithMinimumLines(lat1, lon1, lat2, lon2);
+        }
+        for (auto it=res.begin();it!=res.end();it++){
+            if (it == prev(res.end()))
+                cout << stops[*it].getCode() << endl;
+            else
+                cout << stops[*it].getCode() << " -> ";
+        }
+
+        cout << "Do you want to calculate another route? (y/n)" << endl;
+        getline(cin, tmp1);
+        if (tmp1 == "n")
+            break;
     }
+    return 0;
 }

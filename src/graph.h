@@ -71,7 +71,7 @@ public:
 
     Edge edgeBetween(int &a, int &b);
 
-    list<int> minimunZones(int a, int b);
+    list<int> minimumZones(int a, int b);
 
     int dijkstra_distanceMinZones(int a, int b);
 

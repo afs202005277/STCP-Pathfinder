@@ -63,9 +63,9 @@ void Application::addEdges(const string &path) {
         int weight = 0;
         if (stops[stopToInt[firstStop]].getZone() != stops[stopToInt[secondStop]].getZone())
             weight = 1;
-        g.addEdge(stopToInt[firstStop], stopToInt[secondStop], path.substr(path.find('_') + 1), path.find('.'),
+        g.addEdge(stopToInt[firstStop], stopToInt[secondStop], path.substr(path.find('_') + 1, path.find('.')),
                   getDistance(stops[stopToInt[firstStop]].getLatitude(), stops[stopToInt[firstStop]].getLongitude(),
-                  stops[stopToInt[secondStop]].getLatitude(), stops[stopToInt[secondStop]].getLongitude()), weight);
+                  stops[stopToInt[secondStop]].getLatitude(), stops[stopToInt[secondStop]].getLongitude()), false, weight);
         firstStop = secondStop;
     }
 }
@@ -267,7 +267,7 @@ list<int> Application::courseWithMinimumDistance(double lat1, double lon1, doubl
 }
 
 list<int> Application::courseWithMinimumZones(const string& stop1, const string& stop2) {
-    return g.minimunZones(stopToInt[stop1],stopToInt[stop2]);
+    return g.minimumZones(stopToInt[stop1], stopToInt[stop2]);
 }
 
 list<int> Application::courseWithMinimumZones(double lat1, double lon1, double lat2, double lon2) {
@@ -303,3 +303,97 @@ int Application::getTotalChanges(list<int> l) {
     }
     return total;
 }
+
+list<int> Application::courseWithMinimumDistance(const string& stop1, double lat2, double lon2) {
+    auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
+    list<int> temp, res;
+    int min = INT_MAX;
+    for (auto l:dest) {
+        temp = g.minimumDistance(stopToInt[stop1], stopToInt[l.first]);
+        int d = getTotalDistance(temp);
+        if (d < min){
+            res = temp;
+            min = d;
+        }
+    }
+    return res;
+}
+
+list<int> Application::courseWithMinimumDistance(double lat1, double lon1, const string &stop2) {
+    auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
+    list<int> temp, res;
+    int min = INT_MAX;
+    for (auto l:src) {
+        temp = g.minimumDistance(stopToInt[stop2], stopToInt[l.first]);
+        int d = getTotalDistance(temp);
+        if (d < min){
+            res = temp;
+            min = d;
+        }
+    }
+    return res;
+}
+
+list<int> Application::courseWithMinimumStops(string stop1, double lat2, double lon2) {
+    auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
+    list<int> temp, res;
+    int min = INT_MAX;
+    for (auto l:dest) {
+        temp = g.minimumStops(stopToInt[stop1], stopToInt[l.first]);
+        int d = temp.size();
+        if (d < min){
+            res = temp;
+            min = d;
+        }
+    }
+    return res;
+}
+
+list<int> Application::courseWithMinimumStops(double lat1, double lon1, string stop2) {
+    auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
+    list<int> temp, res;
+    int min = INT_MAX;
+    for (auto l:src) {
+        temp = g.minimumStops(stopToInt[stop2], stopToInt[l.first]);
+        int d = temp.size();
+        if (d < min){
+            res = temp;
+            min = d;
+        }
+    }
+    return res;
+}
+
+list<int> Application::courseWithMinimumZones(const string &stop1, double lat2, double lon2) {
+    auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
+    list<int> temp, res;
+    int min = INT_MAX;
+    for (auto l:dest) {
+        temp = g.minimumZones(stopToInt[stop1], stopToInt[l.first]);
+        int d = getTotalChanges(temp);
+        if (d < min){
+            res = temp;
+            min = d;
+        }
+    }
+    return res;
+}
+
+list<int> Application::courseWithMinimumZones(double lat1, double lon1, const string &stop2) {
+    auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
+    list<int> temp, res;
+    int min = INT_MAX;
+    for (auto l:src) {
+        temp = g.minimumZones(stopToInt[stop2], stopToInt[l.first]);
+        int d = getTotalChanges(temp);
+        if (d < min){
+            res = temp;
+            min = d;
+        }
+    }
+    return res;
+}
+
+
+
+
