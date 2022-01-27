@@ -39,8 +39,8 @@ public:
     list<int> courseWithMinimumDistance(const string& stop1, const string& stop2);
 
     list<int> courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2);
-    list<int> courseWithMinimumStops(string stop1, double lat2, double lon2);
-    list<int> courseWithMinimumStops(double lat1, double lon1, string stop2);
+    list<int> courseWithMinimumStops(const string& stop1, double lat2, double lon2);
+    list<int> courseWithMinimumStops(double lat1, double lon1, const string& stop2);
     list<int> courseWithMinimumStops(const string& stop1, const string& stop2);
 
     list<int> courseWithMinimumLines(double lat1, double lon1, double lat2, double lon2);

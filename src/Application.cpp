@@ -7,12 +7,7 @@
 #include <cmath>
 #include <cfloat>
 
-/**
- * Constructor of the application
- * @param stopsPath the path to the file that contains the information of the stops
- * @param linesPath the path to the file that contains the information of the lines
- * @param distance the maximum distance that the user is willing to walk
- */
+
 Application::Application(string stopsPath, string linesPath, double distance) : stopsPath(std::move(stopsPath)),
                                                                                 linesPath(std::move(linesPath)) {
     walkingDistance = distance;
@@ -326,15 +321,23 @@ int Application::getLineChange(list<int> l)
 }
 
 /**
- * 
- * @param stop1
- * @param stop2
- * @return
+ * Function that calculates the course (stop1 -> stop2) that minimizes the distance travelled
+ * @param stop1 the starting bus stop
+ * @param stop2 the destination bus stop
+ * @return a list with integers corresponding to the different bus stops used
  */
 list<int> Application::courseWithMinimumDistance(const string& stop1, const string& stop2) {
     return g.dijkstra_pathMinDistance(stopToInt[stop1], stopToInt[stop2]);
 }
 
+/**
+ * Function that calculates the course (startingPoint -> targetPoint) that minimizes the times the user changes lines
+ * @param lat1 the latitude of the starting point
+ * @param lon1 the longitude of the starting point
+ * @param lat2 the latitude of the target point
+ * @param lon2 the longitude of the target point
+ * @return a list with integers corresponding to the different bus stops used
+ */
 list<int> Application::courseWithMinimumDistance(double lat1, double lon1, double lat2, double lon2) {
     list<int> res;
     double min = DBL_MAX;
@@ -357,10 +360,24 @@ list<int> Application::courseWithMinimumDistance(double lat1, double lon1, doubl
     return res;
 }
 
+/**
+ * Function that calculates the course (stop1 -> stop2) that minimizes the zones used
+ * @param stop1 the starting bus stop
+ * @param stop2 the destination bus stop
+ * @return a list with integers corresponding to the different bus stops used
+ */
 list<int> Application::courseWithMinimumZones(const string& stop1, const string& stop2) {
     return g.dijkstra_pathMinZones(stopToInt[stop1], stopToInt[stop2]);
 }
 
+/**
+ * Function that calculates the course (stop1 -> stop2) that minimizes the zones used
+ * @param lat1 the latitude of the starting point
+ * @param lon1 the longitude of the starting point
+ * @param lat2 the latitude of the target point
+ * @param lon2 the longitude of the target point
+ * @return a list with integers corresponding to the different bus stops used
+ */
 list<int> Application::courseWithMinimumZones(double lat1, double lon1, double lat2, double lon2) {
     list<int> res;
     int min = INT_MAX;
@@ -383,6 +400,11 @@ list<int> Application::courseWithMinimumZones(double lat1, double lon1, double l
     return res;
 }
 
+/**
+ * Function that calculates the total number of times the user has changed zones
+ * @param l list of integers that represent the course to be analyzed
+ * @return the total number of times the user has changed zones
+ */
 int Application::getTotalChanges(list<int> l) {
     if (l.empty() || l.size() == 1)
         return 0;
@@ -395,6 +417,13 @@ int Application::getTotalChanges(list<int> l) {
     return total;
 }
 
+/**
+ * Function that calculates the course (stop1 -> targetPoint) that minimizes the distance travelled
+ * @param stop1 the starting bus stop
+ * @param lat2 the latitude of the target point
+ * @param lon2 the longitude of the target point
+ * @return a list with integers corresponding to the different bus stops used
+ */
 list<int> Application::courseWithMinimumDistance(const string& stop1, double lat2, double lon2) {
     auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
     list<int> temp, res;
@@ -410,6 +439,13 @@ list<int> Application::courseWithMinimumDistance(const string& stop1, double lat
     return res;
 }
 
+/**
+ * Function that calculates the course (startingPoint -> stop2) that minimizes the distance travelled
+ * @param lat1 the latitude of the starting point
+ * @param lon1 the longitude of the starting point
+ * @param stop2 the destination bus stop
+ * @return a list with integers corresponding to the different bus stops used
+ */
 list<int> Application::courseWithMinimumDistance(double lat1, double lon1, const string &stop2) {
     auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
     list<int> temp, res;
@@ -425,7 +461,14 @@ list<int> Application::courseWithMinimumDistance(double lat1, double lon1, const
     return res;
 }
 
-list<int> Application::courseWithMinimumStops(string stop1, double lat2, double lon2) {
+/**
+ * Function that calculates the course (stop1 -> targetPoint) that minimizes the amount of stops used
+ * @param stop1 the starting bus stop
+ * @param lat2 the latitude of the target point
+ * @param lon2 the longitude of the target point
+ * @return a list with integers corresponding to the different bus stops used
+ */
+list<int> Application::courseWithMinimumStops(const string& stop1, double lat2, double lon2) {
     auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
     list<int> temp, res;
     int min = INT_MAX;
@@ -440,7 +483,14 @@ list<int> Application::courseWithMinimumStops(string stop1, double lat2, double 
     return res;
 }
 
-list<int> Application::courseWithMinimumStops(double lat1, double lon1, string stop2) {
+/**
+ * Function that calculates the course (startingPoint -> stop2) that minimizes the amount of stops used
+ * @param lat1 the latitude of the starting point
+ * @param lon1 the longitude of the starting point
+ * @param stop2 the destination bus stop
+ * @return a list with integers corresponding to the different bus stops used
+ */
+list<int> Application::courseWithMinimumStops(double lat1, double lon1, const string& stop2) {
     auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
     list<int> temp, res;
     int min = INT_MAX;
@@ -455,6 +505,13 @@ list<int> Application::courseWithMinimumStops(double lat1, double lon1, string s
     return res;
 }
 
+/**
+ * Function that calculates the course (startingPoint -> stop2) that minimizes the amount of zones used
+ * @param stop1 the starting bus stop
+ * @param lat2 the latitude of the target point
+ * @param lon2 the longitude of the target point
+ * @return a list with integers corresponding to the different bus stops used
+ */
 list<int> Application::courseWithMinimumZones(const string &stop1, double lat2, double lon2) {
     auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
     list<int> temp, res;
@@ -470,6 +527,13 @@ list<int> Application::courseWithMinimumZones(const string &stop1, double lat2, 
     return res;
 }
 
+/**
+ * Function that calculates the course (startingPoint -> stop2) that minimizes the amount of zones used
+ * @param lat1 the latitude of the starting point
+ * @param lon1 the longitude of the starting point
+ * @param stop2 the destination bus stop
+ * @return a list with integers corresponding to the different bus stops used
+ */
 list<int> Application::courseWithMinimumZones(double lat1, double lon1, const string &stop2) {
     auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
     list<int> temp, res;
@@ -484,7 +548,3 @@ list<int> Application::courseWithMinimumZones(double lat1, double lon1, const st
     }
     return res;
 }
-
-
-
-
