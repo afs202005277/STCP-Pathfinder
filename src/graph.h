@@ -8,6 +8,7 @@
 #include <list>
 #include <queue>
 #include <iostream>
+#include <bits/stl_list.h>
 
 using namespace std;
 
@@ -55,9 +56,9 @@ public:
 
     int dijkstra_lineChange(int a, int b);
 
-    list<int> minimumStops(int a, int b);
+    list<Edge> minimumStops(int a, int b);
 
-    list<int> minimumLines(int a, int b);
+    list<Edge> minimumLines(int a, int b);
 
     int connectedComponents();
 
@@ -65,7 +66,7 @@ public:
 
     list<int> minimumDistance(int a, int b);
 
-    list<int> dijkstra_pathMinDistance(int a, int b);
+    list<Edge> dijkstra_pathMinDistance(int a, int b);
 
     int dijkstra_distanceMinDistance(int a, int b);
 
@@ -75,7 +76,7 @@ public:
 
     int dijkstra_distanceMinZones(int a, int b);
 
-    list<int> dijkstra_pathMinZones(int a, int b);
+    list <Edge> dijkstra_pathMinZones(int a, int b);
 };
 
 #endif

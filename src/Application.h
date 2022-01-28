@@ -30,32 +30,30 @@ public:
     int getConnectedComponents();
     pair<string, int> getNearestStop(double lat, double lon);
     const vector<Stop> &getStops() const;
-    double getTotalDistance(list<int> l);
-    int getLineChange(list<int> l);
+    double getTotalDistance(int src, const list<Edge>& l);
+    int getLineChange(list<Edge> l);
+    int getTotalZoneChanges(int src, list<Edge> l);
+    double getDistance(double lat1, double lon1, double lat2, double lon2);
 
-    list<int> courseWithMinimumDistance(double lat1, double lon1, double lat2, double lon2);
-    list<int> courseWithMinimumDistance(const string& stop1, double lat2, double lon2);
-    list<int> courseWithMinimumDistance(double lat1, double lon1, const string& stop2);
-    list<int> courseWithMinimumDistance(const string& stop1, const string& stop2);
+    pair<int, list<Edge>> courseWithMinimumDistance(double lat1, double lon1, double lat2, double lon2);
+    pair<int, list<Edge>> courseWithMinimumDistance(const string& stop1, double lat2, double lon2);
+    pair<int, list<Edge>> courseWithMinimumDistance(double lat1, double lon1, const string& stop2);
+    pair<int, list<Edge>> courseWithMinimumDistance(const string& stop1, const string& stop2);
 
-    list<int> courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2);
-    list<int> courseWithMinimumStops(const string& stop1, double lat2, double lon2);
-    list<int> courseWithMinimumStops(double lat1, double lon1, const string& stop2);
-    list<int> courseWithMinimumStops(const string& stop1, const string& stop2);
+    pair<int, list<Edge>> courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2);
+    pair<int, list<Edge>> courseWithMinimumStops(const string& stop1, double lat2, double lon2);
+    pair<int, list<Edge>> courseWithMinimumStops(double lat1, double lon1, const string& stop2);
+    pair<int, list<Edge>> courseWithMinimumStops(const string& stop1, const string& stop2);
 
-    list<int> courseWithMinimumLines(double lat1, double lon1, double lat2, double lon2);
+    pair<int, list<Edge>> courseWithMinimumLines(double lat1, double lon1, double lat2, double lon2);
     list<int> courseWithMinimumLines(string stop1, double lat2, double lon2);
     list<int> courseWithMinimumLines(double lat1, double lon1, string stop2);
-    list<int> courseWithMinimumLines(const string& stop1, const string& stop2);
+    pair<int, list<Edge>> courseWithMinimumLines(const string& stop1, const string& stop2);
 
-    list<int> courseWithMinimumZones(double lat1, double lon1, double lat2, double lon2);
-    list<int> courseWithMinimumZones(const string& stop1, double lat2, double lon2);
-    list<int> courseWithMinimumZones(double lat1, double lon1, const string& stop2);
-    list<int> courseWithMinimumZones(const string& stop1, const string& stop2);
-
-    int getTotalChanges(list<int> l);
-
-    double getDistance(double lat1, double lon1, double lat2, double lon2);
+    pair<int, list<Edge>> courseWithMinimumZones(double lat1, double lon1, double lat2, double lon2);
+    pair<int, list<Edge>> courseWithMinimumZones(const string& stop1, double lat2, double lon2);
+    pair<int, list<Edge>> courseWithMinimumZones(double lat1, double lon1, const string& stop2);
+    pair<int, list<Edge>> courseWithMinimumZones(const string& stop1, const string& stop2);
 };
 
 

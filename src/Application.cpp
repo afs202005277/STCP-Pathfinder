@@ -159,8 +159,8 @@ pair<string, int> Application::getNearestStop(double lat, double lon) {
  * @param stop2 destination stop
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumStops(const string& stop1, const string& stop2) {
-    return g.minimumStops(stopToInt[stop1], stopToInt[stop2]);
+pair<int, list<Edge>> Application::courseWithMinimumStops(const string& stop1, const string& stop2) {
+    return {stopToInt[stop1],g.minimumStops(stopToInt[stop1], stopToInt[stop2])};
 }
 
 /**
@@ -170,9 +170,9 @@ list<int> Application::courseWithMinimumStops(const string& stop1, const string&
  * @param stop2 destination stop
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2) {
-    list<list<int>> tmp;
-    list<int> res;
+pair<int, list<Edge>> Application::courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2) {
+    list<Edge> res, tmp;
+    int min = INT_MAX, source;
     list<pair<string, int>> src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
     list<pair<string, int>> dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
     if (src.empty())
@@ -181,17 +181,15 @@ list<int> Application::courseWithMinimumStops(double lat1, double lon1, double l
         dest.push_back(getNearestStop(lat2, lon2));
     for (const auto& s:src){
         for (const auto& d:dest){
-            tmp.push_back(courseWithMinimumStops(s.first, d.first));
+            tmp = courseWithMinimumStops(s.first, d.first).second;
+            if (tmp.size() < min){
+                res = tmp;
+                min = tmp.size();
+                source = s.second;
+            }
         }
     }
-    int min = INT_MAX;
-    for (const auto& l:tmp) {
-        if (l.size() < min) {
-            res = l;
-            min = l.size();
-        }
-    }
-    return res;
+    return {source, res};
 }
 
 /**
@@ -217,8 +215,8 @@ list<pair<string, int>> Application::getAllStopsCloserToXMetres(double lat, doub
  * @param stop2 the destination bus stop
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumLines(const string& stop1, const string& stop2) {
-    return g.minimumLines(stopToInt[stop1], stopToInt[stop2]);
+pair<int, list<Edge>> Application::courseWithMinimumLines(const string& stop1, const string& stop2) {
+    return {stopToInt[stop1],g.minimumLines(stopToInt[stop1], stopToInt[stop2])};
 }
 
 /**
@@ -229,9 +227,10 @@ list<int> Application::courseWithMinimumLines(const string& stop1, const string&
  * @param lon2 longitude of the targetPoint
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumLines(double lat1, double lon1, double lat2, double lon2)
+pair<int, list<Edge>> Application::courseWithMinimumLines(double lat1, double lon1, double lat2, double lon2)
 {
-    list<int> res;
+    list<Edge> res;
+    int source;
     list<pair<string, int>> src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
     list<pair<string, int>> dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
     if (src.empty())
@@ -244,25 +243,27 @@ list<int> Application::courseWithMinimumLines(double lat1, double lon1, double l
     for (const auto& s:src) {
         for (const auto& d:dest) {
             auto tmp = courseWithMinimumLines(s.first, d.first);
-            auto linesCross = getLineChange(tmp);
+            auto linesCross = getLineChange(tmp.second);
             if (min_lines > linesCross || min_lines == -1)
             {
-                res = tmp;
+                res = tmp.second;
                 min_lines = linesCross;
-                min_dist = getTotalDistance(tmp) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
+                min_dist = getTotalDistance(s.second, tmp.second) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
+                source = s.second;
             }
             else if (min_lines == linesCross)
             {
-                double temp = getTotalDistance(tmp) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
+                double temp = getTotalDistance(s.second, tmp.second) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
                 if (min_dist > temp || min_dist == -1)
                 {
-                    res = tmp;
-                    min_dist = getTotalDistance(tmp) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
+                    res = tmp.second;
+                    min_dist = getTotalDistance(s.second, tmp.second) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
+                    source = s.second;
                 }
             }
         }
     }
-    return res;
+    return {source, res};
 }
 
 /**
@@ -282,14 +283,14 @@ const vector<Stop> &Application::getStops() const {
  * @param l list of integers that represent the course to be analyzed
  * @return total distance travelled in the course
  */
-double Application::getTotalDistance(list<int> l) {
+double Application::getTotalDistance(int src, const list<Edge>& l) {
     if (l.empty() || l.size() == 1)
         return 0;
     double total = 0.0;
-    int first = l.front();
-    for (auto it = next(l.begin());it != l.end();it++) {
-        total += getDistance(stops[first].getLatitude(), stops[first].getLongitude(), stops[*it].getLatitude(), stops[*it].getLongitude());
-        first = *it;
+    int first = src;
+    for (auto & elem : l) {
+        total += getDistance(stops[first].getLatitude(), stops[first].getLongitude(), stops[elem.dest].getLatitude(), stops[elem.dest].getLongitude());
+        first = elem.dest;
     }
     return total;
 }
@@ -299,23 +300,17 @@ double Application::getTotalDistance(list<int> l) {
  * @param l list of integers that represent the course to be analyzed
  * @return total number of times the user has changed lines
  */
-int Application::getLineChange(list<int> l)
+int Application::getLineChange(list<Edge> l)
 {
     if (l.empty() || l.size() == 1)
         return 0;
     int lines = 0;
-    string line = "";
-    auto prev_it = l.begin();
-    auto it = l.begin();
-    it++;
-    for (; it != l.end(); ++it)
-    {
-        if (g.edgeBetween(*prev_it, *it).line != line)
-        {
-            line = g.edgeBetween(*prev_it, *it).line;
+    string prevLine = l.front().line;
+    for (auto it = next(l.begin());it!=l.end();it++){
+        if (it->line != prevLine){
             lines++;
+            prevLine = it->line;
         }
-        prev_it++;
     }
     return lines;
 }
@@ -326,8 +321,8 @@ int Application::getLineChange(list<int> l)
  * @param stop2 the destination bus stop
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumDistance(const string& stop1, const string& stop2) {
-    return g.dijkstra_pathMinDistance(stopToInt[stop1], stopToInt[stop2]);
+pair<int, list<Edge>> Application::courseWithMinimumDistance(const string& stop1, const string& stop2) {
+    return {stopToInt[stop1] ,g.dijkstra_pathMinDistance(stopToInt[stop1], stopToInt[stop2])};
 }
 
 /**
@@ -338,8 +333,9 @@ list<int> Application::courseWithMinimumDistance(const string& stop1, const stri
  * @param lon2 the longitude of the target point
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumDistance(double lat1, double lon1, double lat2, double lon2) {
-    list<int> res;
+pair<int, list<Edge>> Application::courseWithMinimumDistance(double lat1, double lon1, double lat2, double lon2) {
+    list<Edge> res;
+    int source;
     double min = DBL_MAX;
     list<pair<string, int>> src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
     list<pair<string, int>> dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
@@ -350,14 +346,15 @@ list<int> Application::courseWithMinimumDistance(double lat1, double lon1, doubl
     for (const auto& s:src){
         for (const auto& d:dest){
             auto tmp = courseWithMinimumDistance(s.first, d.first);
-            auto distance = getTotalDistance(tmp) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
+            auto distance = getTotalDistance(s.second, tmp.second) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
             if (distance < min) {
                 min = distance;
-                res = tmp;
+                res = tmp.second;
+                source = s.second;
             }
         }
     }
-    return res;
+    return {source, res};
 }
 
 /**
@@ -366,8 +363,8 @@ list<int> Application::courseWithMinimumDistance(double lat1, double lon1, doubl
  * @param stop2 the destination bus stop
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumZones(const string& stop1, const string& stop2) {
-    return g.dijkstra_pathMinZones(stopToInt[stop1], stopToInt[stop2]);
+pair<int, list<Edge>> Application::courseWithMinimumZones(const string& stop1, const string& stop2) {
+    return {stopToInt[stop1],g.dijkstra_pathMinZones(stopToInt[stop1], stopToInt[stop2])};
 }
 
 /**
@@ -378,9 +375,9 @@ list<int> Application::courseWithMinimumZones(const string& stop1, const string&
  * @param lon2 the longitude of the target point
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumZones(double lat1, double lon1, double lat2, double lon2) {
-    list<int> res;
-    int min = INT_MAX;
+pair<int, list<Edge>> Application::courseWithMinimumZones(double lat1, double lon1, double lat2, double lon2) {
+    list<Edge> res;
+    int min = INT_MAX, source;
     list<pair<string, int>> src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
     list<pair<string, int>> dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
     if (src.empty())
@@ -390,14 +387,15 @@ list<int> Application::courseWithMinimumZones(double lat1, double lon1, double l
     for (const auto& s:src){
         for (const auto& d:dest){
             auto tmp = courseWithMinimumZones(s.first, d.first);
-            auto zones = getTotalChanges(tmp);
+            auto zones = getTotalZoneChanges(s.second, tmp.second);
             if (zones < min) {
                 min = zones;
-                res = tmp;
+                res = tmp.second;
+                source = s.second;
             }
         }
     }
-    return res;
+    return {source, res};
 }
 
 /**
@@ -405,14 +403,14 @@ list<int> Application::courseWithMinimumZones(double lat1, double lon1, double l
  * @param l list of integers that represent the course to be analyzed
  * @return the total number of times the user has changed zones
  */
-int Application::getTotalChanges(list<int> l) {
+int Application::getTotalZoneChanges(int src, list<Edge> l) {
     if (l.empty() || l.size() == 1)
         return 0;
     int total = 0;
-    int first = l.front();
-    for (auto it = next(l.begin());it != l.end();it++) {
-        total += stops[first].getZone() != stops[*it].getZone();
-        first = *it;
+    int first = src;
+    for (auto & it : l) {
+        total += stops[first].getZone() != stops[it.dest].getZone();
+        first = it.dest;
     }
     return total;
 }
@@ -424,19 +422,19 @@ int Application::getTotalChanges(list<int> l) {
  * @param lon2 the longitude of the target point
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumDistance(const string& stop1, double lat2, double lon2) {
+pair<int, list<Edge>> Application::courseWithMinimumDistance(const string& stop1, double lat2, double lon2) {
     auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
-    list<int> temp, res;
+    list<Edge> temp, res;
     int min = INT_MAX;
     for (auto l:dest) {
         temp = g.dijkstra_pathMinDistance(stopToInt[stop1], stopToInt[l.first]);
-        int d = getTotalDistance(temp);
+        int d = getTotalDistance(stopToInt[stop1], temp);
         if (d < min){
             res = temp;
             min = d;
         }
     }
-    return res;
+    return {stopToInt[stop1],res};
 }
 
 /**
@@ -446,19 +444,21 @@ list<int> Application::courseWithMinimumDistance(const string& stop1, double lat
  * @param stop2 the destination bus stop
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumDistance(double lat1, double lon1, const string &stop2) {
+pair<int, list<Edge>> Application::courseWithMinimumDistance(double lat1, double lon1, const string &stop2) {
     auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
-    list<int> temp, res;
+    list<Edge> temp, res;
+    int source;
     int min = INT_MAX;
     for (auto l:src) {
         temp = g.dijkstra_pathMinDistance(stopToInt[stop2], stopToInt[l.first]);
-        int d = getTotalDistance(temp);
+        int d = getTotalDistance(l.second, temp);
         if (d < min){
             res = temp;
             min = d;
+            source = l.second;
         }
     }
-    return res;
+    return {source, res};
 }
 
 /**
@@ -468,9 +468,9 @@ list<int> Application::courseWithMinimumDistance(double lat1, double lon1, const
  * @param lon2 the longitude of the target point
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumStops(const string& stop1, double lat2, double lon2) {
+pair<int, list<Edge>> Application::courseWithMinimumStops(const string& stop1, double lat2, double lon2) {
     auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
-    list<int> temp, res;
+    list<Edge> temp, res;
     int min = INT_MAX;
     for (auto l:dest) {
         temp = g.minimumStops(stopToInt[stop1], stopToInt[l.first]);
@@ -480,7 +480,7 @@ list<int> Application::courseWithMinimumStops(const string& stop1, double lat2, 
             min = d;
         }
     }
-    return res;
+    return {stopToInt[stop1],res};
 }
 
 /**
@@ -490,19 +490,20 @@ list<int> Application::courseWithMinimumStops(const string& stop1, double lat2, 
  * @param stop2 the destination bus stop
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumStops(double lat1, double lon1, const string& stop2) {
+pair<int, list<Edge>> Application::courseWithMinimumStops(double lat1, double lon1, const string& stop2) {
     auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
-    list<int> temp, res;
-    int min = INT_MAX;
+    list<Edge> temp, res;
+    int min = INT_MAX, source;
     for (auto l:src) {
         temp = g.minimumStops(stopToInt[stop2], stopToInt[l.first]);
         int d = temp.size();
         if (d < min){
             res = temp;
             min = d;
+            source = l.second;
         }
     }
-    return res;
+    return {source, res};
 }
 
 /**
@@ -512,19 +513,19 @@ list<int> Application::courseWithMinimumStops(double lat1, double lon1, const st
  * @param lon2 the longitude of the target point
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumZones(const string &stop1, double lat2, double lon2) {
+pair<int, list<Edge>> Application::courseWithMinimumZones(const string &stop1, double lat2, double lon2) {
     auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
-    list<int> temp, res;
+    list<Edge> temp, res;
     int min = INT_MAX;
     for (auto l:dest) {
         temp = g.dijkstra_pathMinZones(stopToInt[stop1], stopToInt[l.first]);
-        int d = getTotalChanges(temp);
+        int d = getTotalZoneChanges(stopToInt[stop1], temp);
         if (d < min){
             res = temp;
             min = d;
         }
     }
-    return res;
+    return {stopToInt[stop1],res};
 }
 
 /**
@@ -534,17 +535,18 @@ list<int> Application::courseWithMinimumZones(const string &stop1, double lat2, 
  * @param stop2 the destination bus stop
  * @return a list with integers corresponding to the different bus stops used
  */
-list<int> Application::courseWithMinimumZones(double lat1, double lon1, const string &stop2) {
+pair<int, list<Edge>> Application::courseWithMinimumZones(double lat1, double lon1, const string &stop2) {
     auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
-    list<int> temp, res;
-    int min = INT_MAX;
+    list<Edge> temp, res;
+    int min = INT_MAX, source;
     for (auto l:src) {
         temp = g.dijkstra_pathMinZones(stopToInt[stop2], stopToInt[l.first]);
-        int d = getTotalChanges(temp);
+        int d = getTotalZoneChanges(l.second,temp);
         if (d < min){
             res = temp;
             min = d;
+            source = l.second;
         }
     }
-    return res;
+    return {source, res};
 }

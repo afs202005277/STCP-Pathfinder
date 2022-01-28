@@ -37,6 +37,7 @@ int Graph::connectedComponents() {
  * @param weight an integer to represent the amount of zone transitions made by the edge
  */
 void Graph::addEdge(int src, int dest, string line, double d, bool foot, int weight) {
+    line = line.substr(0, line.find('.'));
     if (src<1 || src>n || dest<1 || dest>n)
         return;
     nodes[src].adj.push_back({dest, weight, std::move(line), d, foot});
@@ -81,6 +82,7 @@ void Graph::bfs(int v) {
                 q.push(w);
                 nodes[w].visited = true;
                 nodes[w].pred = u;
+                nodes[w].edgePrev = e;
                 nodes[w].dist = nodes[u].dist+1;
             }
         }
@@ -123,6 +125,7 @@ int Graph::dijkstra_distance(int a, int b) {
     else
         return nodes[b].dist;
 }
+
 /**
  * Dijkstra algorithm that reconstructs the path used by the dijkstra algorithm implementation that calculates the distance between two nodes
  * @param a starting node
@@ -149,18 +152,17 @@ list<int> Graph::dijkstra_path(int a, int b) {
  * @param b target node
  * @return a list with the integers that are associated with each node of the path
  */
-list<int> Graph::minimumStops(int a, int b) {
-    list<int> res;
+list<Edge> Graph::minimumStops(int a, int b) {
+    list<Edge> res;
     int distance = dijkstra_distance(a, b);
     if (distance == -1)
         return res;
     bfs(a);
     int current = b;
     while(current != a) {
-        res.push_front(current);
+        res.push_front(nodes[current].edgePrev);
         current = nodes[current].pred;
     }
-    res.push_front(a);
     return res;
 }
 
@@ -209,17 +211,16 @@ int Graph::dijkstra_lineChange(int a, int b) {
  * @param b target node
  * @return a list with the integers that are associated with each node of the path
  */
-list<int> Graph::minimumLines(int a, int b) {
-    list<int> res;
+list<Edge> Graph::minimumLines(int a, int b) {
+    list<Edge> res;
     int distance = dijkstra_lineChange(a, b);
     if (distance == -1)
         return res;
     int current = b;
     while(current != a){
-        res.push_front(current);
+        res.push_front(nodes[current].edgePrev);
         current = nodes[current].pred;
     }
-    res.push_front(a);
     return res;
 }
 
@@ -250,6 +251,7 @@ int Graph::dijkstra_distanceMinDistance(int a, int b) {
             if (!nodes[v.dest].visited && nodes[u].dist + v.distanceRealWorld < nodes[v.dest].dist){
                 nodes[v.dest].dist = nodes[u].dist + v.distanceRealWorld;
                 nodes[v.dest].pred = u;
+                nodes[v.dest].edgePrev = v;
                 q.decreaseKey(v.dest, nodes[v.dest].dist);
             }
         }
@@ -266,17 +268,16 @@ int Graph::dijkstra_distanceMinDistance(int a, int b) {
  * @param b target node
  * @return a list with the integers that are associated with each node of the path
  */
-list<int> Graph::dijkstra_pathMinDistance(int a, int b) {
-    list<int> path;
+list<Edge> Graph::dijkstra_pathMinDistance(int a, int b) {
+    list<Edge> path;
     dijkstra_distanceMinDistance(a, b);
     if (nodes[b].dist == INF)
         return path;
     int current = b;
     while(current != a) {
-        path.push_front(current);
+        path.push_front(nodes[current].edgePrev);
         current = nodes[current].pred;
     }
-    path.push_front(a);
     return path;
 }
 
@@ -319,6 +320,7 @@ int Graph::dijkstra_distanceMinZones(int a, int b) {
             if (!nodes[v.dest].visited && nodes[u].dist + v.zoneChanges < nodes[v.dest].dist){
                 nodes[v.dest].dist = nodes[u].dist + v.zoneChanges;
                 nodes[v.dest].pred = u;
+                nodes[v.dest].edgePrev = v;
                 q.decreaseKey(v.dest, nodes[v.dest].dist);
             }
         }
@@ -335,17 +337,16 @@ int Graph::dijkstra_distanceMinZones(int a, int b) {
  * @param b target node
  * @return a list with the integers that are associated with each node of the path
  */
-list<int> Graph::dijkstra_pathMinZones(int a, int b) {
-    list<int> path;
+list<Edge> Graph::dijkstra_pathMinZones(int a, int b) {
+    list<Edge> path;
     dijkstra_distanceMinZones(a, b);
     if (nodes[b].dist == INF)
         return path;
     int current = b;
     while(current != a) {
-        path.push_front(current);
+        path.push_front(nodes[current].edgePrev);
         current = nodes[current].pred;
     }
-    path.push_front(a);
     return path;
 }
 

@@ -46,7 +46,7 @@ int main() {
         cin >> option;
         cin.ignore();
 
-        list<int> res;
+        pair<int, list<Edge>> res;
         if (option == 1) {
             if (srcUsingCode && destUsingCode)
                 res = application.courseWithMinimumStops(src, dest);
@@ -86,13 +86,11 @@ int main() {
             else if (!srcUsingCode && !destUsingCode)
                 res = application.courseWithMinimumLines(lat1, lon1, lat2, lon2);
         }
-        for (auto it=res.begin();it!=res.end();it++){
-            if (it == prev(res.end()))
-                cout << stops[*it].getCode() << endl;
-            else
-                cout << stops[*it].getCode() << " -> ";
+        cout << stops[res.first].getCode();
+        for (auto edge:res.second){
+            cout << " - " << edge.line.substr(0, edge.line.find('_')) << endl << stops[edge.dest].getCode();
         }
-
+        cout << endl;
         cout << "Do you want to calculate another route? (y/n)" << endl;
         getline(cin, tmp1);
         if (tmp1 == "n")
