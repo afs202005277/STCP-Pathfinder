@@ -415,6 +415,40 @@ int Application::getTotalZoneChanges(int src, list<Edge> l) {
     return total;
 }
 
+pair<int, list<Edge>> Application::courseWithMinimumLines(double lat1, double lon1, string stop2) {
+    auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
+    list<Edge> res;
+    int min = INT_MAX, source;
+    if (src.empty())
+        src.push_back(getNearestStop(lat1, lon1));
+    for (auto l:src) {
+        auto tmp = courseWithMinimumLines(l.first, stop2);
+        int d = getLineChange(tmp.second);
+        if (d < min){
+            res = tmp.second;
+            source = tmp.first;
+            min = d;
+        }
+    }
+    return {source, res};
+}
+
+pair<int, list<Edge>> Application::courseWithMinimumLines(string stop1, double lat2, double lon2) {
+    auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
+    list<Edge> res;
+    int min = INT_MAX, source;
+    for (auto l:dest) {
+        auto tmp = courseWithMinimumLines(stop1, l.first);
+        int d = getLineChange(tmp.second);
+        if (d < min) {
+            res = tmp.second;
+            min = d;
+            source = tmp.first;
+        }
+    }
+    return {source, res};
+}
+
 /**
  * Function that calculates the course (stop1 -> targetPoint) that minimizes the distance travelled
  * @param stop1 the starting bus stop
@@ -549,4 +583,8 @@ pair<int, list<Edge>> Application::courseWithMinimumZones(double lat1, double lo
         }
     }
     return {source, res};
+}
+
+pair<double, list<int>> Application::MST(string stop) {
+    return g.prim(stopToInt[stop]);
 }

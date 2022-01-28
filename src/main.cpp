@@ -6,6 +6,24 @@ int main() {
     auto stops = application.getStops();
     cout << application.getConnectedComponents() << endl;
     cout << "Welcome to the STCP routing system." << endl;
+    cout << "Do you want to calculate the MST of the graph? (y/n) ";
+    string flag;
+    getline(cin, flag);
+    cout << endl;
+    if (toupper(flag[0]) == 'Y') {
+        cout << "What is the starting node? (stop code) ";
+        getline(cin, flag);
+        auto tmp = application.MST(flag);
+        cout << "The cost of the MST is: " << tmp.first << " kilometers." << endl;
+        cout << "The path is: " << endl;
+        for (auto elem:tmp.second){
+            cout << stops[elem].getCode() << endl;
+        }
+        cout << "Do you want to calculate routes? (y/n)";
+        getline(cin, flag);
+        if (toupper(flag[0]) != 'Y')
+            return 0;
+    }
     while (true) {
         cout << "Please input the coordinates (or the stop code) of the departure location." << endl;
         string tmp1, tmp2, src, dest;
@@ -78,11 +96,9 @@ int main() {
             if (srcUsingCode && destUsingCode)
                 res = application.courseWithMinimumLines(src, dest);
             else if ((!srcUsingCode) && destUsingCode)
-                //res = application.courseWithMinimumLines(lat1, lon1, dest);
-                cout << "Not Implemented" << endl;
+                res = application.courseWithMinimumLines(lat1, lon1, dest);
             else if (srcUsingCode && (!destUsingCode))
-                //res = application.courseWithMinimumLines(src, lat2, lon2);
-                cout << "Not Implemented" << endl;
+                res = application.courseWithMinimumLines(src, lat2, lon2);
             else if (!srcUsingCode && !destUsingCode)
                 res = application.courseWithMinimumLines(lat1, lon1, lat2, lon2);
         }

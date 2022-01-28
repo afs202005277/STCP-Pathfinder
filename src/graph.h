@@ -8,6 +8,7 @@
 #include <list>
 #include <queue>
 #include <iostream>
+#include <utility>
 
 using namespace std;
 
@@ -61,21 +62,17 @@ public:
 
     int connectedComponents();
 
-    const vector<Node> &getNodes() const;
-
-    list<int> minimumDistance(int a, int b);
-
     list<Edge> dijkstra_pathMinDistance(int a, int b);
 
     int dijkstra_distanceMinDistance(int a, int b);
 
     Edge edgeBetween(int &a, int &b);
 
-    list<int> minimumZones(int a, int b);
-
     int dijkstra_distanceMinZones(int a, int b);
 
     list <Edge> dijkstra_pathMinZones(int a, int b);
+
+    pair<double, list<int>> prim(int r);
 };
 
 #endif

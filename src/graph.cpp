@@ -3,6 +3,7 @@
 
 #include "graph.h"
 #include "minHeap.h"
+#include <cfloat>
 #define INF (INT_MAX/2)
 
 // Constructor: nr nodes and direction (default: undirected)
@@ -57,6 +58,33 @@ void Graph::dfs(int v) {
         if (!nodes[w].visited)
             dfs(w);
     }
+}
+
+pair<double, list<int>> Graph::prim(int r) {
+    list<int> res;
+    double distance = 0.0;
+    for (int i=1;i<=n;i++) {
+        nodes[i].dist = DBL_MAX;
+        nodes[i].pred = 0;
+    }
+    nodes[r].dist = 0;
+    MinHeap<int, int> Q(n, -1);
+    for (int i=1;i<=n;i++)
+        Q.insert(i, nodes[i].dist);
+    while(Q.getSize()>0){
+        int u = Q.removeMin();
+        distance += nodes[u].dist;
+        res.push_back(u);
+        for (auto v:nodes[u].adj){
+            if (Q.hasKey(v.dest) and v.distanceRealWorld < nodes[v.dest].dist)
+            {
+                nodes[v.dest].pred = u;
+                nodes[v.dest].dist = v.distanceRealWorld;
+                Q.decreaseKey(v.dest, v.distanceRealWorld);
+            }
+        }
+    }
+    return {distance, res};
 }
 
 /**
