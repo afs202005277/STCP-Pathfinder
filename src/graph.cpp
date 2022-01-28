@@ -213,13 +213,30 @@ int Graph::dijkstra_lineChange(int a, int b) {
  */
 list<Edge> Graph::minimumLines(int a, int b) {
     list<Edge> res;
-    int distance = dijkstra_lineChange(a, b);
-    if (distance == -1)
-        return res;
-    int current = b;
-    while(current != a){
-        res.push_front(nodes[current].edgePrev);
-        current = nodes[current].pred;
+    int min_lineChange = 0;
+    for (Edge v : nodes[a].adj) {
+        list<Edge> temp;
+        nodes[a].edgePrev.line = v.line;
+        int distance = dijkstra_lineChange(a, b);
+        if (distance == -1)
+            continue;
+        int current = b;
+        int lineChange = 0;
+        string prevLine = "";
+        while (current != a) {
+            temp.push_front(nodes[current].edgePrev);
+            if (nodes[current].edgePrev.line != prevLine)
+            {
+                lineChange++;
+                prevLine = nodes[current].edgePrev.line;
+            }
+            current = nodes[current].pred;
+        }
+        if (res.empty() || lineChange < min_lineChange)
+        {
+            res = temp;
+            min_lineChange = lineChange;
+        }
     }
     return res;
 }
