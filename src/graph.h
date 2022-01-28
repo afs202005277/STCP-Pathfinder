@@ -45,7 +45,7 @@ public:
     void addEdge(int src, int dest, string line, double d, bool foot, int weight);
 
     // Depth-First Search: example implementation
-    void dfs(int v);
+    vector<int> dfs(int start, int target, vector<int> stack);
 
     // Breadth-First Search: example implementation
     void bfs(int v);
@@ -77,6 +77,10 @@ public:
     int dijkstra_distanceMinZones(int a, int b);
 
     list <Edge> dijkstra_pathMinZones(int a, int b);
+
+    int sameLine(int v);
+
+    void rearrangeList(int v);
 };
 
 #endif

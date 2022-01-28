@@ -1,11 +1,14 @@
 #include <iostream>
 #include "Application.h"
+#include <vector>
 
 int main() {
     Application application("../dataset/stops.csv", "../dataset/lines.csv", 0);
     auto stops = application.getStops();
+    auto translator = application.getStopToInt();
 
     cout << "Welcome to the STCP routing system." << endl;
+    vector<int> stack;
     while (true) {
         cout << "Please input the coordinates (or the stop code) of the departure location." << endl;
         string tmp1, tmp2, src, dest;
@@ -75,8 +78,12 @@ int main() {
             else if (!srcUsingCode && !destUsingCode)
                 res = application.courseWithMinimumZones(lat1, lon1, lat2, lon2);
         } else if (option == 4) {
-            if (srcUsingCode && destUsingCode)
-                res = application.courseWithMinimumLines(src, dest);
+            if (srcUsingCode && destUsingCode) {
+                auto tmp = application.courseWithMinimumLines(src, dest, stack);
+                for (auto i:tmp.second)
+                    cout << stops[i].getCode() << endl;
+                return 0;
+            }
             else if ((!srcUsingCode) && destUsingCode)
                 //res = application.courseWithMinimumLines(lat1, lon1, dest);
                 cout << "Not Implemented" << endl;

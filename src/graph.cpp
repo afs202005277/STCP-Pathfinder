@@ -3,6 +3,7 @@
 
 #include "graph.h"
 #include "minHeap.h"
+#include <vector>
 #define INF (INT_MAX/2)
 
 // Constructor: nr nodes and direction (default: undirected)
@@ -22,7 +23,7 @@ int Graph::connectedComponents() {
         if (!nodes[i].visited)
         {
             counter++;
-            dfs(i);
+            dfs(i, 0, vector<int>());
         }
     return counter;
 }
@@ -45,19 +46,57 @@ void Graph::addEdge(int src, int dest, string line, double d, bool foot, int wei
         nodes[dest].adj.push_back({src, weight});
 }
 
+int Graph::sameLine(int v) {
+    for (auto e:nodes[v].adj) {
+        if (e.line == nodes[v].edgePrev.line)
+            return e.dest;
+    }
+    return -1;
+}
+
+void Graph::rearrangeList(int v){
+    list<Edge> tmp;
+    for (auto it=nodes[v].adj.begin();it!=nodes[v].adj.end();it++) {
+        if (it->line == nodes[v].edgePrev.line)
+            tmp.push_front(*it);
+        else{
+            tmp.push_back(*it);
+        }
+    }
+    nodes[v].adj = tmp;
+}
+
+void printPath(vector<int> stack)
+{
+    int i;
+    for (i = 0; i < (int)stack.size() - 1; i++) {
+        cout << stack[i] << " -> ";
+    }
+    cout << stack[i];
+}
+
 /**
  * Standard depth first search
- * @param v starting node
+ * @param start starting node
  */
-void Graph::dfs(int v) {
-    // cout << v << " "; // show node order
-    nodes[v].visited = true;
-    for (const auto& e : nodes[v].adj) {
-        int w = e.dest;
-        if (!nodes[w].visited)
-            dfs(w);
+vector<int> Graph::dfs(int start, int target, vector<int> stack) {
+    // cout << start << " "; // show node order
+    stack.push_back(start);
+    if (start == target) {
+        return stack;
     }
+    nodes[start].visited = true;
+    if (!nodes[start].adj.empty()){
+        rearrangeList(start);
+        for (const auto &edge: nodes[start].adj) {
+            if (!nodes[edge.dest].visited)
+                dfs(edge.dest, target, stack);
+        }
+    }
+    if (!stack.empty())
+        stack.pop_back();
 }
+
 
 /**
  * Standard breath first search

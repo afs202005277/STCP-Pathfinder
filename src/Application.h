@@ -54,6 +54,12 @@ public:
     pair<int, list<Edge>> courseWithMinimumZones(const string& stop1, double lat2, double lon2);
     pair<int, list<Edge>> courseWithMinimumZones(double lat1, double lon1, const string& stop2);
     pair<int, list<Edge>> courseWithMinimumZones(const string& stop1, const string& stop2);
+
+    void teste(int start, int target, vector<int> stack);
+
+    const unordered_map<string, int> &getStopToInt() const;
+
+    pair<int, vector<int>> courseWithMinimumLines(const string &stop1, const string &stop2, vector<int> stack);
 };
 
 

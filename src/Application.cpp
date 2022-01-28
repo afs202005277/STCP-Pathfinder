@@ -219,6 +219,10 @@ pair<int, list<Edge>> Application::courseWithMinimumLines(const string& stop1, c
     return {stopToInt[stop1],g.minimumLines(stopToInt[stop1], stopToInt[stop2])};
 }
 
+pair<int, vector<int>> Application::courseWithMinimumLines(const string& stop1, const string& stop2, vector<int> stack) {
+    return {stopToInt[stop1],g.dfs(stopToInt[stop1], stopToInt[stop2], stack)};
+}
+
 /**
  * Function that calculates the course (startingPoint -> targetPoint) that minimizes the times the user changes lines
  * @param lat1 latitude of the startingPoint
@@ -549,4 +553,12 @@ pair<int, list<Edge>> Application::courseWithMinimumZones(double lat1, double lo
         }
     }
     return {source, res};
+}
+
+void Application::teste(int start, int target, vector<int> stack) {
+    g.dfs(start, target, stack);
+}
+
+const unordered_map<string, int> &Application::getStopToInt() const {
+    return stopToInt;
 }
