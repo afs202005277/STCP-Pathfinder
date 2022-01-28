@@ -45,7 +45,7 @@ public:
     void addEdge(int src, int dest, string line, double d, bool foot, int weight);
 
     // Depth-First Search: example implementation
-    vector<int> dfs(int start, int target, vector<int> stack);
+    vector<int> dfs(int start, int target, vector<int> &stack);
 
     // Breadth-First Search: example implementation
     void bfs(int v);

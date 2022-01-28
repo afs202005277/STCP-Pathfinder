@@ -23,7 +23,7 @@ int Graph::connectedComponents() {
         if (!nodes[i].visited)
         {
             counter++;
-            dfs(i, 0, vector<int>());
+            //dfs(i, 0, vector<int>());
         }
     return counter;
 }
@@ -79,22 +79,27 @@ void printPath(vector<int> stack)
  * Standard depth first search
  * @param start starting node
  */
-vector<int> Graph::dfs(int start, int target, vector<int> stack) {
+vector<int> Graph::dfs(int start, int target, vector<int> &stack) {
     // cout << start << " "; // show node order
     stack.push_back(start);
     if (start == target) {
         return stack;
     }
     nodes[start].visited = true;
-    if (!nodes[start].adj.empty()){
-        rearrangeList(start);
-        for (const auto &edge: nodes[start].adj) {
-            if (!nodes[edge.dest].visited)
-                dfs(edge.dest, target, stack);
+    auto tmp1 = nodes[start].adj;
+    auto edgePrev = nodes[start].edgePrev;
+    rearrangeList(start);
+    auto tmp2 = nodes[start].adj;
+    for (const auto& e : nodes[start].adj) {
+        int w = e.dest;
+        string currentLine = e.line;
+        if (currentLine == "204_1")
+            cout << "ola" << endl;
+        if (!nodes[w].visited) {
+            nodes[w].edgePrev = edgePrev;
+            dfs(w, target, stack);
         }
     }
-    if (!stack.empty())
-        stack.pop_back();
 }
 
 
