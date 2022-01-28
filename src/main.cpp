@@ -2,9 +2,9 @@
 #include "Application.h"
 
 int main() {
-    Application application("../dataset/stops.csv", "../dataset/lines.csv", 0);
+    Application application("../dataset/stops.csv", "../dataset/lines.csv", 74);
     auto stops = application.getStops();
-
+    cout << application.getConnectedComponents() << endl;
     cout << "Welcome to the STCP routing system." << endl;
     while (true) {
         cout << "Please input the coordinates (or the stop code) of the departure location." << endl;
