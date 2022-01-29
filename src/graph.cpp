@@ -7,7 +7,7 @@
 #define INF (INT_MAX/2)
 
 // Constructor: nr nodes and direction (default: undirected)
-Graph::Graph(int num, bool dir) : n(num), hasDir(dir), nodes(num+1) {}
+Graph::Graph(int num, list<string> forbiddenLines, bool dir) : n(num), hasDir(dir), nodes(num+1) {}
 
 Graph::Graph() {}
 
@@ -28,6 +28,12 @@ int Graph::connectedComponents() {
     return counter;
 }
 
+bool Graph::canUse(string line) {
+    for (string l:forbiddenLines)
+        if (l==line)
+            return false;
+    return true;
+}
 /**
  * Function that adds an edge between two nodes
  * @param src first node
@@ -39,6 +45,8 @@ int Graph::connectedComponents() {
  */
 void Graph::addEdge(int src, int dest, string line, double d, bool foot, int weight) {
     line = line.substr(0, line.find('.'));
+    if (!canUse(line))
+        return;
     if (src<1 || src>n || dest<1 || dest>n)
         return;
     nodes[src].adj.push_back({dest, weight, std::move(line), d, foot});

@@ -6,13 +6,19 @@
 #include <fstream>
 #include <cmath>
 #include <cfloat>
+#include <utility>
 
 
-Application::Application(string stopsPath, string linesPath, double distance) : stopsPath(std::move(stopsPath)),
+Application::Application(string stopsPath, string linesPath, double distance, list<string> forbiddenStops, list<string> forbiddenLines, char nightOrDay) : stopsPath(std::move(stopsPath)),
                                                                                 linesPath(std::move(linesPath)) {
     walkingDistance = distance;
+    this->forbiddenStops = std::move(forbiddenStops);
     readStops();
-    g = Graph (stops.size()-1, true);
+    g = Graph (stops.size()-1, std::move(forbiddenLines),true);
+    if (nightOrDay == 'D')
+        day = true;
+    else
+        day = false;
     readEdges();
     if (walkingDistance > 0)
         addOnFootEdges();
@@ -37,6 +43,14 @@ Stop getStop(string line){
     return stop;
 }
 
+bool Application::canUse(string code) {
+    for (string c:forbiddenStops) {
+        if (c == code)
+            return false;
+    }
+    return true;
+}
+
 /**
  * Function that fills the stops vector with all the stops present in the file
  */
@@ -49,9 +63,11 @@ void Application::readStops() {
     int counter = 1;
     while(getline(fileStream, line)){
         Stop tmp = getStop(line);
-        stops.push_back(tmp);
-        stopToInt.insert({tmp.getCode(), counter});
-        counter++;
+        if (canUse(tmp.getCode())) {
+            stops.push_back(tmp);
+            stopToInt.insert({tmp.getCode(), counter});
+            counter++;
+        }
     }
 }
 
@@ -108,8 +124,15 @@ void Application::readEdges() {
     string line;
     getline(linesDataset, line);
     while(getline(linesDataset, line)) {
-        addEdges("../dataset/line_" + line.substr(0, line.find(',')) + "_0.csv");
-        addEdges("../dataset/line_" + line.substr(0, line.find(',')) + "_1.csv");
+        string lineCode = line.substr(0, line.find(','));
+        if (day && lineCode.find('M') == string::npos) {
+            addEdges("../dataset/line_" + lineCode + "_0.csv");
+            addEdges("../dataset/line_" + lineCode + "_1.csv");
+        }
+        else if (!day && lineCode.find('M') != string::npos) {
+            addEdges("../dataset/line_" + lineCode + "_0.csv");
+            addEdges("../dataset/line_" + lineCode + "_1.csv");
+        }
     }
 }
 

@@ -19,9 +19,11 @@ private:
     unordered_map<string, int> stopToInt;
     Graph g;
     double walkingDistance;
+    list<string> forbiddenStops;
+    bool day;
 
 public:
-    Application(string stopsPath, string linesPath, double distance);
+    Application(string stopsPath, string linesPath, double distance, list<string> forbiddenStops, list<string> forbiddenLines, char nightOrDay);
     void readStops();
     void readEdges();
     void addEdges(const string &path);
@@ -56,6 +58,8 @@ public:
     pair<int, list<Edge>> courseWithMinimumZones(const string& stop1, const string& stop2);
 
     pair<double, list<int>> MST(const string& stop);
+
+    bool canUse(string code);
 };
 
 

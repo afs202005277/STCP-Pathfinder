@@ -33,11 +33,12 @@ private:
     int n;              // Graph size (vertices are numbered from 1 to n)
     bool hasDir;        // false: undirect; true: directed
     vector<Node> nodes; // The list of nodes being represented
+    list<string> forbiddenLines;
 
 
 public:
     // Constructor: nr nodes and direction (default: undirected)
-    Graph(int nodes, bool dir = false);
+    Graph(int nodes, list<string> forbiddenLines,bool dir = false);
 
     Graph();
 
@@ -75,6 +76,8 @@ public:
     pair<double, list<int>> prim(int r);
 
     void rearrangeEdges(int v);
+
+    bool canUse(string line);
 };
 
 #endif

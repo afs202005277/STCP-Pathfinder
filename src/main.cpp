@@ -9,9 +9,39 @@ string toUpper(string s) {
 }
 
 int main() {
-    Application application("../dataset/stops.csv", "../dataset/lines.csv", 74);
-    auto stops = application.getStops();
+    int walkingDistance;
     cout << "Welcome to the STCP routing system." << endl;
+    cout << "Please input the distance (in meters) you are willing to walk on foot: ";
+    cin >> walkingDistance;
+    cin.ignore();
+
+    char nightOrDay;
+    cout << "Night or day trips? (N/D) ";
+    cin >> nightOrDay;
+    cin.ignore();
+
+    list<string> forbiddenStops, forbiddenLines;
+    string stopCode;
+    cout << "Please input the code of the bus stop you want to ignore (you can leave this field blank): ";
+    while(getline(cin, stopCode)){
+        if (stopCode.empty() || stopCode == "q")
+            break;
+        else
+            forbiddenStops.push_back(toUpper(stopCode));
+        cout << "Next stop: ";
+    }
+
+    cout << "Now you can choose the lines you don't want to use (you can leave this field blank). \nInput the in the format [CODE]_[DIR]: ";
+    while(getline(cin, stopCode)){
+        if (stopCode.empty() || stopCode == "q")
+            break;
+        else
+            forbiddenLines.push_back(toUpper(stopCode));
+        cout << "Next line: ";
+    }
+
+    Application application("../dataset/stops.csv", "../dataset/lines.csv", walkingDistance, forbiddenStops, forbiddenLines, nightOrDay);
+    auto stops = application.getStops();
     cout << "Do you want to calculate the MST of the graph? (y/n) ";
     string flag;
     getline(cin, flag);
