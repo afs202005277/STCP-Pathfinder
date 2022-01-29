@@ -539,7 +539,7 @@ pair<int, list<Edge>> Application::courseWithMinimumStops(double lat1, double lo
     list<Edge> temp, res;
     int min = INT_MAX, source;
     for (auto l:src) {
-        temp = g.minimumStops(stopToInt[stop2], stopToInt[l.first]);
+        temp = g.minimumStops(stopToInt[l.first], stopToInt[stop2]);
         int d = temp.size();
         if (d < min){
             res = temp;

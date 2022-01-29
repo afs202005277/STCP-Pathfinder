@@ -14,9 +14,8 @@ int main() {
         auto tmp = application.MST(flag);
         cout << "The cost of the MST is: " << tmp.first << " kilometers." << endl;
         cout << "The path is: " << endl;
-        for (auto elem:tmp.second){
+        for (auto elem:tmp.second)
             cout << stops[elem].getCode() << endl;
-        }
         cout << "Do you want to calculate routes? (y/n)";
         getline(cin, flag);
         if (toupper(flag[0]) != 'Y')
@@ -102,7 +101,10 @@ int main() {
         }
         cout << stops[res.first].getCode();
         for (auto edge:res.second){
-            cout << " - " << edge.line.substr(0, edge.line.find('_')) << endl << stops[edge.dest].getCode();
+            if (!edge.line.empty())
+                cout << " - " << edge.line.substr(0, edge.line.find('_')) << endl << stops[edge.dest].getCode();
+            else
+                cout << " - " << "ON FOOT" << endl << stops[edge.dest].getCode();
         }
         cout << endl;
         cout << "Do you want to calculate another route? (y/n)" << endl;
