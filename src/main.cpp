@@ -1,6 +1,13 @@
 #include <iostream>
 #include "Application.h"
 
+string toUpper(string s) {
+    for (char & i : s){
+        i = toupper(i);
+    }
+    return s;
+}
+
 int main() {
     Application application("../dataset/stops.csv", "../dataset/lines.csv", 74);
     auto stops = application.getStops();
@@ -35,7 +42,7 @@ int main() {
             getline(cin, tmp1);
             lon1 = stod(tmp1);
         } catch (...) {
-            src = tmp1;
+            src = toUpper(tmp1);
             srcUsingCode = true;
         }
         cout << "Please input the coordinates (or the stop code) of the arrival." << endl;
@@ -48,7 +55,7 @@ int main() {
             getline(cin, tmp1);
             lon2 = stod(tmp1);
         } catch (...) {
-            dest = tmp1;
+            dest = toUpper(tmp1);
             destUsingCode = true;
         }
         int option;

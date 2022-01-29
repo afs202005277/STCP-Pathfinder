@@ -599,6 +599,6 @@ pair<int, list<Edge>> Application::courseWithMinimumZones(double lat1, double lo
     return {source, res};
 }
 
-pair<double, list<int>> Application::MST(string stop) {
+pair<double, list<int>> Application::MST(const string& stop) {
     return g.prim(stopToInt[stop]);
 }

@@ -55,7 +55,7 @@ public:
     pair<int, list<Edge>> courseWithMinimumZones(double lat1, double lon1, const string& stop2);
     pair<int, list<Edge>> courseWithMinimumZones(const string& stop1, const string& stop2);
 
-    pair<double, list<int>> MST(string stop);
+    pair<double, list<int>> MST(const string& stop);
 };
 
 
