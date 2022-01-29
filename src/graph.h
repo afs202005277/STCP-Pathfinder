@@ -77,7 +77,7 @@ public:
 
     void rearrangeEdges(int v);
 
-    bool canUse(string line);
+    bool canUse(const string& line);
 };
 
 #endif

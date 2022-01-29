@@ -6,7 +6,12 @@
 #include <cfloat>
 #define INF (INT_MAX/2)
 
-// Constructor: nr nodes and direction (default: undirected)
+/**
+ * Constructor: nr nodes and direction (default: undirected) and a list of forbidden lines
+ * @param num the number of nodes
+ * @param forbiddenLines the list of lines that cannot exist in the graph
+ * @param dir if the graph is directed or not (default = undirected)
+ */
 Graph::Graph(int num, list<string> forbiddenLines, bool dir) : n(num), hasDir(dir), nodes(num+1) {}
 
 Graph::Graph() {}
@@ -28,12 +33,18 @@ int Graph::connectedComponents() {
     return counter;
 }
 
-bool Graph::canUse(string line) {
+/**
+ * Checks if the line provided as parameters can be used
+ * @param line the line to be checked
+ * @return true if the line isn't the "forbiddenLines" list
+ */
+bool Graph::canUse(const string& line) {
     for (string l:forbiddenLines)
         if (l==line)
             return false;
     return true;
 }
+
 /**
  * Function that adds an edge between two nodes
  * @param src first node
@@ -68,6 +79,9 @@ void Graph::dfs(int v) {
     }
 }
 
+/**
+ *
+ */
 pair<double, list<int>> Graph::prim(int r) {
     list<int> res;
     double distance = 0.0;

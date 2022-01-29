@@ -183,6 +183,10 @@ pair<string, int> Application::getNearestStop(double lat, double lon) {
  * @return a list with integers corresponding to the different bus stops used
  */
 pair<int, list<Edge>> Application::courseWithMinimumStops(const string& stop1, const string& stop2) {
+    if (stopToInt.find(stop1) == stopToInt.end() || stopToInt.find(stop2) == stopToInt.end()) {
+        cout << "Invalid code provided!" << endl;
+        return {};
+    }
     return {stopToInt[stop1],g.minimumStops(stopToInt[stop1], stopToInt[stop2])};
 }
 
@@ -239,6 +243,10 @@ list<pair<string, int>> Application::getAllStopsCloserToXMetres(double lat, doub
  * @return a list with integers corresponding to the different bus stops used
  */
 pair<int, list<Edge>> Application::courseWithMinimumLines(const string& stop1, const string& stop2) {
+    if (stopToInt.find(stop1) == stopToInt.end() || stopToInt.find(stop2) == stopToInt.end()) {
+        cout << "Invalid code provided!" << endl;
+        return {};
+    }
     return {stopToInt[stop1],g.minimumLines(stopToInt[stop1], stopToInt[stop2])};
 }
 
@@ -345,6 +353,10 @@ int Application::getLineChange(list<Edge> l)
  * @return a list with integers corresponding to the different bus stops used
  */
 pair<int, list<Edge>> Application::courseWithMinimumDistance(const string& stop1, const string& stop2) {
+    if (stopToInt.find(stop1) == stopToInt.end() || stopToInt.find(stop2) == stopToInt.end()) {
+        cout << "Invalid code provided!" << endl;
+        return {};
+    }
     return {stopToInt[stop1] ,g.dijkstra_pathMinDistance(stopToInt[stop1], stopToInt[stop2])};
 }
 
@@ -387,6 +399,10 @@ pair<int, list<Edge>> Application::courseWithMinimumDistance(double lat1, double
  * @return a list with integers corresponding to the different bus stops used
  */
 pair<int, list<Edge>> Application::courseWithMinimumZones(const string& stop1, const string& stop2) {
+    if (stopToInt.find(stop1) == stopToInt.end() || stopToInt.find(stop2) == stopToInt.end()) {
+        cout << "Invalid code provided!" << endl;
+        return {};
+    }
     return {stopToInt[stop1],g.dijkstra_pathMinZones(stopToInt[stop1], stopToInt[stop2])};
 }
 
@@ -623,5 +639,7 @@ pair<int, list<Edge>> Application::courseWithMinimumZones(double lat1, double lo
 }
 
 pair<double, list<int>> Application::MST(const string& stop) {
+    if (stopToInt.find(stop) == stopToInt.end())
+        return {};
     return g.prim(stopToInt[stop]);
 }

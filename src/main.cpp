@@ -8,56 +8,113 @@ string toUpper(string s) {
     return s;
 }
 
-int main() {
-    int walkingDistance;
-    cout << "Welcome to the STCP routing system." << endl;
+bool isAllDigit(string s) {
+    for (auto c:s)
+        if (!isdigit(c))
+            return false;
+    return true;
+}
+
+int readWalkingDistance() {
+    string walkingDistance;
     cout << "Please input the distance (in meters) you are willing to walk on foot: ";
-    cin >> walkingDistance;
-    cin.ignore();
+    do {
+        getline(cin, walkingDistance);
+        if (isAllDigit(walkingDistance))
+            return stoi(walkingDistance);
+        cout << "Invalid distance! Please try again: ";
+    }while(true);
+}
 
-    char nightOrDay;
+char readNightOrDay() {
+    string nightOrDay;
     cout << "Night or day trips? (N/D) ";
-    cin >> nightOrDay;
-    cin.ignore();
+    do {
+        getline(cin, nightOrDay);
+        if (nightOrDay.size() == 1 && (toupper(nightOrDay[0]) == 'D' || toupper(nightOrDay[0]) == 'N'))
+            return nightOrDay[0];
+        cout << "Invalid input! Please try again: ";
+    }while(true);
+}
 
-    list<string> forbiddenStops, forbiddenLines;
+list<string> readForbiddenStops(){
     string stopCode;
-    cout << "Please input the code of the bus stop you want to ignore (you can leave this field blank): ";
+    list<string> tmp;
+    cout << "Please input the code of the bus stop you want to ignore (you can leave this field blank or press 'q' to move to the next step): ";
     while(getline(cin, stopCode)){
         if (stopCode.empty() || stopCode == "q")
             break;
         else
-            forbiddenStops.push_back(toUpper(stopCode));
+            tmp.push_back(toUpper(stopCode));
         cout << "Next stop: ";
     }
+    return tmp;
+}
 
-    cout << "Now you can choose the lines you don't want to use (you can leave this field blank). \nInput the in the format [CODE]_[DIR]: ";
-    while(getline(cin, stopCode)){
-        if (stopCode.empty() || stopCode == "q")
+list<string> readForbiddenLines() {
+    string lineCode;
+    list<string> tmp;
+    cout << "Now you can choose the lines you don't want to use (you can leave this field blank or press 'q' to move to the next step). \nInput the in the format [CODE]_[DIR]: ";
+    do {
+        getline(cin, lineCode);
+        if (lineCode.empty() || lineCode[0] == 'q')
             break;
-        else
-            forbiddenLines.push_back(toUpper(stopCode));
-        cout << "Next line: ";
-    }
+        if (lineCode.find('_') != string::npos)
+            tmp.push_back(lineCode);
+        cout << "Invalid input! Please try again: ";
+    }while(true);
+    return tmp;
+}
 
-    Application application("../dataset/stops.csv", "../dataset/lines.csv", walkingDistance, forbiddenStops, forbiddenLines, nightOrDay);
-    auto stops = application.getStops();
+bool readMSTChoice(Application &application, vector<Stop> &stops) {
     cout << "Do you want to calculate the MST of the graph? (y/n) ";
-    string flag;
-    getline(cin, flag);
-    if (toupper(flag[0]) == 'Y') {
-        cout << "What is the starting node? (stop code) ";
-        getline(cin, flag);
-        auto tmp = application.MST(flag);
+    bool flag;
+    do {
+        string choice;
+        getline(cin, choice);
+        if (choice.size() == 1) {
+            if (toupper(choice[0]) == 'Y') {
+                flag = true;
+                break;
+            }
+            else if (toupper(choice[0]) == 'N') {
+                flag = false;
+                break;
+            }
+        }
+        cout << "Invalid input! Please try again: ";
+    }while(true);
+    pair<double, list<int>> tmp;
+    if (flag) {
+        do {
+            string startingNode;
+            cout << "What is the starting node? (stop code) ";
+            getline(cin, startingNode);
+            tmp = application.MST(startingNode);
+            if (!tmp.second.empty())
+                break;
+            else
+                cout << "Invalid stop code" << endl;
+        }while(true);
         cout << "The cost of the MST is: " << tmp.first << " kilometers." << endl;
         cout << "The path is: " << endl;
         for (auto elem:tmp.second)
             cout << stops[elem].getCode() << endl;
-        cout << "Do you want to calculate routes? (y/n)";
-        getline(cin, flag);
-        if (toupper(flag[0]) != 'Y')
-            return 0;
     }
+}
+
+int main() {
+    cout << "Welcome to the STCP routing system." << endl;
+    int walkingDistance = readWalkingDistance();
+    char nightOrDay = readNightOrDay();
+    list<string> forbiddenStops = readForbiddenStops();
+    list<string> forbiddenLines = readForbiddenLines();
+
+    Application application("../dataset/stops.csv", "../dataset/lines.csv", walkingDistance, forbiddenStops, forbiddenLines, nightOrDay);
+    auto stops = application.getStops();
+
+    readMSTChoice(application, stops);
+
     while (true) {
         cout << "Please input the coordinates (or the stop code) of the departure location." << endl;
         string tmp1, tmp2, src, dest;
@@ -136,12 +193,16 @@ int main() {
             else if (!srcUsingCode && !destUsingCode)
                 res = application.courseWithMinimumLines(lat1, lon1, lat2, lon2);
         }
-        cout << stops[res.first].getCode();
-        for (auto edge:res.second){
-            if (!edge.line.empty())
-                cout << " - " << edge.line.substr(0, edge.line.find('_')) << endl << stops[edge.dest].getCode();
-            else
-                cout << " - " << "ON FOOT" << endl << stops[edge.dest].getCode();
+        if (res.second.empty())
+            cout << "There isn't a path between the stops provided." << endl;
+        else {
+            cout << stops[res.first].getCode();
+            for (auto edge: res.second) {
+                if (!edge.line.empty())
+                    cout << " - " << edge.line.substr(0, edge.line.find('_')) << endl << stops[edge.dest].getCode();
+                else
+                    cout << " - " << "ON FOOT" << endl << stops[edge.dest].getCode();
+            }
         }
         cout << endl;
         cout << "Do you want to calculate another route? (y/n)" << endl;
