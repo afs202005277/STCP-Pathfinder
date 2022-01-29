@@ -588,7 +588,7 @@ pair<int, list<Edge>> Application::courseWithMinimumZones(double lat1, double lo
     list<Edge> temp, res;
     int min = INT_MAX, source;
     for (auto l:src) {
-        temp = g.dijkstra_pathMinZones(stopToInt[stop2], stopToInt[l.first]);
+        temp = g.dijkstra_pathMinZones(stopToInt[l.first], stopToInt[stop2]);
         int d = getTotalZoneChanges(l.second,temp);
         if (d < min){
             res = temp;
