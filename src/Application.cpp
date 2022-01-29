@@ -1,12 +1,7 @@
-//
-// Created by andre on 22/01/2022.
-//
-
 #include "Application.h"
 #include <fstream>
 #include <cmath>
 #include <cfloat>
-#include <utility>
 
 
 Application::Application(string stopsPath, string linesPath, double distance, list<string> forbiddenStops, list<string> forbiddenLines, char nightOrDay) : stopsPath(std::move(stopsPath)),
@@ -24,12 +19,7 @@ Application::Application(string stopsPath, string linesPath, double distance, li
         addOnFootEdges();
 }
 
-/**
- * Creates a Stop object using the information received
- * @param line string that contains all the information of a certain bus stop
- * @return the created object
- */
-Stop getStop(string line){
+Stop Application::getStop(string line){
     string code = line.substr(0, line.find(','));
     line = line.substr(line.find(',')+1);
     string name = line.substr(0, line.find(','));
@@ -51,9 +41,6 @@ bool Application::canUse(string code) {
     return true;
 }
 
-/**
- * Function that fills the stops vector with all the stops present in the file
- */
 void Application::readStops() {
     ifstream fileStream;
     fileStream.open(stopsPath);
@@ -71,9 +58,6 @@ void Application::readStops() {
     }
 }
 
-/**
- * Function that adds all the links between stops that are materialized by foot
- */
 void Application::addOnFootEdges() {
     for (int i=1;i+1<stops.size();i++){
         for (int j=i+1;j<stops.size();j++){
@@ -89,10 +73,6 @@ void Application::addOnFootEdges() {
     }
 }
 
-/**
- * Function that reads the existing lines that connect the different bus stops
- * @param path string that contains the path to the file with the corresponding route of that line
- */
 void Application::addEdges(const string &path) {
     ifstream trajectory;
     trajectory.open(path);
@@ -115,9 +95,6 @@ void Application::addEdges(const string &path) {
     }
 }
 
-/**
- * Function that reads the lines from the lines.csv file
- */
 void Application::readEdges() {
     ifstream linesDataset;
     linesDataset.open(linesPath);
@@ -136,14 +113,6 @@ void Application::readEdges() {
     }
 }
 
-/**
- * Function that calculates the distance between two points using its coordinates
- * @param lat1 the latitude of point 1
- * @param lon1 the longitude of point 1
- * @param lat2 the latitude of point 2
- * @param lon2 the longitude of point 2
- * @return the distance between two points in kilometers (double)
- */
 double Application::getDistance(double lat1, double lon1, double lat2, double lon2) {
     double dLat = (lat2 - lat1) * M_PI / 180.0;
     double dLon = (lon2 - lon1) * M_PI / 180.0;
@@ -155,12 +124,6 @@ double Application::getDistance(double lat1, double lon1, double lat2, double lo
     return rad * c;
 }
 
-/**
- * Function that returns the nearest stop to the coordinates given
- * @param lat latitude of the point
- * @param lon longitude of the point
- * @return pair where where the first element is the stop's code and the second one is the index of that stop in the stops vector
- */
 pair<string, int> Application::getNearestStop(double lat, double lon) {
     Stop tmp;
     double min = DBL_MAX;
@@ -176,12 +139,6 @@ pair<string, int> Application::getNearestStop(double lat, double lon) {
     return {tmp.getCode(), idx};
 }
 
-/**
- * Function that calculates the course (stop1 -> targetStop2) that minimizes the amount of stops used
- * @param stop1 source stop
- * @param stop2 destination stop
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumStops(const string& stop1, const string& stop2) {
     if (stopToInt.find(stop1) == stopToInt.end() || stopToInt.find(stop2) == stopToInt.end()) {
         cout << "Invalid code provided!" << endl;
@@ -190,13 +147,6 @@ pair<int, list<Edge>> Application::courseWithMinimumStops(const string& stop1, c
     return {stopToInt[stop1],g.minimumStops(stopToInt[stop1], stopToInt[stop2])};
 }
 
-/**
- * Function that calculates the course (startingPoint -> targetStop) that minimizes the amount of stops used
- * @param lat1 the latitude of the starting point
- * @param lon1 the longitude of the starting point
- * @param stop2 destination stop
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumStops(double lat1, double lon1, double lat2, double lon2) {
     list<Edge> res, tmp;
     int min = INT_MAX, source;
@@ -219,13 +169,6 @@ pair<int, list<Edge>> Application::courseWithMinimumStops(double lat1, double lo
     return {source, res};
 }
 
-/**
- * Function that returns all the stops that are closer to X metres to a given point
- * @param lat the latitude of the starting point
- * @param lon the longitude of the starting point
- * @param x the maximum distance
- * @return a list with pairs where the first element is the stop code and the second is the corresponding index in the stops vector
- */
 list<pair<string, int>> Application::getAllStopsCloserToXMetres(double lat, double lon, double x) {
     list<pair<string, int>> res;
     for (int i=1;i<stops.size();i++){
@@ -236,12 +179,6 @@ list<pair<string, int>> Application::getAllStopsCloserToXMetres(double lat, doub
     return res;
 }
 
-/**
- * Function that calculates the course (stop1 -> stop2) that minimizes the times the user changes lines
- * @param stop1 the starting bus stop
- * @param stop2 the destination bus stop
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumLines(const string& stop1, const string& stop2) {
     if (stopToInt.find(stop1) == stopToInt.end() || stopToInt.find(stop2) == stopToInt.end()) {
         cout << "Invalid code provided!" << endl;
@@ -250,14 +187,6 @@ pair<int, list<Edge>> Application::courseWithMinimumLines(const string& stop1, c
     return {stopToInt[stop1],g.minimumLines(stopToInt[stop1], stopToInt[stop2])};
 }
 
-/**
- * Function that calculates the course (startingPoint -> targetPoint) that minimizes the times the user changes lines
- * @param lat1 latitude of the startingPoint
- * @param lon1 longitude of the startingPoint
- * @param lat2 latitude of the targetPoint
- * @param lon2 longitude of the targetPoint
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumLines(double lat1, double lon1, double lat2, double lon2)
 {
     list<Edge> res;
@@ -297,10 +226,6 @@ pair<int, list<Edge>> Application::courseWithMinimumLines(double lat1, double lo
     return {source, res};
 }
 
-/**
- * Function that returns the amount of connected components of the graph
- * @return amount (integer) of connected components of the graph
- */
 int Application::getConnectedComponents() {
     return g.connectedComponents();
 }
@@ -309,11 +234,6 @@ const vector<Stop> &Application::getStops() const {
     return stops;
 }
 
-/**
- * Function that calculates the total distance travelled in the course received as parameter
- * @param l list of integers that represent the course to be analyzed
- * @return total distance travelled in the course
- */
 double Application::getTotalDistance(int src, const list<Edge>& l) {
     if (l.empty() || l.size() == 1)
         return 0;
@@ -326,11 +246,6 @@ double Application::getTotalDistance(int src, const list<Edge>& l) {
     return total;
 }
 
-/**
- * Function that calculates the total number of times the user has changed lines
- * @param l list of integers that represent the course to be analyzed
- * @return total number of times the user has changed lines
- */
 int Application::getLineChange(list<Edge> l)
 {
     if (l.empty() || l.size() == 1)
@@ -346,12 +261,6 @@ int Application::getLineChange(list<Edge> l)
     return lines;
 }
 
-/**
- * Function that calculates the course (stop1 -> stop2) that minimizes the distance travelled
- * @param stop1 the starting bus stop
- * @param stop2 the destination bus stop
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumDistance(const string& stop1, const string& stop2) {
     if (stopToInt.find(stop1) == stopToInt.end() || stopToInt.find(stop2) == stopToInt.end()) {
         cout << "Invalid code provided!" << endl;
@@ -360,14 +269,6 @@ pair<int, list<Edge>> Application::courseWithMinimumDistance(const string& stop1
     return {stopToInt[stop1] ,g.dijkstra_pathMinDistance(stopToInt[stop1], stopToInt[stop2])};
 }
 
-/**
- * Function that calculates the course (startingPoint -> targetPoint) that minimizes the times the user changes lines
- * @param lat1 the latitude of the starting point
- * @param lon1 the longitude of the starting point
- * @param lat2 the latitude of the target point
- * @param lon2 the longitude of the target point
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumDistance(double lat1, double lon1, double lat2, double lon2) {
     list<Edge> res;
     int source;
@@ -392,12 +293,6 @@ pair<int, list<Edge>> Application::courseWithMinimumDistance(double lat1, double
     return {source, res};
 }
 
-/**
- * Function that calculates the course (stop1 -> stop2) that minimizes the zones used
- * @param stop1 the starting bus stop
- * @param stop2 the destination bus stop
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumZones(const string& stop1, const string& stop2) {
     if (stopToInt.find(stop1) == stopToInt.end() || stopToInt.find(stop2) == stopToInt.end()) {
         cout << "Invalid code provided!" << endl;
@@ -406,14 +301,6 @@ pair<int, list<Edge>> Application::courseWithMinimumZones(const string& stop1, c
     return {stopToInt[stop1],g.dijkstra_pathMinZones(stopToInt[stop1], stopToInt[stop2])};
 }
 
-/**
- * Function that calculates the course (stop1 -> stop2) that minimizes the zones used
- * @param lat1 the latitude of the starting point
- * @param lon1 the longitude of the starting point
- * @param lat2 the latitude of the target point
- * @param lon2 the longitude of the target point
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumZones(double lat1, double lon1, double lat2, double lon2) {
     list<Edge> res;
     int min = INT_MAX, source;
@@ -437,11 +324,6 @@ pair<int, list<Edge>> Application::courseWithMinimumZones(double lat1, double lo
     return {source, res};
 }
 
-/**
- * Function that calculates the total number of times the user has changed zones
- * @param l list of integers that represent the course to be analyzed
- * @return the total number of times the user has changed zones
- */
 int Application::getTotalZoneChanges(int src, list<Edge> l) {
     if (l.empty() || l.size() == 1)
         return 0;
@@ -490,13 +372,6 @@ pair<int, list<Edge>> Application::courseWithMinimumLines(const string& stop1, d
     return {source, res};
 }
 
-/**
- * Function that calculates the course (stop1 -> targetPoint) that minimizes the distance travelled
- * @param stop1 the starting bus stop
- * @param lat2 the latitude of the target point
- * @param lon2 the longitude of the target point
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumDistance(const string& stop1, double lat2, double lon2) {
     auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
     if (dest.empty())
@@ -514,13 +389,6 @@ pair<int, list<Edge>> Application::courseWithMinimumDistance(const string& stop1
     return {stopToInt[stop1],res};
 }
 
-/**
- * Function that calculates the course (startingPoint -> stop2) that minimizes the distance travelled
- * @param lat1 the latitude of the starting point
- * @param lon1 the longitude of the starting point
- * @param stop2 the destination bus stop
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumDistance(double lat1, double lon1, const string &stop2) {
     auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
     if (src.empty())
@@ -540,13 +408,6 @@ pair<int, list<Edge>> Application::courseWithMinimumDistance(double lat1, double
     return {source, res};
 }
 
-/**
- * Function that calculates the course (stop1 -> targetPoint) that minimizes the amount of stops used
- * @param stop1 the starting bus stop
- * @param lat2 the latitude of the target point
- * @param lon2 the longitude of the target point
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumStops(const string& stop1, double lat2, double lon2) {
     auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
     if (dest.empty())
@@ -564,13 +425,6 @@ pair<int, list<Edge>> Application::courseWithMinimumStops(const string& stop1, d
     return {stopToInt[stop1],res};
 }
 
-/**
- * Function that calculates the course (startingPoint -> stop2) that minimizes the amount of stops used
- * @param lat1 the latitude of the starting point
- * @param lon1 the longitude of the starting point
- * @param stop2 the destination bus stop
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumStops(double lat1, double lon1, const string& stop2) {
     auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
     if (src.empty())
@@ -589,13 +443,6 @@ pair<int, list<Edge>> Application::courseWithMinimumStops(double lat1, double lo
     return {source, res};
 }
 
-/**
- * Function that calculates the course (startingPoint -> stop2) that minimizes the amount of zones used
- * @param stop1 the starting bus stop
- * @param lat2 the latitude of the target point
- * @param lon2 the longitude of the target point
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumZones(const string &stop1, double lat2, double lon2) {
     auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
     if (dest.empty())
@@ -613,13 +460,6 @@ pair<int, list<Edge>> Application::courseWithMinimumZones(const string &stop1, d
     return {stopToInt[stop1],res};
 }
 
-/**
- * Function that calculates the course (startingPoint -> stop2) that minimizes the amount of zones used
- * @param lat1 the latitude of the starting point
- * @param lon1 the longitude of the starting point
- * @param stop2 the destination bus stop
- * @return a list with integers corresponding to the different bus stops used
- */
 pair<int, list<Edge>> Application::courseWithMinimumZones(double lat1, double lon1, const string &stop2) {
     auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
     if (src.empty())

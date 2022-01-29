@@ -8,7 +8,7 @@ string toUpper(string s) {
     return s;
 }
 
-bool isAllDigit(string s) {
+bool isAllDigit(const string& s) {
     for (auto c:s)
         if (!isdigit(c))
             return false;

@@ -88,15 +88,11 @@ $(document).ready(function(){initNavTree('class_graph.html',''); initResizable()
   <div class="headertitle"><div class="title">Graph Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p><code>#include &lt;<a class="el" href="graph_8h_source.html">graph.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a18b4f6dec368300991b68dd75e39a5e9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a18b4f6dec368300991b68dd75e39a5e9">Graph</a> (int nodes, bool dir=false)</td></tr>
-<tr class="separator:a18b4f6dec368300991b68dd75e39a5e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4c72b8ac4d693c49800a4c7e273654f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ae4c72b8ac4d693c49800a4c7e273654f">Graph</a> ()</td></tr>
-<tr class="separator:ae4c72b8ac4d693c49800a4c7e273654f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40111cd6813381d2609ad23eeb91dfcb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a40111cd6813381d2609ad23eeb91dfcb">Graph</a> (int nodes, list&lt; string &gt; forbiddenLines, bool dir=false)</td></tr>
+<tr class="separator:a40111cd6813381d2609ad23eeb91dfcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae47818de10cb66314786f6811ef220b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ae47818de10cb66314786f6811ef220b1">addEdge</a> (int src, int dest, string line, double d, bool foot, int weight)</td></tr>
 <tr class="separator:ae47818de10cb66314786f6811ef220b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af81888a45922aa1839fe0262bd0ca7b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#af81888a45922aa1839fe0262bd0ca7b3">dfs</a> (int v)</td></tr>
@@ -105,36 +101,30 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae1e45e27c60711dadec619ca17e830a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41d0da4f9e4a809cdbbc4c49db9f074e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a41d0da4f9e4a809cdbbc4c49db9f074e">dijkstra_distance</a> (int a, int b)</td></tr>
 <tr class="separator:a41d0da4f9e4a809cdbbc4c49db9f074e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68dee2186fca9890aecf5ee5c22cb6ab"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a68dee2186fca9890aecf5ee5c22cb6ab">dijkstra_path</a> (int a, int b)</td></tr>
-<tr class="separator:a68dee2186fca9890aecf5ee5c22cb6ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95c17e93abd0ee8732eb06dee10d7d35"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a95c17e93abd0ee8732eb06dee10d7d35">dijkstra_lineChange</a> (int a, int b)</td></tr>
 <tr class="separator:a95c17e93abd0ee8732eb06dee10d7d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69ab53a5a33953ef50d092b7b1092f12"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a69ab53a5a33953ef50d092b7b1092f12">minimumStops</a> (int a, int b)</td></tr>
-<tr class="separator:a69ab53a5a33953ef50d092b7b1092f12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8cf47d00fdd93959acdb221709d0d3c"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ad8cf47d00fdd93959acdb221709d0d3c">minimumLines</a> (int a, int b)</td></tr>
-<tr class="separator:ad8cf47d00fdd93959acdb221709d0d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84955b2ba498e031802039e9bb53cc8e"><td class="memItemLeft" align="right" valign="top">list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a84955b2ba498e031802039e9bb53cc8e">minimumStops</a> (int a, int b)</td></tr>
+<tr class="separator:a84955b2ba498e031802039e9bb53cc8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8105e436fd6722789532bc7ecba4535c"><td class="memItemLeft" align="right" valign="top">list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a8105e436fd6722789532bc7ecba4535c">minimumLines</a> (int a, int b)</td></tr>
+<tr class="separator:a8105e436fd6722789532bc7ecba4535c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a684873414628f08f55ed4a08e9172255"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a684873414628f08f55ed4a08e9172255">connectedComponents</a> ()</td></tr>
 <tr class="separator:a684873414628f08f55ed4a08e9172255"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39df4260bd4eea2c76ea7c7d1a2b51c4"><td class="memItemLeft" align="right" valign="top">const vector&lt; <a class="el" href="struct_node.html">Node</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a39df4260bd4eea2c76ea7c7d1a2b51c4">getNodes</a> () const</td></tr>
-<tr class="separator:a39df4260bd4eea2c76ea7c7d1a2b51c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05710c552eaffe50f1a701e8435017e2"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a05710c552eaffe50f1a701e8435017e2">minimumDistance</a> (int a, int b)</td></tr>
-<tr class="separator:a05710c552eaffe50f1a701e8435017e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ce2710be1816055195b62fc9626ba1c"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a2ce2710be1816055195b62fc9626ba1c">dijkstra_pathMinDistance</a> (int a, int b)</td></tr>
-<tr class="separator:a2ce2710be1816055195b62fc9626ba1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acac6074180d08c8f9367a59af14fc7a5"><td class="memItemLeft" align="right" valign="top">list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#acac6074180d08c8f9367a59af14fc7a5">dijkstra_pathMinDistance</a> (int a, int b)</td></tr>
+<tr class="separator:acac6074180d08c8f9367a59af14fc7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1991b07dab327f5eb8eeab63b3d8677f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a1991b07dab327f5eb8eeab63b3d8677f">dijkstra_distanceMinDistance</a> (int a, int b)</td></tr>
 <tr class="separator:a1991b07dab327f5eb8eeab63b3d8677f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ceedf0e14eb6263ede857c005fdf462"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_edge.html">Edge</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a6ceedf0e14eb6263ede857c005fdf462">edgeBetween</a> (int &amp;a, int &amp;b)</td></tr>
-<tr class="separator:a6ceedf0e14eb6263ede857c005fdf462"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d0a90de7763e71b0c764a08b9c526ef"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a3d0a90de7763e71b0c764a08b9c526ef">minimumZones</a> (int a, int b)</td></tr>
-<tr class="separator:a3d0a90de7763e71b0c764a08b9c526ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af24eb12a439f9caa70201dcdef42ebdc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#af24eb12a439f9caa70201dcdef42ebdc">dijkstra_distanceMinZones</a> (int a, int b)</td></tr>
 <tr class="separator:af24eb12a439f9caa70201dcdef42ebdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8b25a9e5d4114920d5935c1efb7fd98"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#aa8b25a9e5d4114920d5935c1efb7fd98">dijkstra_pathMinZones</a> (int a, int b)</td></tr>
-<tr class="separator:aa8b25a9e5d4114920d5935c1efb7fd98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e038d0f54574b9915f7b3dab92890d8"><td class="memItemLeft" align="right" valign="top">list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a8e038d0f54574b9915f7b3dab92890d8">dijkstra_pathMinZones</a> (int a, int b)</td></tr>
+<tr class="separator:a8e038d0f54574b9915f7b3dab92890d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c4648e75dc695579e51e41a523424cc"><td class="memItemLeft" align="right" valign="top">pair&lt; double, list&lt; int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a3c4648e75dc695579e51e41a523424cc">prim</a> (int r)</td></tr>
+<tr class="separator:a3c4648e75dc695579e51e41a523424cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a39acf218af21e896b9e5535e261281"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a3a39acf218af21e896b9e5535e261281">canUse</a> (const string &amp;line)</td></tr>
+<tr class="separator:a3a39acf218af21e896b9e5535e261281"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a18b4f6dec368300991b68dd75e39a5e9" name="a18b4f6dec368300991b68dd75e39a5e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18b4f6dec368300991b68dd75e39a5e9">&#9670;&nbsp;</a></span>Graph() <span class="overload">[1/2]</span></h2>
+<a id="a40111cd6813381d2609ad23eeb91dfcb" name="a40111cd6813381d2609ad23eeb91dfcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40111cd6813381d2609ad23eeb91dfcb">&#9670;&nbsp;</a></span>Graph()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,6 +134,12 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>nodes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">list&lt; string &gt;&#160;</td>
+          <td class="paramname"><em>forbiddenLines</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -158,23 +154,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae4c72b8ac4d693c49800a4c7e273654f" name="ae4c72b8ac4d693c49800a4c7e273654f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4c72b8ac4d693c49800a4c7e273654f">&#9670;&nbsp;</a></span>Graph() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Graph::Graph </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p >Constructor: nr nodes and direction (default: undirected) and a list of forbidden lines </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num</td><td>the number of nodes </td></tr>
+    <tr><td class="paramname">forbiddenLines</td><td>the list of lines that cannot exist in the graph </td></tr>
+    <tr><td class="paramname">dir</td><td>if the graph is directed or not (default = undirected) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -228,6 +215,17 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Adds an edge between two nodes </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>first node </td></tr>
+    <tr><td class="paramname">dest</td><td>second node </td></tr>
+    <tr><td class="paramname">line</td><td>the code of the bus line that connects the two nodes (empty if there id no bus line) </td></tr>
+    <tr><td class="paramname">d</td><td>distance between the nodes (bus stops) </td></tr>
+    <tr><td class="paramname">foot</td><td>a boolean to flag the links that aren't possible using buses </td></tr>
+    <tr><td class="paramname">weight</td><td>an integer to represent the amount of zone transitions made by the edge </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -246,6 +244,37 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Standard breath first search </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>starting node </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3a39acf218af21e896b9e5535e261281" name="a3a39acf218af21e896b9e5535e261281"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a39acf218af21e896b9e5535e261281">&#9670;&nbsp;</a></span>canUse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Graph::canUse </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>line</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Checks if the line provided as parameter can be used </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td>the line (string) to be checked </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the line isn't the "forbiddenLines" list </dd></dl>
 
 </div>
 </div>
@@ -263,6 +292,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Calculates the amount of connected components in the graph </p><dl class="section return"><dt>Returns</dt><dd>number of connected components in the graph </dd></dl>
 
 </div>
 </div>
@@ -281,6 +311,12 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Standard depth first search </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>starting node </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -309,6 +345,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Dijkstra algorithm that calculates the distance between two nodes, while making it possible to reconstruct the path </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>starting node </td></tr>
+    <tr><td class="paramname">b</td><td>target node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the distance (integer) between the nodes </dd></dl>
 
 </div>
 </div>
@@ -337,6 +381,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Dijkstra implementation to calculate the distance between two nodes, using a path that minimizes the distance travelled </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>starting node </td></tr>
+    <tr><td class="paramname">b</td><td>target node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the distance (integer) between the two nodes </dd></dl>
 
 </div>
 </div>
@@ -365,6 +417,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Dijkstra implementation to calculate the distance between two nodes, using a path that minimizes the zones used </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>starting node </td></tr>
+    <tr><td class="paramname">b</td><td>target node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the distance (integer) between the two nodes </dd></dl>
 
 </div>
 </div>
@@ -393,17 +453,25 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Dijkstra implementation to calculate the distance between two nodes, using a path that minimizes the amount of times that the user needs to change line </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>starting node </td></tr>
+    <tr><td class="paramname">b</td><td>target node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the distance (integer) between the two nodes </dd></dl>
 
 </div>
 </div>
-<a id="a68dee2186fca9890aecf5ee5c22cb6ab" name="a68dee2186fca9890aecf5ee5c22cb6ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68dee2186fca9890aecf5ee5c22cb6ab">&#9670;&nbsp;</a></span>dijkstra_path()</h2>
+<a id="acac6074180d08c8f9367a59af14fc7a5" name="acac6074180d08c8f9367a59af14fc7a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acac6074180d08c8f9367a59af14fc7a5">&#9670;&nbsp;</a></span>dijkstra_pathMinDistance()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">list&lt; int &gt; Graph::dijkstra_path </td>
+          <td class="memname">list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; Graph::dijkstra_pathMinDistance </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -421,17 +489,25 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Algorithm that reconstructs the path created by the Dijkstra implementation that minimizes the distance travelled </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>starting node </td></tr>
+    <tr><td class="paramname">b</td><td>target node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a list with the edges that are associated to each portion of the path </dd></dl>
 
 </div>
 </div>
-<a id="a2ce2710be1816055195b62fc9626ba1c" name="a2ce2710be1816055195b62fc9626ba1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ce2710be1816055195b62fc9626ba1c">&#9670;&nbsp;</a></span>dijkstra_pathMinDistance()</h2>
+<a id="a8e038d0f54574b9915f7b3dab92890d8" name="a8e038d0f54574b9915f7b3dab92890d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e038d0f54574b9915f7b3dab92890d8">&#9670;&nbsp;</a></span>dijkstra_pathMinZones()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">list&lt; int &gt; Graph::dijkstra_pathMinDistance </td>
+          <td class="memname">list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; Graph::dijkstra_pathMinZones </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -449,17 +525,25 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Algorithm that reconstructs the path created by the Dijkstra implementation that minimizes the zones used </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>starting node </td></tr>
+    <tr><td class="paramname">b</td><td>target node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a list with the edges that are associated to each portion of the path </dd></dl>
 
 </div>
 </div>
-<a id="aa8b25a9e5d4114920d5935c1efb7fd98" name="aa8b25a9e5d4114920d5935c1efb7fd98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8b25a9e5d4114920d5935c1efb7fd98">&#9670;&nbsp;</a></span>dijkstra_pathMinZones()</h2>
+<a id="a8105e436fd6722789532bc7ecba4535c" name="a8105e436fd6722789532bc7ecba4535c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8105e436fd6722789532bc7ecba4535c">&#9670;&nbsp;</a></span>minimumLines()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">list&lt; int &gt; Graph::dijkstra_pathMinZones </td>
+          <td class="memname">list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; Graph::minimumLines </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -477,62 +561,25 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Algorithm that reconstructs the path created by the Dijkstra implementation that minimizes line changes </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>starting node </td></tr>
+    <tr><td class="paramname">b</td><td>target node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a list with the edges that are associated to each portion of the path </dd></dl>
 
 </div>
 </div>
-<a id="a6ceedf0e14eb6263ede857c005fdf462" name="a6ceedf0e14eb6263ede857c005fdf462"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ceedf0e14eb6263ede857c005fdf462">&#9670;&nbsp;</a></span>edgeBetween()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_edge.html">Edge</a> Graph::edgeBetween </td>
-          <td>(</td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a39df4260bd4eea2c76ea7c7d1a2b51c4" name="a39df4260bd4eea2c76ea7c7d1a2b51c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39df4260bd4eea2c76ea7c7d1a2b51c4">&#9670;&nbsp;</a></span>getNodes()</h2>
+<a id="a84955b2ba498e031802039e9bb53cc8e" name="a84955b2ba498e031802039e9bb53cc8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84955b2ba498e031802039e9bb53cc8e">&#9670;&nbsp;</a></span>minimumStops()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const vector&lt; <a class="el" href="struct_node.html">Node</a> &gt; &amp; Graph::getNodes </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a05710c552eaffe50f1a701e8435017e2" name="a05710c552eaffe50f1a701e8435017e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05710c552eaffe50f1a701e8435017e2">&#9670;&nbsp;</a></span>minimumDistance()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">list&lt; int &gt; Graph::minimumDistance </td>
+          <td class="memname">list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; Graph::minimumStops </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>a</em>, </td>
@@ -550,96 +597,45 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Algorithm to calculate the path that contains the minimum number of stops between two nodes </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>starting node </td></tr>
+    <tr><td class="paramname">b</td><td>target node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a list with the edges that are associated to each portion of the path </dd></dl>
 
 </div>
 </div>
-<a id="ad8cf47d00fdd93959acdb221709d0d3c" name="ad8cf47d00fdd93959acdb221709d0d3c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8cf47d00fdd93959acdb221709d0d3c">&#9670;&nbsp;</a></span>minimumLines()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">list&lt; int &gt; Graph::minimumLines </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a69ab53a5a33953ef50d092b7b1092f12" name="a69ab53a5a33953ef50d092b7b1092f12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69ab53a5a33953ef50d092b7b1092f12">&#9670;&nbsp;</a></span>minimumStops()</h2>
+<a id="a3c4648e75dc695579e51e41a523424cc" name="a3c4648e75dc695579e51e41a523424cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c4648e75dc695579e51e41a523424cc">&#9670;&nbsp;</a></span>prim()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">list&lt; int &gt; Graph::minimumStops </td>
+          <td class="memname">pair&lt; double, list&lt; int &gt; &gt; Graph::prim </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>r</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3d0a90de7763e71b0c764a08b9c526ef" name="a3d0a90de7763e71b0c764a08b9c526ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d0a90de7763e71b0c764a08b9c526ef">&#9670;&nbsp;</a></span>minimumZones()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">list&lt; int &gt; Graph::minimumZones </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p >Standard Prim's algorithm to find the MST of a graph </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>starting node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pair where first element is the weight of the MST and the second is the MST </dd></dl>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="graph_8h_source.html">graph.h</a></li>
-<li>src/<a class="el" href="graph_8cpp.html">graph.cpp</a></li>
+<li>src/graph.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,6 +1,3 @@
-// AED 2021/2022 - Aula Pratica 09
-// Pedro Ribeiro (DCC/FCUP) [03/01/2022]
-
 #ifndef _GRAPH_H_
 #define _GRAPH_H_
 
@@ -37,46 +34,121 @@ private:
 
 
 public:
-    // Constructor: nr nodes and direction (default: undirected)
+    /**
+    * Constructor: nr nodes and direction (default: undirected) and a list of forbidden lines
+    * @param num the number of nodes
+    * @param forbiddenLines the list of lines that cannot exist in the graph
+    * @param dir if the graph is directed or not (default = undirected)
+    */
     Graph(int nodes, list<string> forbiddenLines,bool dir = false);
 
     Graph();
 
-    // Add edge from source to destination with a certain zoneChanges
+    /**
+    * Adds an edge between two nodes
+    * @param src first node
+    * @param dest second node
+    * @param line the code of the bus line that connects the two nodes (empty if there id no bus line)
+    * @param d distance between the nodes (bus stops)
+    * @param foot a boolean to flag the links that aren't possible using buses
+    * @param weight an integer to represent the amount of zone transitions made by the edge
+    */
     void addEdge(int src, int dest, string line, double d, bool foot, int weight);
 
-    // Depth-First Search: example implementation
+    /**
+    * Standard depth first search
+    * @param v starting node
+    */
     void dfs(int v);
 
-    // Breadth-First Search: example implementation
+    /**
+    * Standard breath first search
+    * @param v starting node
+    */
     void bfs(int v);
 
+    /**
+    * Dijkstra algorithm that calculates the distance between two nodes, while making it possible to reconstruct the path
+    * @param a starting node
+    * @param b target node
+    * @return the distance (integer) between the nodes
+    */
     int dijkstra_distance(int a, int b);
 
-    list<int> dijkstra_path(int a, int b);
-
+    /**
+    * Dijkstra implementation to calculate the distance between two nodes, using a path that minimizes the amount of times that the user needs to change line
+    * @param a starting node
+    * @param b target node
+    * @return the distance (integer) between the two nodes
+    */
     int dijkstra_lineChange(int a, int b);
 
+    /**
+    * Algorithm to calculate the path that contains the minimum number of stops between two nodes
+    * @param a starting node
+    * @param b target node
+    * @return a list with the edges that are associated to each portion of the path
+    */
     list<Edge> minimumStops(int a, int b);
 
+    /**
+    * Algorithm that reconstructs the path created by the Dijkstra implementation that minimizes line changes
+    * @param a starting node
+    * @param b target node
+    * @return a list with the edges that are associated to each portion of the path
+    */
     list<Edge> minimumLines(int a, int b);
 
+    /**
+    * Calculates the amount of connected components in the graph
+    * @return number of connected components in the graph
+    */
     int connectedComponents();
 
+    /**
+    * Algorithm that reconstructs the path created by the Dijkstra implementation that minimizes the distance travelled
+    * @param a starting node
+    * @param b target node
+    * @return a list with the edges that are associated to each portion of the path
+    */
     list<Edge> dijkstra_pathMinDistance(int a, int b);
 
+    /**
+    * Dijkstra implementation to calculate the distance between two nodes, using a path that minimizes the distance travelled
+    * @param a starting node
+    * @param b target node
+    * @return the distance (integer) between the two nodes
+    */
     int dijkstra_distanceMinDistance(int a, int b);
 
-    Edge edgeBetween(int &a, int &b);
-
+    /**
+    * Dijkstra implementation to calculate the distance between two nodes, using a path that minimizes the zones used
+    * @param a starting node
+    * @param b target node
+    * @return the distance (integer) between the two nodes
+    */
     int dijkstra_distanceMinZones(int a, int b);
 
+    /**
+    * Algorithm that reconstructs the path created by the Dijkstra implementation that minimizes the zones used
+    * @param a starting node
+    * @param b target node
+    * @return a list with the edges that are associated to each portion of the path
+    */
     list <Edge> dijkstra_pathMinZones(int a, int b);
 
+    /**
+     * Standard Prim's algorithm to find the MST of a graph
+     * @param r starting node
+     * @return pair where first element is the weight of the MST and the second is the MST
+     */
     pair<double, list<int>> prim(int r);
 
-    void rearrangeEdges(int v);
-
+    /**
+    * Checks if the line provided as parameter can be used
+    * @param line the line (string) to be checked
+    * @return true if the line isn't the "forbiddenLines" list
+    */
     bool canUse(const string& line);
 };
 

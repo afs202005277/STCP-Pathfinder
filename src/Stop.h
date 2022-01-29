@@ -1,7 +1,3 @@
-//
-// Created by andre on 19/01/2022.
-//
-
 #ifndef PROJETO2_STOP_H
 #define PROJETO2_STOP_H
 

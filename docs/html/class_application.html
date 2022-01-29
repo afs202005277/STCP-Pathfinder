@@ -88,131 +88,65 @@ $(document).ready(function(){initNavTree('class_application.html',''); initResiz
   <div class="headertitle"><div class="title">Application Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p><code>#include &lt;<a class="el" href="_application_8h_source.html">Application.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa326ddf8bc810bf6ffd1d824619ec8d4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#aa326ddf8bc810bf6ffd1d824619ec8d4">Application</a> (string stopsPath, string linesPath, double distance)</td></tr>
-<tr class="separator:aa326ddf8bc810bf6ffd1d824619ec8d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89175031fd6fd811bd0a3bfae7301930"><td class="memItemLeft" align="right" valign="top"><a id="a89175031fd6fd811bd0a3bfae7301930" name="a89175031fd6fd811bd0a3bfae7301930"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Application</b> (string stopsPath, string linesPath, double distance, list&lt; string &gt; forbiddenStops, list&lt; string &gt; forbiddenLines, char nightOrDay)</td></tr>
+<tr class="separator:a89175031fd6fd811bd0a3bfae7301930"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ef9bdb032c6ee9ccfd5631258072f9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a2ef9bdb032c6ee9ccfd5631258072f9f">readStops</a> ()</td></tr>
 <tr class="separator:a2ef9bdb032c6ee9ccfd5631258072f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af85d2b21e905d2cdd2d4cc8389f076c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#af85d2b21e905d2cdd2d4cc8389f076c3">readEdges</a> ()</td></tr>
 <tr class="separator:af85d2b21e905d2cdd2d4cc8389f076c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b9a629a730a605271a7fcaa696d93c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a4b9a629a730a605271a7fcaa696d93c5">addEdges</a> (const string &amp;path)</td></tr>
-<tr class="separator:a4b9a629a730a605271a7fcaa696d93c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7062cae8ed98a7c9a90b7c37ddbfb275"><td class="memItemLeft" align="right" valign="top">list&lt; pair&lt; string, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a7062cae8ed98a7c9a90b7c37ddbfb275">getAllStopsCloserToXMetres</a> (double lat, double lon, double x)</td></tr>
-<tr class="separator:a7062cae8ed98a7c9a90b7c37ddbfb275"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8d7b0fc36ef5e592ca02d7d6eef05ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#ac8d7b0fc36ef5e592ca02d7d6eef05ad">addOnFootEdges</a> ()</td></tr>
-<tr class="separator:ac8d7b0fc36ef5e592ca02d7d6eef05ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93a0e99d12a808a238ecb7b810632706"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a93a0e99d12a808a238ecb7b810632706">getConnectedComponents</a> ()</td></tr>
 <tr class="separator:a93a0e99d12a808a238ecb7b810632706"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ab056ff7de28273aefe2044a0522b78"><td class="memItemLeft" align="right" valign="top">pair&lt; string, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a8ab056ff7de28273aefe2044a0522b78">getNearestStop</a> (double lat, double lon)</td></tr>
-<tr class="separator:a8ab056ff7de28273aefe2044a0522b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9d63a0d712b198d9d06b4c8ec8201c8"><td class="memItemLeft" align="right" valign="top">const vector&lt; <a class="el" href="class_stop.html">Stop</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#ab9d63a0d712b198d9d06b4c8ec8201c8">getStops</a> () const</td></tr>
+<tr class="memitem:ab9d63a0d712b198d9d06b4c8ec8201c8"><td class="memItemLeft" align="right" valign="top"><a id="ab9d63a0d712b198d9d06b4c8ec8201c8" name="ab9d63a0d712b198d9d06b4c8ec8201c8"></a>
+const vector&lt; <a class="el" href="class_stop.html">Stop</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getStops</b> () const</td></tr>
 <tr class="separator:ab9d63a0d712b198d9d06b4c8ec8201c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24fdd710da5167e11234d4da1132ebe2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a24fdd710da5167e11234d4da1132ebe2">getTotalDistance</a> (list&lt; int &gt; l)</td></tr>
-<tr class="separator:a24fdd710da5167e11234d4da1132ebe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f69d8de170e32b2e9c854592b23d94b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a3f69d8de170e32b2e9c854592b23d94b">getLineChange</a> (list&lt; int &gt; l)</td></tr>
-<tr class="separator:a3f69d8de170e32b2e9c854592b23d94b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abefa011f4eefdd075df8607fd2e6ff47"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#abefa011f4eefdd075df8607fd2e6ff47">courseWithMinimumDistance</a> (double lat1, double lon1, double lat2, double lon2)</td></tr>
-<tr class="separator:abefa011f4eefdd075df8607fd2e6ff47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63dadc71794ff3eb295a117ea55ff024"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a63dadc71794ff3eb295a117ea55ff024">courseWithMinimumDistance</a> (const string &amp;stop1, const string &amp;stop2)</td></tr>
-<tr class="separator:a63dadc71794ff3eb295a117ea55ff024"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58edf6ec0dd76b403c1cae83b4da1951"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a58edf6ec0dd76b403c1cae83b4da1951">courseWithMinimumStops</a> (string stop1, string stop2)</td></tr>
-<tr class="separator:a58edf6ec0dd76b403c1cae83b4da1951"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac931cbb6df042c7492365d995e46dbe2"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#ac931cbb6df042c7492365d995e46dbe2">courseWithMinimumStops</a> (double lat1, double lon1, double lat2, double lon2)</td></tr>
-<tr class="separator:ac931cbb6df042c7492365d995e46dbe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabe70da97d19ef0120f4aaf6528cf301"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#aabe70da97d19ef0120f4aaf6528cf301">courseWithMinimumLines</a> (string stop1, string stop2)</td></tr>
-<tr class="separator:aabe70da97d19ef0120f4aaf6528cf301"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad21c55d79645728d9afe7334d17bbf04"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#ad21c55d79645728d9afe7334d17bbf04">courseWithMinimumLines</a> (double lat1, double lon1, double lat2, double lon2)</td></tr>
-<tr class="separator:ad21c55d79645728d9afe7334d17bbf04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8645ca16e9ca8a13083b740b7300005a"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a8645ca16e9ca8a13083b740b7300005a">courseWithMinimumZones</a> (const string &amp;stop1, const string &amp;stop2)</td></tr>
-<tr class="separator:a8645ca16e9ca8a13083b740b7300005a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af50e52b3c482078e6383d112e998aef7"><td class="memItemLeft" align="right" valign="top">list&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#af50e52b3c482078e6383d112e998aef7">courseWithMinimumZones</a> (double lat1, double lon1, double lat2, double lon2)</td></tr>
-<tr class="separator:af50e52b3c482078e6383d112e998aef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc481a8ed3ceaad942526bd1fe53382e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#abc481a8ed3ceaad942526bd1fe53382e">getTotalZoneChanges</a> (list&lt; int &gt; l)</td></tr>
-<tr class="separator:abc481a8ed3ceaad942526bd1fe53382e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e1526849967bc6ca503edb201c49b25"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a7e1526849967bc6ca503edb201c49b25">courseWithMinimumDistance</a> (double lat1, double lon1, double lat2, double lon2)</td></tr>
+<tr class="separator:a7e1526849967bc6ca503edb201c49b25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9f8fb987eec9c72e44978f82de9fa10"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#ae9f8fb987eec9c72e44978f82de9fa10">courseWithMinimumDistance</a> (const string &amp;stop1, double lat2, double lon2)</td></tr>
+<tr class="separator:ae9f8fb987eec9c72e44978f82de9fa10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88f4b3d07d21388664777986bbe82bb2"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a88f4b3d07d21388664777986bbe82bb2">courseWithMinimumDistance</a> (double lat1, double lon1, const string &amp;stop2)</td></tr>
+<tr class="separator:a88f4b3d07d21388664777986bbe82bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9194f605144336d0773888090677db6d"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a9194f605144336d0773888090677db6d">courseWithMinimumDistance</a> (const string &amp;stop1, const string &amp;stop2)</td></tr>
+<tr class="separator:a9194f605144336d0773888090677db6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aac9978975d64afa58ee65181d7d39b"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a6aac9978975d64afa58ee65181d7d39b">courseWithMinimumStops</a> (double lat1, double lon1, double lat2, double lon2)</td></tr>
+<tr class="separator:a6aac9978975d64afa58ee65181d7d39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40f8dcd1d0153bfeeb384a7ed1eab492"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a40f8dcd1d0153bfeeb384a7ed1eab492">courseWithMinimumStops</a> (const string &amp;stop1, double lat2, double lon2)</td></tr>
+<tr class="separator:a40f8dcd1d0153bfeeb384a7ed1eab492"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85a9da363df8f2b0069de32aa4de6f74"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a85a9da363df8f2b0069de32aa4de6f74">courseWithMinimumStops</a> (double lat1, double lon1, const string &amp;stop2)</td></tr>
+<tr class="separator:a85a9da363df8f2b0069de32aa4de6f74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e9d696e0c43077c5fe8183e054e3436"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a3e9d696e0c43077c5fe8183e054e3436">courseWithMinimumStops</a> (const string &amp;stop1, const string &amp;stop2)</td></tr>
+<tr class="separator:a3e9d696e0c43077c5fe8183e054e3436"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a672d7d0f5c456ed031bdbb6cb6459d"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a3a672d7d0f5c456ed031bdbb6cb6459d">courseWithMinimumLines</a> (double lat1, double lon1, double lat2, double lon2)</td></tr>
+<tr class="separator:a3a672d7d0f5c456ed031bdbb6cb6459d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab612cd94e5c1867f023b0e252d889fa3"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#ab612cd94e5c1867f023b0e252d889fa3">courseWithMinimumLines</a> (const string &amp;stop1, double lat2, double lon2)</td></tr>
+<tr class="separator:ab612cd94e5c1867f023b0e252d889fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae397093114c04c54747926a066aeb062"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#ae397093114c04c54747926a066aeb062">courseWithMinimumLines</a> (double lat1, double lon1, string stop2)</td></tr>
+<tr class="separator:ae397093114c04c54747926a066aeb062"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62ed0a6efbcf3250e75e032ca5fa3649"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a62ed0a6efbcf3250e75e032ca5fa3649">courseWithMinimumLines</a> (const string &amp;stop1, const string &amp;stop2)</td></tr>
+<tr class="separator:a62ed0a6efbcf3250e75e032ca5fa3649"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a858251d2496d4366f9b306cf182795c3"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a858251d2496d4366f9b306cf182795c3">courseWithMinimumZones</a> (double lat1, double lon1, double lat2, double lon2)</td></tr>
+<tr class="separator:a858251d2496d4366f9b306cf182795c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade111df643e3298789233518597b2d09"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#ade111df643e3298789233518597b2d09">courseWithMinimumZones</a> (const string &amp;stop1, double lat2, double lon2)</td></tr>
+<tr class="separator:ade111df643e3298789233518597b2d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45ad15741c258e3aec64a6349df65967"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a45ad15741c258e3aec64a6349df65967">courseWithMinimumZones</a> (double lat1, double lon1, const string &amp;stop2)</td></tr>
+<tr class="separator:a45ad15741c258e3aec64a6349df65967"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af248025f940f6dd968a08d51f095d1d9"><td class="memItemLeft" align="right" valign="top">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#af248025f940f6dd968a08d51f095d1d9">courseWithMinimumZones</a> (const string &amp;stop1, const string &amp;stop2)</td></tr>
+<tr class="separator:af248025f940f6dd968a08d51f095d1d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d2a82123bb9c7e63725089378c2043b"><td class="memItemLeft" align="right" valign="top">pair&lt; double, list&lt; int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a6d2a82123bb9c7e63725089378c2043b">MST</a> (const string &amp;stop)</td></tr>
+<tr class="separator:a6d2a82123bb9c7e63725089378c2043b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa326ddf8bc810bf6ffd1d824619ec8d4" name="aa326ddf8bc810bf6ffd1d824619ec8d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa326ddf8bc810bf6ffd1d824619ec8d4">&#9670;&nbsp;</a></span>Application()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Application::Application </td>
-          <td>(</td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>stopsPath</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>linesPath</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>distance</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4b9a629a730a605271a7fcaa696d93c5" name="a4b9a629a730a605271a7fcaa696d93c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b9a629a730a605271a7fcaa696d93c5">&#9670;&nbsp;</a></span>addEdges()</h2>
+<a id="a9194f605144336d0773888090677db6d" name="a9194f605144336d0773888090677db6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9194f605144336d0773888090677db6d">&#9670;&nbsp;</a></span>courseWithMinimumDistance() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Application::addEdges </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>path</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac8d7b0fc36ef5e592ca02d7d6eef05ad" name="ac8d7b0fc36ef5e592ca02d7d6eef05ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8d7b0fc36ef5e592ca02d7d6eef05ad">&#9670;&nbsp;</a></span>addOnFootEdges()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Application::addOnFootEdges </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a63dadc71794ff3eb295a117ea55ff024" name="a63dadc71794ff3eb295a117ea55ff024"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63dadc71794ff3eb295a117ea55ff024">&#9670;&nbsp;</a></span>courseWithMinimumDistance() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">list&lt; int &gt; Application::courseWithMinimumDistance </td>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumDistance </td>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>stop1</em>, </td>
@@ -230,17 +164,111 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Function that calculates the course (stop1 -&gt; stop2) that minimizes the distance travelled </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stop1</td><td>the starting bus stop </td></tr>
+    <tr><td class="paramname">stop2</td><td>the destination bus stop </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
 
 </div>
 </div>
-<a id="abefa011f4eefdd075df8607fd2e6ff47" name="abefa011f4eefdd075df8607fd2e6ff47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abefa011f4eefdd075df8607fd2e6ff47">&#9670;&nbsp;</a></span>courseWithMinimumDistance() <span class="overload">[2/2]</span></h2>
+<a id="ae9f8fb987eec9c72e44978f82de9fa10" name="ae9f8fb987eec9c72e44978f82de9fa10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9f8fb987eec9c72e44978f82de9fa10">&#9670;&nbsp;</a></span>courseWithMinimumDistance() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">list&lt; int &gt; Application::courseWithMinimumDistance </td>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumDistance </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>stop1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lat2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lon2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Function that calculates the course (stop1 -&gt; targetPoint) that minimizes the distance travelled </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stop1</td><td>the starting bus stop </td></tr>
+    <tr><td class="paramname">lat2</td><td>the latitude of the target point </td></tr>
+    <tr><td class="paramname">lon2</td><td>the longitude of the target point </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
+
+</div>
+</div>
+<a id="a88f4b3d07d21388664777986bbe82bb2" name="a88f4b3d07d21388664777986bbe82bb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88f4b3d07d21388664777986bbe82bb2">&#9670;&nbsp;</a></span>courseWithMinimumDistance() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumDistance </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lat1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lon1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>stop2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Function that calculates the course (startingPoint -&gt; stop2) that minimizes the distance travelled </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lat1</td><td>the latitude of the starting point </td></tr>
+    <tr><td class="paramname">lon1</td><td>the longitude of the starting point </td></tr>
+    <tr><td class="paramname">stop2</td><td>the destination bus stop </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
+
+</div>
+</div>
+<a id="a7e1526849967bc6ca503edb201c49b25" name="a7e1526849967bc6ca503edb201c49b25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e1526849967bc6ca503edb201c49b25">&#9670;&nbsp;</a></span>courseWithMinimumDistance() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumDistance </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>lat1</em>, </td>
@@ -270,153 +298,27 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Function that calculates the course (startingPoint -&gt; targetPoint) that minimizes the distance travelled </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lat1</td><td>the latitude of the starting bus stop </td></tr>
+    <tr><td class="paramname">lat1</td><td>the longitude of the starting bus stop </td></tr>
+    <tr><td class="paramname">lat2</td><td>the latitude of the target point </td></tr>
+    <tr><td class="paramname">lon2</td><td>the longitude of the target point </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
 
 </div>
 </div>
-<a id="ad21c55d79645728d9afe7334d17bbf04" name="ad21c55d79645728d9afe7334d17bbf04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad21c55d79645728d9afe7334d17bbf04">&#9670;&nbsp;</a></span>courseWithMinimumLines() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">list&lt; int &gt; Application::courseWithMinimumLines </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lat1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lon1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lat2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lon2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aabe70da97d19ef0120f4aaf6528cf301" name="aabe70da97d19ef0120f4aaf6528cf301"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabe70da97d19ef0120f4aaf6528cf301">&#9670;&nbsp;</a></span>courseWithMinimumLines() <span class="overload">[2/2]</span></h2>
+<a id="a62ed0a6efbcf3250e75e032ca5fa3649" name="a62ed0a6efbcf3250e75e032ca5fa3649"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62ed0a6efbcf3250e75e032ca5fa3649">&#9670;&nbsp;</a></span>courseWithMinimumLines() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">list&lt; int &gt; Application::courseWithMinimumLines </td>
-          <td>(</td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>stop1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>stop2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac931cbb6df042c7492365d995e46dbe2" name="ac931cbb6df042c7492365d995e46dbe2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac931cbb6df042c7492365d995e46dbe2">&#9670;&nbsp;</a></span>courseWithMinimumStops() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">list&lt; int &gt; Application::courseWithMinimumStops </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lat1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lon1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lat2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lon2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a58edf6ec0dd76b403c1cae83b4da1951" name="a58edf6ec0dd76b403c1cae83b4da1951"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58edf6ec0dd76b403c1cae83b4da1951">&#9670;&nbsp;</a></span>courseWithMinimumStops() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">list&lt; int &gt; Application::courseWithMinimumStops </td>
-          <td>(</td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>stop1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>stop2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8645ca16e9ca8a13083b740b7300005a" name="a8645ca16e9ca8a13083b740b7300005a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8645ca16e9ca8a13083b740b7300005a">&#9670;&nbsp;</a></span>courseWithMinimumZones() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">list&lt; int &gt; Application::courseWithMinimumZones </td>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumLines </td>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>stop1</em>, </td>
@@ -434,17 +336,68 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Function that calculates the course (stop1 -&gt; stop2) that minimizes the times the user changes lines </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stop1</td><td>the starting bus stop </td></tr>
+    <tr><td class="paramname">stop2</td><td>the destination bus stop </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
 
 </div>
 </div>
-<a id="af50e52b3c482078e6383d112e998aef7" name="af50e52b3c482078e6383d112e998aef7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af50e52b3c482078e6383d112e998aef7">&#9670;&nbsp;</a></span>courseWithMinimumZones() <span class="overload">[2/2]</span></h2>
+<a id="ab612cd94e5c1867f023b0e252d889fa3" name="ab612cd94e5c1867f023b0e252d889fa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab612cd94e5c1867f023b0e252d889fa3">&#9670;&nbsp;</a></span>courseWithMinimumLines() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">list&lt; int &gt; Application::courseWithMinimumZones </td>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumLines </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>stop1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lat2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lon2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Function that calculates the course (stop1 -&gt; targetPoint) that minimizes the times the user changes lines </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stop1</td><td>code of the source stop </td></tr>
+    <tr><td class="paramname">lat2</td><td>latitude of the targetPoint </td></tr>
+    <tr><td class="paramname">lon2</td><td>longitude of the targetPoint </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
+
+</div>
+</div>
+<a id="a3a672d7d0f5c456ed031bdbb6cb6459d" name="a3a672d7d0f5c456ed031bdbb6cb6459d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a672d7d0f5c456ed031bdbb6cb6459d">&#9670;&nbsp;</a></span>courseWithMinimumLines() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumLines </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>lat1</em>, </td>
@@ -474,32 +427,42 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Function that calculates the course (startingPoint -&gt; targetPoint) that minimizes the times the user changes lines </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lat1</td><td>latitude of the startingPoint </td></tr>
+    <tr><td class="paramname">lon1</td><td>longitude of the startingPoint </td></tr>
+    <tr><td class="paramname">lat2</td><td>latitude of the targetPoint </td></tr>
+    <tr><td class="paramname">lon2</td><td>longitude of the targetPoint </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
 
 </div>
 </div>
-<a id="a7062cae8ed98a7c9a90b7c37ddbfb275" name="a7062cae8ed98a7c9a90b7c37ddbfb275"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7062cae8ed98a7c9a90b7c37ddbfb275">&#9670;&nbsp;</a></span>getAllStopsCloserToXMetres()</h2>
+<a id="ae397093114c04c54747926a066aeb062" name="ae397093114c04c54747926a066aeb062"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae397093114c04c54747926a066aeb062">&#9670;&nbsp;</a></span>courseWithMinimumLines() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">list&lt; pair&lt; string, int &gt; &gt; Application::getAllStopsCloserToXMetres </td>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumLines </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lat</em>, </td>
+          <td class="paramname"><em>lat1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lon</em>, </td>
+          <td class="paramname"><em>lon1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>x</em>&#160;</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>stop2</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -508,6 +471,358 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Function that calculates the course (startingPoint -&gt; stop2) that minimizes the times the user changes lines </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lat1</td><td>latitude of the targetPoint </td></tr>
+    <tr><td class="paramname">lon1</td><td>longitude of the targetPoint </td></tr>
+    <tr><td class="paramname">stop2</td><td>code of the destination stop </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
+
+</div>
+</div>
+<a id="a3e9d696e0c43077c5fe8183e054e3436" name="a3e9d696e0c43077c5fe8183e054e3436"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e9d696e0c43077c5fe8183e054e3436">&#9670;&nbsp;</a></span>courseWithMinimumStops() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumStops </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>stop1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>stop2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Function that calculates the course (stop1 -&gt; targetStop2) that minimizes the amount of stops used </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stop1</td><td>source stop </td></tr>
+    <tr><td class="paramname">stop2</td><td>destination stop </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
+
+</div>
+</div>
+<a id="a40f8dcd1d0153bfeeb384a7ed1eab492" name="a40f8dcd1d0153bfeeb384a7ed1eab492"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40f8dcd1d0153bfeeb384a7ed1eab492">&#9670;&nbsp;</a></span>courseWithMinimumStops() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumStops </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>stop1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lat2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lon2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Function that calculates the course (stop1 -&gt; targetPoint) that minimizes the amount of stops used </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stop1</td><td>the starting bus stop </td></tr>
+    <tr><td class="paramname">lat2</td><td>the latitude of the target point </td></tr>
+    <tr><td class="paramname">lon2</td><td>the longitude of the target point </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
+
+</div>
+</div>
+<a id="a85a9da363df8f2b0069de32aa4de6f74" name="a85a9da363df8f2b0069de32aa4de6f74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85a9da363df8f2b0069de32aa4de6f74">&#9670;&nbsp;</a></span>courseWithMinimumStops() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumStops </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lat1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lon1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>stop2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Function that calculates the course (startingPoint -&gt; stop2) that minimizes the amount of stops used </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lat1</td><td>the latitude of the starting point </td></tr>
+    <tr><td class="paramname">lon1</td><td>the longitude of the starting point </td></tr>
+    <tr><td class="paramname">stop2</td><td>the destination bus stop </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
+
+</div>
+</div>
+<a id="a6aac9978975d64afa58ee65181d7d39b" name="a6aac9978975d64afa58ee65181d7d39b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aac9978975d64afa58ee65181d7d39b">&#9670;&nbsp;</a></span>courseWithMinimumStops() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumStops </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lat1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lon1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lat2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lon2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Function that calculates the course (startingPoint -&gt; targetStop) that minimizes the amount of stops used </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lat1</td><td>the latitude of the starting point </td></tr>
+    <tr><td class="paramname">lon1</td><td>the longitude of the starting point </td></tr>
+    <tr><td class="paramname">stop2</td><td>destination stop </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
+
+</div>
+</div>
+<a id="af248025f940f6dd968a08d51f095d1d9" name="af248025f940f6dd968a08d51f095d1d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af248025f940f6dd968a08d51f095d1d9">&#9670;&nbsp;</a></span>courseWithMinimumZones() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumZones </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>stop1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>stop2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Function that calculates the course (stop1 -&gt; stop2) that minimizes the zones used </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stop1</td><td>the starting bus stop </td></tr>
+    <tr><td class="paramname">stop2</td><td>the destination bus stop </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
+
+</div>
+</div>
+<a id="ade111df643e3298789233518597b2d09" name="ade111df643e3298789233518597b2d09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade111df643e3298789233518597b2d09">&#9670;&nbsp;</a></span>courseWithMinimumZones() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumZones </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>stop1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lat2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lon2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Function that calculates the course (startingPoint -&gt; stop2) that minimizes the amount of zones used </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stop1</td><td>the starting bus stop </td></tr>
+    <tr><td class="paramname">lat2</td><td>the latitude of the target point </td></tr>
+    <tr><td class="paramname">lon2</td><td>the longitude of the target point </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
+
+</div>
+</div>
+<a id="a45ad15741c258e3aec64a6349df65967" name="a45ad15741c258e3aec64a6349df65967"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45ad15741c258e3aec64a6349df65967">&#9670;&nbsp;</a></span>courseWithMinimumZones() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumZones </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lat1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lon1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>stop2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Function that calculates the course (stop1 -&gt; stop2) that minimizes the zones used </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lat1</td><td>the latitude of the starting point </td></tr>
+    <tr><td class="paramname">lon1</td><td>the longitude of the starting point </td></tr>
+    <tr><td class="paramname">lat2</td><td>the latitude of the target point </td></tr>
+    <tr><td class="paramname">lon2</td><td>the longitude of the target point </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
+
+</div>
+</div>
+<a id="a858251d2496d4366f9b306cf182795c3" name="a858251d2496d4366f9b306cf182795c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a858251d2496d4366f9b306cf182795c3">&#9670;&nbsp;</a></span>courseWithMinimumZones() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pair&lt; int, list&lt; <a class="el" href="struct_edge.html">Edge</a> &gt; &gt; Application::courseWithMinimumZones </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lat1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lon1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lat2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lon2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Function that calculates the course (startingPoint -&gt; stop2) that minimizes the amount of zones used </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lat1</td><td>the latitude of the starting point </td></tr>
+    <tr><td class="paramname">lon1</td><td>the longitude of the starting point </td></tr>
+    <tr><td class="paramname">stop2</td><td>the destination bus stop </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the index of the starting node and the second is a list with the edges used in the calculated path </dd></dl>
 
 </div>
 </div>
@@ -525,105 +840,32 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Function that returns the amount of connected components of the graph </p><dl class="section return"><dt>Returns</dt><dd>amount (integer) of connected components of the graph </dd></dl>
 
 </div>
 </div>
-<a id="a3f69d8de170e32b2e9c854592b23d94b" name="a3f69d8de170e32b2e9c854592b23d94b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f69d8de170e32b2e9c854592b23d94b">&#9670;&nbsp;</a></span>getLineChange()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Application::getLineChange </td>
-          <td>(</td>
-          <td class="paramtype">list&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>l</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8ab056ff7de28273aefe2044a0522b78" name="a8ab056ff7de28273aefe2044a0522b78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ab056ff7de28273aefe2044a0522b78">&#9670;&nbsp;</a></span>getNearestStop()</h2>
+<a id="a6d2a82123bb9c7e63725089378c2043b" name="a6d2a82123bb9c7e63725089378c2043b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d2a82123bb9c7e63725089378c2043b">&#9670;&nbsp;</a></span>MST()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pair&lt; string, int &gt; Application::getNearestStop </td>
+          <td class="memname">pair&lt; double, list&lt; int &gt; &gt; Application::MST </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lat</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lon</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab9d63a0d712b198d9d06b4c8ec8201c8" name="ab9d63a0d712b198d9d06b4c8ec8201c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9d63a0d712b198d9d06b4c8ec8201c8">&#9670;&nbsp;</a></span>getStops()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const vector&lt; <a class="el" href="class_stop.html">Stop</a> &gt; &amp; Application::getStops </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="abc481a8ed3ceaad942526bd1fe53382e" name="abc481a8ed3ceaad942526bd1fe53382e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc481a8ed3ceaad942526bd1fe53382e">&#9670;&nbsp;</a></span>getTotalZoneChanges()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Application::getTotalZoneChanges </td>
-          <td>(</td>
-          <td class="paramtype">list&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>l</em></td><td>)</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>stop</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a24fdd710da5167e11234d4da1132ebe2" name="a24fdd710da5167e11234d4da1132ebe2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24fdd710da5167e11234d4da1132ebe2">&#9670;&nbsp;</a></span>getTotalDistance()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double Application::getTotalDistance </td>
-          <td>(</td>
-          <td class="paramtype">list&lt; int &gt;&#160;</td>
-          <td class="paramname"><em>l</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p >Calculates the MST of the entire graph </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stop</td><td>the code of the starting stop </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pair where the first element is the total distance of the MST and the second is the list of indexes of the bus stops that are included in the MST (by order) </dd></dl>
 
 </div>
 </div>
@@ -641,6 +883,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Function that reads the lines from the lines.csv file </p>
 
 </div>
 </div>
@@ -658,12 +901,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Function that fills the stops vector with all the stops present in the file </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="_application_8h_source.html">Application.h</a></li>
-<li>src/<a class="el" href="_application_8cpp.html">Application.cpp</a></li>
+<li>src/Application.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
