@@ -4,12 +4,10 @@
 int main() {
     Application application("../dataset/stops.csv", "../dataset/lines.csv", 74);
     auto stops = application.getStops();
-    cout << application.getConnectedComponents() << endl;
     cout << "Welcome to the STCP routing system." << endl;
     cout << "Do you want to calculate the MST of the graph? (y/n) ";
     string flag;
     getline(cin, flag);
-    cout << endl;
     if (toupper(flag[0]) == 'Y') {
         cout << "What is the starting node? (stop code) ";
         getline(cin, flag);

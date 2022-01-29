@@ -433,8 +433,10 @@ pair<int, list<Edge>> Application::courseWithMinimumLines(double lat1, double lo
     return {source, res};
 }
 
-pair<int, list<Edge>> Application::courseWithMinimumLines(string stop1, double lat2, double lon2) {
+pair<int, list<Edge>> Application::courseWithMinimumLines(const string& stop1, double lat2, double lon2) {
     auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
+    if (dest.empty())
+        dest.push_back(getNearestStop(lat2, lon2));
     list<Edge> res;
     int min = INT_MAX, source;
     for (auto l:dest) {
@@ -458,6 +460,8 @@ pair<int, list<Edge>> Application::courseWithMinimumLines(string stop1, double l
  */
 pair<int, list<Edge>> Application::courseWithMinimumDistance(const string& stop1, double lat2, double lon2) {
     auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
+    if (dest.empty())
+        dest.push_back(getNearestStop(lat2, lon2));
     list<Edge> temp, res;
     int min = INT_MAX;
     for (auto l:dest) {
@@ -480,11 +484,13 @@ pair<int, list<Edge>> Application::courseWithMinimumDistance(const string& stop1
  */
 pair<int, list<Edge>> Application::courseWithMinimumDistance(double lat1, double lon1, const string &stop2) {
     auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
+    if (src.empty())
+        src.push_back(getNearestStop(lat1, lon1));
     list<Edge> temp, res;
     int source;
     int min = INT_MAX;
     for (auto l:src) {
-        temp = g.dijkstra_pathMinDistance(stopToInt[stop2], stopToInt[l.first]);
+        temp = g.dijkstra_pathMinDistance(stopToInt[l.first], stopToInt[stop2]);
         int d = getTotalDistance(l.second, temp);
         if (d < min){
             res = temp;
@@ -504,6 +510,8 @@ pair<int, list<Edge>> Application::courseWithMinimumDistance(double lat1, double
  */
 pair<int, list<Edge>> Application::courseWithMinimumStops(const string& stop1, double lat2, double lon2) {
     auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
+    if (dest.empty())
+        dest.push_back(getNearestStop(lat2, lon2));
     list<Edge> temp, res;
     int min = INT_MAX;
     for (auto l:dest) {
@@ -526,6 +534,8 @@ pair<int, list<Edge>> Application::courseWithMinimumStops(const string& stop1, d
  */
 pair<int, list<Edge>> Application::courseWithMinimumStops(double lat1, double lon1, const string& stop2) {
     auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
+    if (src.empty())
+        src.push_back(getNearestStop(lat1, lon1));
     list<Edge> temp, res;
     int min = INT_MAX, source;
     for (auto l:src) {
@@ -549,6 +559,8 @@ pair<int, list<Edge>> Application::courseWithMinimumStops(double lat1, double lo
  */
 pair<int, list<Edge>> Application::courseWithMinimumZones(const string &stop1, double lat2, double lon2) {
     auto dest = getAllStopsCloserToXMetres(lat2, lon2, walkingDistance);
+    if (dest.empty())
+        dest.push_back(getNearestStop(lat2, lon2));
     list<Edge> temp, res;
     int min = INT_MAX;
     for (auto l:dest) {
@@ -571,6 +583,8 @@ pair<int, list<Edge>> Application::courseWithMinimumZones(const string &stop1, d
  */
 pair<int, list<Edge>> Application::courseWithMinimumZones(double lat1, double lon1, const string &stop2) {
     auto src = getAllStopsCloserToXMetres(lat1, lon1, walkingDistance);
+    if (src.empty())
+        src.push_back(getNearestStop(lat1, lon1));
     list<Edge> temp, res;
     int min = INT_MAX, source;
     for (auto l:src) {

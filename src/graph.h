@@ -73,6 +73,8 @@ public:
     list <Edge> dijkstra_pathMinZones(int a, int b);
 
     pair<double, list<int>> prim(int r);
+
+    void rearrangeEdges(int v);
 };
 
 #endif

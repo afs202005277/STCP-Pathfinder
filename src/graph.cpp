@@ -269,6 +269,17 @@ list<Edge> Graph::minimumLines(int a, int b) {
     return res;
 }
 
+void Graph::rearrangeEdges(int v) {
+    list<Edge> tmp;
+    for (const Edge& edge:nodes[v].adj) {
+        if (edge.line.empty())
+            tmp.push_back(edge);
+        else
+            tmp.push_front(edge);
+    }
+    nodes[v].adj = tmp;
+}
+
 /**
  * Dijkstra implementation to calculate the distance between two nodes, using a path that minimizes the distance travelled
  * @param a starting node

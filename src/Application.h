@@ -46,7 +46,7 @@ public:
     pair<int, list<Edge>> courseWithMinimumStops(const string& stop1, const string& stop2);
 
     pair<int, list<Edge>> courseWithMinimumLines(double lat1, double lon1, double lat2, double lon2);
-    pair<int, list<Edge>> courseWithMinimumLines(string stop1, double lat2, double lon2);
+    pair<int, list<Edge>> courseWithMinimumLines(const string& stop1, double lat2, double lon2);
     pair<int, list<Edge>> courseWithMinimumLines(double lat1, double lon1, string stop2);
     pair<int, list<Edge>> courseWithMinimumLines(const string& stop1, const string& stop2);
 
