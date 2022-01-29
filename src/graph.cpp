@@ -52,26 +52,33 @@ void Graph::dfs(int v) {
 pair<double, list<int>> Graph::prim(int r) {
     list<int> res;
     double distance = 0.0;
+    int last;
     for (int i=1;i<=n;i++) {
         nodes[i].dist = DBL_MAX;
         nodes[i].pred = 0;
     }
     nodes[r].dist = 0;
+    nodes[r].pred = r;
     MinHeap<int, int> Q(n, -1);
     for (int i=1;i<=n;i++)
         Q.insert(i, nodes[i].dist);
     while(Q.getSize()>0){
         int u = Q.removeMin();
         distance += nodes[u].dist;
-        res.push_back(u);
         for (const auto& v:nodes[u].adj){
             if (Q.hasKey(v.dest) and v.distanceRealWorld < nodes[v.dest].dist)
             {
+                last = v.dest;
                 nodes[v.dest].pred = u;
                 nodes[v.dest].dist = v.distanceRealWorld;
                 Q.decreaseKey(v.dest, v.distanceRealWorld);
             }
         }
+    }
+    int current = last;
+    while(current != r){
+        res.push_front(current);
+        current = nodes[current].pred;
     }
     return {distance, res};
 }
