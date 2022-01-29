@@ -109,7 +109,7 @@ int main() {
         cout << endl;
         cout << "Do you want to calculate another route? (y/n)" << endl;
         getline(cin, tmp1);
-        if (tmp1 == "n")
+        if (toupper(tmp1[0]) != 'Y')
             break;
     }
     return 0;
