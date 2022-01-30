@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "Application.h"
 
 string toUpper(string s) {
@@ -59,14 +60,17 @@ list<string> readForbiddenLines() {
         getline(cin, lineCode);
         if (lineCode.empty() || lineCode[0] == 'q')
             break;
-        if (lineCode.find('_') != string::npos)
+        if (lineCode.find('_') != string::npos) {
             tmp.push_back(lineCode);
-        cout << "Invalid input! Please try again: ";
+            cout << "Next line: ";
+        }
+        else
+            cout << "Invalid input! Please try again: ";
     }while(true);
     return tmp;
 }
 
-bool readMSTChoice(Application &application, vector<Stop> &stops) {
+void readMSTChoice(Application &application, vector<Stop> &stops) {
     cout << "Do you want to calculate the MST of the graph? (y/n) ";
     bool flag;
     do {
@@ -84,22 +88,19 @@ bool readMSTChoice(Application &application, vector<Stop> &stops) {
         }
         cout << "Invalid input! Please try again: ";
     }while(true);
-    pair<double, list<int>> tmp;
+    pair<double, vector<int>> tmp;
     if (flag) {
-        do {
-            string startingNode;
-            cout << "What is the starting node? (stop code) ";
-            getline(cin, startingNode);
-            tmp = application.MST(startingNode);
-            if (!tmp.second.empty())
-                break;
-            else
-                cout << "Invalid stop code" << endl;
-        }while(true);
+        string startingNode;
+        cout << "What is the starting node? (stop code) ";
+        getline(cin, startingNode);
+        tmp = application.MST(startingNode);
         cout << "The cost of the MST is: " << tmp.first << " kilometers." << endl;
-        cout << "The path is: " << endl;
-        for (auto elem:tmp.second)
-            cout << stops[elem].getCode() << endl;
+        cout << "The nodes reached by the algorithm were: " << endl;
+        for (int i=0;i<tmp.second.size();i++){
+            cout << setw(5) << stops[tmp.second[i]].getCode() << "  ";
+            if ((i+1) % 10 == 0)
+                cout << endl;
+        }
     }
 }
 

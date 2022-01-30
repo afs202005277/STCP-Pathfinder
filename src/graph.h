@@ -20,7 +20,7 @@ struct Edge {
 struct Node {
     list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
     bool visited;   // As the node been visited on a search?
-    int dist;
+    double dist;
     int pred;
     Edge edgePrev;
 };
@@ -142,7 +142,7 @@ public:
      * @param r starting node
      * @return pair where first element is the weight of the MST and the second is the MST
      */
-    pair<double, list<int>> prim(int r);
+    pair<double, vector<int>> prim(int r);
 
     /**
     * Checks if the line provided as parameter can be used

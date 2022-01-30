@@ -260,6 +260,6 @@ public:
      * @param stop the code of the starting stop
      * @return a pair where the first element is the total distance of the MST and the second is the list of indexes of the bus stops that are included in the MST (by order)
      */
-    pair<double, list<int>> MST(const string& stop);
+    pair<double, vector<int>> MST(const string& stop);
 };
 #endif //PROJETO2_APPLICATION_H

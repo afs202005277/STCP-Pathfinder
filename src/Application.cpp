@@ -478,7 +478,7 @@ pair<int, list<Edge>> Application::courseWithMinimumZones(double lat1, double lo
     return {source, res};
 }
 
-pair<double, list<int>> Application::MST(const string& stop) {
+pair<double, vector<int>> Application::MST(const string& stop) {
     if (stopToInt.find(stop) == stopToInt.end())
         return {};
     return g.prim(stopToInt[stop]);
