@@ -175,7 +175,6 @@ int Graph::dijkstra_lineChange(int a, int b) {
     while (q.getSize() > 0){
         int u = q.removeMin();
         nodes[u].visited = true;
-        string prevLine;
         for (const auto& v:nodes[u].adj){
             if (!nodes[v.dest].visited && nodes[u].dist + (nodes[u].edgePrev.line == v.line ? 0 : 1) < nodes[v.dest].dist){
                 nodes[v.dest].dist = nodes[u].dist + (nodes[u].edgePrev.line == v.line ? 0 : 1);
@@ -232,6 +231,7 @@ int Graph::dijkstra_distanceMinDistance(int a, int b) {
             nodes[i].dist = INF;
             nodes[i].visited = false;
             nodes[i].pred = 0;
+            nodes[i].edgePrev = Edge();
         }
         q.insert(i, nodes[i].dist);
     }

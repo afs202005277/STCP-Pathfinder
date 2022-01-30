@@ -55,7 +55,7 @@ list<string> readForbiddenStops(){
 list<string> readForbiddenLines() {
     string lineCode;
     list<string> tmp;
-    cout << "Now you can choose the lines you don't want to use (you can leave this field blank or press 'q' to move to the next step). \nInput the in the format [CODE]_[DIR]: ";
+    cout << "Now you can choose the lines you don't want to use (you can leave this field blank or press 'q' to move to the next step). \nInput them in the format [CODE]_[DIR]: ";
     do {
         getline(cin, lineCode);
         if (lineCode.empty() || lineCode[0] == 'q')

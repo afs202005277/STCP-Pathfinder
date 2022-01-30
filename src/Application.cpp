@@ -199,7 +199,6 @@ pair<int, list<Edge>> Application::courseWithMinimumLines(double lat1, double lo
         dest.push_back(getNearestStop(lat2, lon2));
 
     int min_lines = -1;
-    double min_dist = -1;
     for (const auto& s:src) {
         for (const auto& d:dest) {
             auto tmp = courseWithMinimumLines(s.first, d.first);
@@ -208,18 +207,7 @@ pair<int, list<Edge>> Application::courseWithMinimumLines(double lat1, double lo
             {
                 res = tmp.second;
                 min_lines = linesCross;
-                min_dist = getTotalDistance(s.second, tmp.second) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
                 source = s.second;
-            }
-            else if (min_lines == linesCross)
-            {
-                double temp = getTotalDistance(s.second, tmp.second) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
-                if (min_dist > temp || min_dist == -1)
-                {
-                    res = tmp.second;
-                    min_dist = getTotalDistance(s.second, tmp.second) + getDistance(stops[s.second].getLatitude(), stops[s.second].getLongitude(), lat1, lon1) + getDistance(stops[d.second].getLatitude(), stops[d.second].getLongitude(), lat2, lon2);
-                    source = s.second;
-                }
             }
         }
     }
