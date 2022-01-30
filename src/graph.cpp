@@ -30,8 +30,6 @@ bool Graph::canUse(const string& line) {
 
 void Graph::addEdge(int src, int dest, string line, double d, bool foot, int weight) {
     line = line.substr(0, line.find('.'));
-    if (line == "205_1" || line == "205_0")
-        cout << "ola" << endl;
     if (!canUse(line))
         return;
     if (src<1 || src>n || dest<1 || dest>n)
@@ -77,7 +75,7 @@ pair<double, vector<int>> Graph::prim(int r) {
     for (int i=1;i<=n;i++){
         if (nodes[i].dist == DBL_MAX) {
             if (flag) {
-                cout << "With the settings provided, Prim's algorithm wasn't able to reach all the nodes, therefore these nodes will be ignored" << endl;
+                cout << "With the settings provided, Prim's algorithm wasn't able to reach all the nodes (this happened because the graph has "<< connectedComponents() << " different connected components), therefore these nodes will be ignored" << endl;
                 flag = false;
             }
         }

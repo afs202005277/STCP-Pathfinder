@@ -101,6 +101,7 @@ void readMSTChoice(Application &application, vector<Stop> &stops) {
             if ((i+1) % 10 == 0)
                 cout << endl;
         }
+        cout << endl;
     }
 }
 
