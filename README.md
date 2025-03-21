@@ -64,15 +64,3 @@ The system provides routing based on the following criteria:
 
 ## Noteworthy Feature
 The project uses a **single graph structure** to store all information. This approach simplifies the implementation of various route-finding algorithms by simply adding new attributes to the graph's edges. Minor modifications to the Dijkstra algorithm allow it to consider different criteria for finding the optimal path. This structure provides efficient access to all required data without unnecessary repetition or complex interactions between multiple graphs.
-
----
-
-## Challenges
-The primary challenge encountered was creating a user-friendly interface that provides a smooth experience for specifying routes and criteria.
-
----
-
-## Contribution
-- André Sousa: 33%
-- João Félix: 33%
-- Pedro Fonseca: 33%
